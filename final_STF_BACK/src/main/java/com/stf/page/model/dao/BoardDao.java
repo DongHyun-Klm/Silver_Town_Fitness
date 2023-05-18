@@ -15,16 +15,16 @@ public interface BoardDao {
 	void insertBoard(Board board);
 
 	// 사랑방 글 수정
-	int updateBoard(Board board);
+	void updateBoard(Board board);
 	
 	// 사랑방 글 삭제
-	int deleteBoard(Board index);
+	void deleteBoard(Board index);
 	
 	// 사랑방 글 검색
-	Board selectSearch(HashMap<String, String> params);
+	List<Board> selectSearch(HashMap<String, String> params);
 	
 	// 사랑방 상세 조회
 	Board selectOne(int index);
-	
+
 	
 }
