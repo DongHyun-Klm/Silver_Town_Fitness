@@ -10,6 +10,5 @@ public class BackRestPageApplication {
 		SpringApplication.run(BackRestPageApplication.class, args);
 	}
 
-//아까 한말이 윤영 머리봐라 이거 맞나?
-//ggg
+
 }

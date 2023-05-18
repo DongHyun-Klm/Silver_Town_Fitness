@@ -6,16 +6,27 @@ import java.util.List;
 import com.stf.page.model.dto.Board;
 
 public interface BoardService {
-	//게시글 등록
-	void writeBoard(Board board);
-	//게시글 목록
-	List<Board> getBoardList(HashMap<String, String> params);
-	//게시글 조회
-	Board getBoard(int id);
-	//게시글 수정
-	boolean modifyBoard(Board board);
-	//게시글 삭제
-	boolean removeBoard(int id);
+	
+	// 사랑방 글 전체 조회
+	List<Board> selectList();
+	
+	// 사랑방 글 등록
+	void insertBoard(Board board);
+	
+	// 사랑방 글 수정
+	void updateBoard(Board board);
+	
+	// 사랑방 글 삭제
+	void deleteBoard(Board index);
+	
+	// 사랑방 글 검색
+	List<Board> selectSearch(HashMap<String, String> params);
+		
+	// 사랑방 상세 조회
+	Board selectOne(int index);
+	
 	//게시글 view cnt 증가
-	void updateViewCnt(int id);
+	void updateViewCnt(int index);
+
+	
 }
