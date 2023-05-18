@@ -1,6 +1,7 @@
 DROP DATABASE IF EXISTS STF;
 CREATE DATABASE STF;
 USE STF;
+
 -- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
 
 -- Teacher Table Create SQL
@@ -140,7 +141,7 @@ CREATE TABLE Board
     `board_index`    INT              NOT NULL    AUTO_INCREMENT COMMENT '인덱스', 
     `user_index`     INT              NOT NULL    COMMENT '유저 인덱스', 
     `board_title`    VARCHAR(1000)    NOT NULL    COMMENT '제목', 
-    `board_content`  VARCHAR(1000)    NOT NULL    COMMENT '공지 내용', 
+    `board_content`  VARCHAR(1000)    NOT NULL    COMMENT '글 내용', 
     `board_date`     DATE             NOT NULL    COMMENT '등록일', 
     `board_cnt`      INT              NOT NULL    COMMENT '조회수', 
     `board_img`      VARCHAR(1000)    NULL        COMMENT '이미지. 이미지 파일 명', 
@@ -219,16 +220,14 @@ ALTER TABLE Reservation
 -- 테이블 생성 SQL - Notice
 CREATE TABLE Notice
 (
-    `board_index`    INT              NOT NULL    AUTO_INCREMENT COMMENT '인덱스', 
-    `board_title`    VARCHAR(1000)    NOT NULL    COMMENT '제목', 
-    `board_content`  VARCHAR(1000)    NOT NULL    COMMENT '공지 내용', 
-    `board_date`     DATE             NOT NULL    COMMENT '등록일', 
-    `board_cnt`      INT              NOT NULL    COMMENT '조회수', 
-    `board_manager`  VARCHAR(10)      NOT NULL    COMMENT '관리자', 
-     PRIMARY KEY (board_index)
+    `notice_index`    INT              NOT NULL    AUTO_INCREMENT COMMENT '인덱스', 
+    `notice_title`    VARCHAR(1000)    NOT NULL    COMMENT '제목', 
+    `notice_content`  VARCHAR(1000)    NOT NULL    COMMENT '공지 내용', 
+    `notice_date`     DATE             NOT NULL    COMMENT '등록일', 
+    `notice_cnt`      INT              NOT NULL    COMMENT '조회수', 
+    `notice_manager`  VARCHAR(10)      NOT NULL    COMMENT '작성자', 
+     PRIMARY KEY (notice_index)
 );
 
 -- 테이블 Comment 설정 SQL - Notice
 ALTER TABLE Notice COMMENT '공지사항';
-
-
