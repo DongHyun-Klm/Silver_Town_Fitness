@@ -1,21 +1,35 @@
 DROP DATABASE IF EXISTS STF;
-CREATE DATABASE IF NOT EXISTS STF;
+CREATE DATABASE STF;
 USE STF;
 
--- 191006
+-- 191010
 -- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
 
 -- Exercise Table Create SQL
 -- 테이블 생성 SQL - Exercise
+
 CREATE TABLE Exercise
 (
-    `exercise_index`  INT              NOT NULL    AUTO_INCREMENT COMMENT '인덱스', 
+    `exercise_index`  INT              NOT NULL    COMMENT '인덱스', 
     `exercise_name`   VARCHAR(100)     NOT NULL    COMMENT '종목 이름', 
     `exercise_intro`  VARCHAR(1000)    NOT NULL    COMMENT '종목 소개', 
     `exercise_img`    VARCHAR(1000)    NOT NULL    COMMENT '종목 영상', 
     `exercise_force`  VARCHAR(1000)    NOT NULL    COMMENT '종목 장점 소개', 
      PRIMARY KEY (exercise_index)
 );
+
+-- 운동 정보 테이블
+DELETE FROM exercise;
+INSERT INTO exercise(exercise_index, exercise_name, exercise_intro, exercise_img, exercise_force)
+VALUES ( '1', '수영', '수영(水泳, Swimming)은 물에서 나아가기 위해 손발을 움직이는 행위, 또는 물에서 누가 더 빨리 나가는지를 겨루는 스포츠이다.', '수영 URL', '수영 장점: '),
+ ( '2', '요가', '요가는 신비적 명상법으로서, 종파를 초월하여 실천됨. 오늘날에는 심신의 건강법으로서도 응용되고 있다.', '요가 URL', '요가 장점은~'),
+  ( '3', '게이트볼', '게이트볼(gateball)은 T자 모양의 막대기로 공을 쳐서 경기장 안의 게이트(문) 3군데를 통과시킨 다음 골폴에 맞히는 구기이다.', '게이트볼 URL', '게이트볼 장점은~'),
+   ( '4', '댄스 스포츠', '댄스스포츠(Dancesport)는 친목과 사교, 공연을 위한 볼룸 댄스가 아닌, 스포츠로서 경기를 하기 위한 볼룸 댄스이다. ', '댄스스포츠 URL', '댄스스포츠 장점은~'),
+    ( '5', '스쿼시', '스쿼시(squash)는 두 명(단식) 또는 네 명(복식)의 선수가 사방이 벽으로 이루어진 코트에서 작고 속이 빈 고무공으로 경기를 하는 라켓 스포츠이다.', '스쿼시 URL', '스쿼시 장점은~');
+SELECT * from exercise;
+
+
+
 
 -- 테이블 Comment 설정 SQL - Exercise
 ALTER TABLE Exercise COMMENT '종목 정보 테이블';
@@ -25,7 +39,7 @@ ALTER TABLE Exercise COMMENT '종목 정보 테이블';
 -- 테이블 생성 SQL - Teacher
 CREATE TABLE Teacher
 (
-    `teacher_index`     INT              NOT NULL    AUTO_INCREMENT COMMENT '인덱스', 
+    `teacher_index`     INT              NOT NULL    COMMENT '인덱스', 
     `teacher_name`      VARCHAR(20)      NOT NULL    COMMENT '이름', 
     `teacher_sex`       VARCHAR(2)       NOT NULL    COMMENT '성별', 
     `teacher_follower`  INT              NOT NULL    COMMENT '팔로워 수', 
@@ -33,6 +47,23 @@ CREATE TABLE Teacher
     `teacher_img`       VARCHAR(1000)    NOT NULL    COMMENT '강사 이미지', 
     CONSTRAINT PK_teacher PRIMARY KEY (teacher_index)
 );
+
+-- 강사 정보 테이블
+DELETE FROM Teacher;
+INSERT INTO Teacher(teacher_index, teacher_name, teacher_sex, teacher_follower, exercise_index, teacher_img)
+VALUES ( 1, '일동현', '남',0, 1 , '일동현 이미지'),
+ ( 2, '이동현', '여',0, 1 , '이동현 이미지'),
+ ( 3, '일은성', '남',0, '2', '일은성 이미지'),
+ ( 4, '이은성', '여',0, '2', '이은성 이미지'),
+ ( 5, '일덕용', '남',0, '3', '일덕용 이미지'),
+ ( 6, '이덕용', '여',0, '3', '이덕용 이미지'),
+ ( 7, '일동익', '남',0, '4', '일동익 이미지'),
+ ( 8, '이동익', '여',0, '4', '이동익 이미지'),
+ ( 9, '일동교', '남',0, '5', '일동교 이미지'),
+ ( 10, '이동교', '여',0, '5', '이동교 이미지');
+SELECT * from Teacher;
+
+
 
 -- 테이블 Comment 설정 SQL - Teacher
 ALTER TABLE Teacher COMMENT '강사 정보 테이블';
@@ -56,18 +87,29 @@ CREATE TABLE User
     `user_img`          VARCHAR(45)    NULL        COMMENT '회원 이미지. 이미지파일 명', 
     `user_birth`        DATE           NOT NULL    COMMENT '생년월일. YYYYMMDD, 8자', 
     `user_sex`          VARCHAR(2)     NOT NULL    COMMENT '성별. 남 / 여', 
-    `user_id`           VARCHAR(45)    NOT NULL    COMMENT '아이디', 
+    `user_id`           VARCHAR(45)    NOT NULL    DEFAULT 'UNIQUE' COMMENT '아이디', 
     `user_password`     VARCHAR(45)    NOT NULL    COMMENT '비밀번호', 
     `user_nick`         VARCHAR(45)    NOT NULL    COMMENT '닉네임', 
     `user_number`       VARCHAR(45)    NOT NULL    COMMENT '핸드폰. 010-0000-0000 / ''-''제외 11자', 
     `user_email`        VARCHAR(45)    NOT NULL    COMMENT '이메일', 
     `user_lecture_cnt`  INT            NULL        COMMENT '수강 개수', 
      PRIMARY KEY (user_index)
+  --   CONSTRAINT uc_user_id UNIQUE (user_id)
 );
+-- Unique Index 설정 SQL - User(user_id)
+CREATE UNIQUE INDEX UQ_User_1
+    ON User(user_id);
 
 -- 테이블 Comment 설정 SQL - User
 ALTER TABLE User COMMENT '회원 정보 테이블';
 
+-- 회원 정보 테이블
+DELETE FROM User;
+INSERT INTO User(user_index, user_name, user_img, user_birth, user_sex, user_id, user_password, user_nick, user_number, user_email , user_lecture_cnt)
+VALUES ( '0', '김재이', '재이 사진 url','19970901','남', 'jay_id', 'ssafy', '재이다', '010-1111-1111','jay@naver.com',0),
+ ( '0', '김라현',  '라현 사진 url','19980723','여', 'ra_id', 'ssafy', '라현이다', '010-2222-2222','dong@naver.com',0),
+ ( '0', '김소연', '소연 사진 url','19981010', '여','so_id', 'ssafy','소연이다','010-3333-3333','so@gmail.com',0 );
+SELECT * from User;
 
 -- Program Table Create SQL
 -- 테이블 생성 SQL - Program
@@ -126,6 +168,17 @@ CREATE TABLE Notice
 -- 테이블 Comment 설정 SQL - Notice
 ALTER TABLE Notice COMMENT '공지사항';
 
+-- 공지사항 테이블
+DELETE FROM Notice;
+INSERT INTO Notice(notice_index, notice_title, notice_content, notice_date, notice_cnt, notice_manager)
+VALUES ( '0', '수영 프로그램 안내', '수영 프로그램 안내입니다.', NOW(), 0, '관리자'),
+( '0', '4월 프로그램 안내', '4월 프로그램 안내입니다.', NOW(), 0, '관리자'),
+( '0', '5월 프로그램 안내', '5월 프로그램 안내입니다.', NOW(), 0, '관리자'),
+( '0', '휴관 안내', '휴관 안내입니다.', NOW(), 0, '관리자'),
+( '0', '단수 안내', '단수 안내입니다.', NOW(), 0, '관리자'),
+( '0', '대체 공휴일 안내', '대체 공휴일 안내입니다.', NOW(), 0, '관리자'),
+( '0', '스쿼시 프로그램 안내', '스쿼시 프로그램 안내입니다.', NOW(), 0, '관리자');
+SELECT * from Notice;
 
 -- Reservation Table Create SQL
 -- 테이블 생성 SQL - Reservation

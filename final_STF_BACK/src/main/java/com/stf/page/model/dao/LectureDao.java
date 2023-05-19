@@ -9,10 +9,10 @@ import com.stf.page.model.dto.Program;
 public interface LectureDao {
 	
 	// 종목별 정보 조회
-	Exercise selectExercise(String exercise);
+	Exercise selectExercise(int index);
 	
 	// 종목별 강의목록 조회
-	List<Program> exerciseList(String exercise_name);
+	List<Program> exerciseList(int exercise_index);
 		
 	
 }
