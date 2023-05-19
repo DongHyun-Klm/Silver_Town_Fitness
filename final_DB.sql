@@ -18,6 +18,8 @@ CREATE TABLE Exercise
      PRIMARY KEY (exercise_index)
 );
 
+
+        
 -- 운동 정보 테이블
 DELETE FROM exercise;
 INSERT INTO exercise(exercise_index, exercise_name, exercise_intro, exercise_img, exercise_force)
@@ -115,12 +117,12 @@ SELECT * from User;
 -- 테이블 생성 SQL - Program
 CREATE TABLE Program
 (
-    `lecture_index`    INT            NOT NULL    AUTO_INCREMENT COMMENT '인덱스', 
+    `lecture_index`    INT            NOT NULL    COMMENT '인덱스', 
     `lecture_name`     VARCHAR(10)    NOT NULL    COMMENT '강의명', 
     `lecture_start`    VARCHAR(45)    NOT NULL    COMMENT '시작시간', 
     `lecture_end`      VARCHAR(45)    NOT NULL    COMMENT '끝 시간', 
-    `lecture_event_1`  VARCHAR(45)    NOT NULL    COMMENT '주 1차 강의', 
-    `lecture_event_2`  VARCHAR(45)    NOT NULL    COMMENT '주 2차 강의', 
+    `lecture_event_1`  VARCHAR(45)    NOT NULL    COMMENT '1차 요일 ', 
+    `lecture_event_2`  VARCHAR(45)    NOT NULL    COMMENT '2차 요일', 
     `lecture_month`    INT            NOT NULL    COMMENT '프로그램 월 차수', 
     `lecture_max_cnt`  INT            NOT NULL    COMMENT '수강 최대 인원', 
     `lecture_cnt`      INT            NOT NULL    COMMENT '수강 인원', 
@@ -129,6 +131,54 @@ CREATE TABLE Program
     `teacher_index`    INT            NOT NULL    COMMENT '강사 인덱스', 
      PRIMARY KEY (lecture_index)
 );
+
+select * from program;
+SELECT * from program 
+		WHERE exercise_index =  1;
+        
+DELETE FROM program;
+INSERT INTO program(lecture_index, lecture_name, lecture_start, lecture_end, lecture_event_1, lecture_event_2, lecture_month, lecture_max_cnt, lecture_cnt, lecture_place, exercise_index , teacher_index)
+VALUES 
+-- 수영 요가 게이트볼 댄스 스포츠 스쿼시
+-- 5월
+( 1, '수영1', '오후 3시','오후 5시','화', '목', 5, 20, 15,'수영장 1호', 1, 1),
+( 2, '수영1', '오후 3시','오후 5시','화', '목', 5, 20, 15,'수영장 2호', 1, 2),
+( 3, '수영1', '오후 3시','오후 5시','화', '목', 5, 20, 15,'요가교실 1호', 2, 3),
+( 4, '수영1', '오후 3시','오후 5시','화', '목', 5, 20, 15,'요가교실 2호', 1, 4),
+( 5, '수영1', '오후 3시','오후 5시','화', '목', 5, 20, 15,'게이트볼장 1호', 1, 5),
+( 6, '수영1', '오후 3시','오후 5시','화', '목', 5, 20, 15,'게이트볼장 2호', 1, 6),
+( 7, '수영1', '오후 3시','오후 5시','화', '목', 5, 20, 15,'댄스교실 1호', 1, 7),
+( 8, '수영1', '오후 3시','오후 5시','화', '목', 5, 20, 15,'댄스교실 2호', 1, 8),
+( 8, '수영1', '오후 3시','오후 5시','화', '목', 5, 20, 15,'스쿼시장 1호', 1, 9),
+( 10, '수영1', '오후 3시','오후 5시','화', '목', 5, 20, 15,'스쿼시장 2호', 1, 10),
+-- 6월 
+( 11, '수영1', '오후 3시','오후 5시','화', '목', 6, 20, 15,'수영장 1호', 1, 1),
+( 12, '수영1', '오후 3시','오후 5시','화', '목', 6, 20, 15,'수영장 1호', 1, 1),
+( 13, '수영1', '오후 3시','오후 5시','화', '목', 6, 20, 15,'수영장 1호', 1, 1),
+( 14, '수영1', '오후 3시','오후 5시','화', '목', 6, 20, 15,'수영장 1호', 1, 1),
+( 15, '수영1', '오후 3시','오후 5시','화', '목', 6, 20, 15,'수영장 1호', 1, 1),
+( 16, '수영1', '오후 3시','오후 5시','화', '목', 6, 20, 15,'수영장 1호', 1, 1),
+( 17, '수영1', '오후 3시','오후 5시','화', '목', 6, 20, 15,'수영장 1호', 1, 1),
+( 18, '수영1', '오후 3시','오후 5시','화', '목', 6, 20, 15,'수영장 1호', 1, 1),
+( 19, '수영1', '오후 3시','오후 5시','화', '목', 6, 20, 15,'수영장 1호', 1, 1),
+( 20, '수영1', '오후 3시','오후 5시','화', '목', 6, 20, 15,'수영장 1호', 1, 1),
+-- 7월
+( 21, '수영1', '오후 3시','오후 5시','화', '목', 7, 20, 15,'수영장 1호', 1, 1),
+( 22, '수영1', '오후 3시','오후 5시','화', '목', 7, 20, 15,'수영장 1호', 1, 1),
+( 23, '수영1', '오후 3시','오후 5시','화', '목', 7, 20, 15,'수영장 1호', 1, 1),
+( 24, '수영1', '오후 3시','오후 5시','화', '목', 7, 20, 15,'수영장 1호', 1, 1),
+( 25, '수영1', '오후 3시','오후 5시','화', '목', 7, 20, 15,'수영장 1호', 1, 1),
+( 26, '수영1', '오후 3시','오후 5시','화', '목', 7, 20, 15,'수영장 1호', 1, 1),
+( 27, '수영1', '오후 3시','오후 5시','화', '목', 7, 20, 15,'수영장 1호', 1, 1),
+( 28, '수영1', '오후 3시','오후 5시','화', '목', 7, 20, 15,'수영장 1호', 1, 1),
+( 29, '수영1', '오후 3시','오후 5시','화', '목', 7, 20, 15,'수영장 1호', 1, 1),
+( 30, '수영1', '오후 3시','오후 5시','화', '목', 7, 20, 15,'수영장 1호', 1, 1);
+
+SELECT * from program; 
+		
+       SELECT * from program 
+		WHERE exercise_index = 1
+		AND month(current_date()) = lecture_month;
 
 -- 테이블 Comment 설정 SQL - Program
 ALTER TABLE Program COMMENT '프로그램 테이블';
@@ -151,6 +201,7 @@ ALTER TABLE Program
 -- ALTER TABLE Program
 -- DROP FOREIGN KEY FK_Program_teacher_index_Teacher_teacher_index;
 
+       
 
 -- Notice Table Create SQL
 -- 테이블 생성 SQL - Notice
