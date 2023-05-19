@@ -13,6 +13,4 @@ public interface NoticeDao {
 	// 공지사항 글 상세 조회
 	Notice selectOne(int index);
 	
-	
-	
 }

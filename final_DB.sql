@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS STF;
 CREATE DATABASE IF NOT EXISTS STF;
 USE STF;
 
--- 182253
+-- 191006
 -- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
 
 -- Exercise Table Create SQL
@@ -10,6 +10,7 @@ USE STF;
 CREATE TABLE Exercise
 (
     `exercise_index`  INT              NOT NULL    AUTO_INCREMENT COMMENT '인덱스', 
+    `exercise_name`   VARCHAR(100)     NOT NULL    COMMENT '종목 이름', 
     `exercise_intro`  VARCHAR(1000)    NOT NULL    COMMENT '종목 소개', 
     `exercise_img`    VARCHAR(1000)    NOT NULL    COMMENT '종목 영상', 
     `exercise_force`  VARCHAR(1000)    NOT NULL    COMMENT '종목 장점 소개', 
