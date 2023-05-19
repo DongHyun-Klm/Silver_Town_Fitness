@@ -13,5 +13,4 @@ public interface InstructorDao {
 	// 강사 이력 조회
 	Teacher_career selectCareer(String exercise);
 	
-	
 }
