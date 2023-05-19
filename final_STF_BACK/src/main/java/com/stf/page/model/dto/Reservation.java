@@ -8,12 +8,10 @@ public class Reservation {
 	
 
 	public Reservation() {
-		// TODO Auto-generated constructor stub
 	}
 
 
 	public Reservation(int reservation_index, int user_index, int lecture_index) {
-		super();
 		this.reservation_index = reservation_index;
 		this.user_index = user_index;
 		this.lecture_index = lecture_index;

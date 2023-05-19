@@ -10,12 +10,10 @@ public class Teacher {
 	private String teacher_img;
 
 	public Teacher() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Teacher(int teacher_index, String teacher_name, String teacher_sex, int teacher_follower,
 			String teacher_exercise, String teacher_img) {
-		super();
 		this.teacher_index = teacher_index;
 		this.teacher_name = teacher_name;
 		this.teacher_sex = teacher_sex;

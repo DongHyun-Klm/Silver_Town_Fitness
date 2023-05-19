@@ -7,11 +7,9 @@ public class Teacher_career {
 	private int teacher_career;
 
 	public Teacher_career() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Teacher_career(int teacher_table_index, int teacher_index, int teacher_career) {
-		super();
 		this.teacher_table_index = teacher_table_index;
 		this.teacher_index = teacher_index;
 		this.teacher_career = teacher_career;

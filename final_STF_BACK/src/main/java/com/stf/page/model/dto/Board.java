@@ -11,12 +11,10 @@ public class Board {
 	private String board_img;
 
 	public Board() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Board(int board_index, int user_index, String board_title, String board_content, String board_date,
 			int board_cnt, String board_img) {
-		super();
 		this.board_index = board_index;
 		this.user_index = user_index;
 		this.board_title = board_title;

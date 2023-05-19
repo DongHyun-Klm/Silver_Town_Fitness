@@ -12,41 +12,50 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;import org.springframework.web.jsf.FacesContextUtils;
 
 import com.stf.page.model.dto.User;
+import com.stf.page.model.service.UserService;
 import com.stf.page.util.JwtUtil;
 
 @RestController
 @RequestMapping("/api")
 public class UserRestController {
 
-//	@Autowired
-//	private JwtUtil jwtUtil;
-//
-//	private static final String SUCCESS = "succes";
-//	private static final String FAIL = "fail";
-//
-//	@PostMapping("/login")
-//	public ResponseEntity<Map<String, Object>> login(User user) {
-//
-//		Map<String, Object> result = new HashMap<String, Object>();
-//
-//		// user를 이용해서 Service -> Dao -> DB를 통해 실제 유저인지 확인을 해야한다.
-//		// 우리는 하지 않겠다. ㅎ 직접 해볼것
-//		// 아이디가 널이 아니거나 길이가 있거나
-//		HttpStatus status = null;
-//		
-//		try {
-//			if (user.getId() != null || user.getId().length() > 0) {
-//				result.put("access-token", jwtUtil.createToken("id", user.getId()));
-//				result.put("message", SUCCESS);
-//				status = HttpStatus.ACCEPTED;
-//			}else {
-//				result.put("message", FAIL);
-//				status = HttpStatus.NO_CONTENT;
-//			}
-//		} catch (UnsupportedEncodingException e) {
-//			result.put("message", FAIL);
-//			status = HttpStatus.INTERNAL_SERVER_ERROR;
-//		}
-//		return new ResponseEntity<Map<String,Object>>(result, status);
-//	}
+	@Autowired
+	private JwtUtil jwtUtil;
+	
+	@Autowired
+	private UserService userService;
+	
+	@PostMapping("/user/login")
+	public ResponseEntity<Map<String, Object>> login(User user) {
+		System.out.println(user);
+		Map<String, Object> result = new HashMap<String, Object>();
+		HttpStatus status = null;
+		// 로그인 결과 확인
+		int check = -1;
+		check = userService.login(user.getUser_id(), user.getUser_password());
+		// 아이디가 존재하지 않는 경우(check => 1)
+		if(check == 1) {
+			result.put("message", "존재하지 않는 아이디입니다.");
+			status = HttpStatus.NO_CONTENT;
+		}
+		// 비밀번호가 틀린 경우(check => 2)
+		else if(check == 2) {
+			result.put("message", "비밀번호가 틀렸습니다.");
+			status = HttpStatus.NO_CONTENT;
+		}
+		// 로그인 성공(check => 0)
+		else if(check == 0){
+			try {
+				result.put("access-token", jwtUtil.createToken("id", user.getUser_id()));
+				result.put("message", "로그인 성공!");
+				status = HttpStatus.ACCEPTED;
+			} catch (UnsupportedEncodingException e) {
+				result.put("message", "서버 오류");
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
+			}
+		}
+		return new ResponseEntity<Map<String,Object>>(result, status);
+	}
+	
+	
 }

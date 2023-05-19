@@ -10,12 +10,10 @@ public class Teacher_review {
 	private double review_grade;
 
 	public Teacher_review() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Teacher_review(int review_index, int user_index, int teacher_index, String review_title,
 			String review_content, double review_grade) {
-		super();
 		this.review_index = review_index;
 		this.user_index = user_index;
 		this.teacher_index = teacher_index;

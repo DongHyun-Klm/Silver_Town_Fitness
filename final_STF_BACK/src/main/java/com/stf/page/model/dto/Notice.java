@@ -10,12 +10,10 @@ public class Notice {
 	private String notice_manager;
 
 	public Notice() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Notice(int notice_index, String notice_title, String notice_content, String notice_date, int notice_cnt,
 			String notice_manager) {
-		super();
 		this.notice_index = notice_index;
 		this.notice_title = notice_title;
 		this.notice_content = notice_content;

@@ -9,12 +9,10 @@ public class Exercise {
 	private String exercise_force;
 	
 	public Exercise() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Exercise(int exercise_index, String exercise_name, String exercise_intro, String exercise_img,
 			String exercise_force) {
-		super();
 		this.exercise_index = exercise_index;
 		this.exercise_name = exercise_name;
 		this.exercise_intro = exercise_intro;

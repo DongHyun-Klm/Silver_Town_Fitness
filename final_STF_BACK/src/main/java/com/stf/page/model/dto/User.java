@@ -15,13 +15,11 @@ public class User {
 	private String user_email;
 
 	public User() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public User(int user_index, int user_lecture_cnt, String user_name, String user_img, String user_birth,
 			String user_sex, String user_id, String user_password, String user_nick, String user_number,
 			String user_email) {
-		super();
 		this.user_index = user_index;
 		this.user_lecture_cnt = user_lecture_cnt;
 		this.user_name = user_name;
