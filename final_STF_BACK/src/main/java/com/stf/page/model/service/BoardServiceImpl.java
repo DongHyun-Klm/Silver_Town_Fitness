@@ -39,8 +39,8 @@ public class BoardServiceImpl implements BoardService{
 
 	// 글 삭제
 	@Override
-	public void deleteBoard(Board index) {
-		boardDao.deleteBoard(index) ;
+	public int deleteBoard(Board index) {
+		return boardDao.deleteBoard(index) ;
 	}
 
 	// 검색 목록
