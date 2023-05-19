@@ -1,0 +1,47 @@
+-- 운동종목 테이블
+DELETE FROM exercise;
+INSERT INTO exercise(exercise_index, exercise_name, exercise_intro, exercise_img, exercise_force)
+VALUES ( '0', '수영', '수영(水泳, Swimming)은 물에서 나아가기 위해 손발을 움직이는 행위, 또는 물에서 누가 더 빨리 나가는지를 겨루는 스포츠이다.', '수영 URL', '수영 장점: '),
+ ( '0', '요가', '요가는 신비적 명상법으로서, 종파를 초월하여 실천됨. 오늘날에는 심신의 건강법으로서도 응용되고 있다.', '요가 URL', '요가 장점은~'),
+  ( '0', '게이트볼', '수영은', '수영 URL', '수영 장점은~'),
+   ( '0', '댄스 스포츠', '수영은', '수영 URL', '수영 장점은~'),
+    ( '0', '스쿼시', '수영은', '수영 URL', '수영 장점은~');
+SELECT * from exercise;
+
+-- 강사 정보 테이블
+DELETE FROM Teacher;
+INSERT INTO Teacher(teacher_index, teacher_name, teacher_sex, teacher_follower, exercise_index, teacher_img)
+VALUES ( 1, '일동현', '남',0, 1 , '일동현 이미지'),
+( 2, '이동현', '여',0, 1 , '이동현 이미지'),
+ ( 3, '일은성', '남',0, '2', '일은성 이미지'),
+ ( 4, '이은성', '여',0, '2', '이은성 이미지'),
+ ( 5, '일덕용', '남',0, '3', '일덕용 이미지'),
+ ( 6, '이덕용', '여',0, '3', '이덕용 이미지'),
+ ( 7, '일동익', '남',0, '4', '일동익 이미지'),
+ ( 8, '이동익', '여',0, '4', '이동익 이미지'),
+ ( 9, '일동교', '남',0, '5', '일동교 이미지'),
+ ( 10, '이동교', '여',0, '5', '이동교 이미지');
+SELECT * from Teacher;
+
+-- 공지사항 테이블
+DELETE FROM Notice;
+INSERT INTO Notice(notice_index, notice_title, notice_content, notice_date, notice_cnt, notice_manager)
+VALUES ( '0', '수영 프로그램 안내', '수영 프로그램 안내입니다.', NOW(), 0, '관리자'),
+( '0', '4월 프로그램 안내', '4월 프로그램 안내입니다.', NOW(), 0, '관리자'),
+( '0', '5월 프로그램 안내', '5월 프로그램 안내입니다.', NOW(), 0, '관리자'),
+( '0', '휴관 안내', '휴관 안내입니다.', NOW(), 0, '관리자'),
+( '0', '단수 안내', '단수 안내입니다.', NOW(), 0, '관리자'),
+( '0', '대체 공휴일 안내', '대체 공휴일 안내입니다.', NOW(), 0, '관리자'),
+( '0', '스쿼시 프로그램 안내', '스쿼시 프로그램 안내입니다.', NOW(), 0, '관리자');
+SELECT * from Notice;
+
+-- 회원 정보 테이블
+DELETE FROM User;
+INSERT INTO User(user_index, user_name, user_img, user_birth, user_sex, user_id, user_password, user_nick, user_number, user_email , user_lecture_cnt)
+VALUES ( '0', '김재이', '재이 사진 url','19970901','남', 'jay_id', 'ssafy', '재이다', '010-1111-1111','jay@naver.com',0),
+ ( '0', '김라현',  '라현 사진 url','19980723','여', 'ra_id', 'ssafy', '라현이다', '010-2222-2222','dong@naver.com',0),
+ ( '0', '김소연', '소연 사진 url','19981010', '여','so_id', 'ssafy','소연이다','010-3333-3333','so@gmail.com',0 );
+SELECT * from User;
+
+
+
