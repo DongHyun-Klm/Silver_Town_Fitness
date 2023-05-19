@@ -17,7 +17,7 @@ public interface BoardService {
 	void updateBoard(Board board);
 	
 	// 사랑방 글 삭제
-	void deleteBoard(Board index);
+	int deleteBoard(Board index);
 	
 	// 사랑방 글 검색
 	List<Board> selectSearch(HashMap<String, String> params);

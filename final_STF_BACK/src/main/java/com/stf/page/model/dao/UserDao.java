@@ -6,6 +6,8 @@ import com.stf.page.model.dto.User;
 public interface UserDao {
 
 	// 로그인
+	
+	
 	// 마이페이지 조회
 	public User selectOne(String id);
 	
