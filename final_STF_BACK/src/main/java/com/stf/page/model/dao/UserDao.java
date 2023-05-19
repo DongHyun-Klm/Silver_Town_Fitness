@@ -18,10 +18,6 @@ public interface UserDao {
 	// 회원 탈퇴
 	public void deleteUser(int index);
 	
-	// 예약목록 조회
-	
-	
-	// 이수목록 조회
-	
+
 	
 }
