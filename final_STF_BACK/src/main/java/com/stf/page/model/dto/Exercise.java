@@ -3,17 +3,20 @@ package com.stf.page.model.dto;
 public class Exercise {
 	
 	private int exercise_index;
+	private String exercise_name;
 	private String exercise_intro;
 	private String exercise_img;
 	private String exercise_force;
-
+	
 	public Exercise() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Exercise(int exercise_index, String exercise_intro, String exercise_img, String exercise_force) {
+	public Exercise(int exercise_index, String exercise_name, String exercise_intro, String exercise_img,
+			String exercise_force) {
 		super();
 		this.exercise_index = exercise_index;
+		this.exercise_name = exercise_name;
 		this.exercise_intro = exercise_intro;
 		this.exercise_img = exercise_img;
 		this.exercise_force = exercise_force;
@@ -25,6 +28,14 @@ public class Exercise {
 
 	public void setExercise_index(int exercise_index) {
 		this.exercise_index = exercise_index;
+	}
+
+	public String getExercise_name() {
+		return exercise_name;
+	}
+
+	public void setExercise_name(String exercise_name) {
+		this.exercise_name = exercise_name;
 	}
 
 	public String getExercise_intro() {
@@ -53,11 +64,10 @@ public class Exercise {
 
 	@Override
 	public String toString() {
-		return "Exercise [exercise_index=" + exercise_index + ", exercise_intro=" + exercise_intro + ", exercise_img="
-				+ exercise_img + ", exercise_force=" + exercise_force + "]";
+		return "Exercise [exercise_index=" + exercise_index + ", exercise_name=" + exercise_name + ", exercise_intro="
+				+ exercise_intro + ", exercise_img=" + exercise_img + ", exercise_force=" + exercise_force + "]";
 	}
-	
-	
+
 	
 	
 }

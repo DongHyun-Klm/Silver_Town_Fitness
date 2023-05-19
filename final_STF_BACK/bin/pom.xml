@@ -9,11 +9,11 @@
 		<version>2.7.11</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.ssafy</groupId>
-	<artifactId>back-rest-board</artifactId>
+	<groupId>com.final</groupId>
+	<artifactId>final_STF</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>back-rest-board</name>
-	<description>Spring Board REST API</description>
+	<name>final_STF</name>
+	<description>Spring Final REST API</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>

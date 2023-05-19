@@ -18,10 +18,10 @@ public class InstructorServiceImpl implements InstructorService{
 	public List<Teacher_career> selectList(String exercise){
 		return instructorDao.selectList(exercise); 
 	}
-	z
+	
 	// 강사 이력 조회
 	public Teacher_career selectCareer(String exercise) {
-		return instructorDao.selectCareer(exercise);
+		 return instructorDao.selectCareer(exercise);
 	}
 	
 
