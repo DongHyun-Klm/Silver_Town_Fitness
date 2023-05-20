@@ -49,8 +49,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		board_cnt = board_cnt + 1
 		WHERE board_index = #{board_index} ;
 	</update>
-
-	<!-- 사랑방 글 검색 <select id="selectSearch" parameterType="HashMap<String, String> 
-		params"> </select> -->
+	
+	<!-- 사랑방 검색 -->
+	<select id="selectSearch" resultType="Board" parameterType="java.util.HashMap">
+	  SELECT * FROM board
+	    <if test="type == title">
+	      WHERE board_title LIKE CONCAT('%', #{keyword}, '%')
+	    </if>
+	    <if test="type == 'content'">
+	      WHERE board_content LIKE CONCAT('%', #{keyword}, '%')
+	    </if>
+	    <if test="type == 'author'">
+	      WHERE user_index LIKE CONCAT('%', #{keyword}, '%')
+	    </if>
+	</select>
+	
 
 </mapper>
