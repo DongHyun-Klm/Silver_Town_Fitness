@@ -14,9 +14,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertBoard" parameterType="Board"
 		keyProperty="board_index">
 		INSERT INTO board (board_index, user_index, board_title,
-		board_content)
-		VALUES (#{board_index}, #{user_index}, #{board_title},
-		#{board_content} );
+		board_content, board_date, board_cnt,board_img)
+		VALUES (0,
+		#{user_index}, #{board_title}, #{board_content}, NOW(), 0,
+		#{board_img} );
 	</insert>
 
 	<!-- 사랑방 글 수정 -->
@@ -25,8 +26,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET
 		board_title = #{board_title},
 		board_content = #{board_content},
-		board_cnt =
-		#{board_cnt},
 		board_date = Now()
 		WHERE board_index = #{board_index} ;
 	</update>
@@ -43,6 +42,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM board
 		WHERE board_index = #{board_index}
 	</select>
+
+	<!-- 조회수 증가 --> 
+	<update id="updateViewCnt" parameterType="int">
+		UPDATE board SET
+		board_cnt = board_cnt + 1
+		WHERE board_index = #{board_index} ;
+	</update>
 
 	<!-- 사랑방 글 검색 <select id="selectSearch" parameterType="HashMap<String, String> 
 		params"> </select> -->

@@ -23,7 +23,7 @@ import io.swagger.annotations.Api;
 
 @RestController
 @RequestMapping("/api")
-
+@Api(tags = "유저 컨트롤러")
 public class UserRestController {
 	//동현
 	@Autowired
