@@ -1,12 +1,13 @@
 <template>
   <div>
-    <h2>TMDB뷰</h2>
+    <h2>공지사항 뷰</h2>
+    <router-view />
   </div>
 </template>
 
 <script>
 export default {
-  name: "TMDBView",
+  name: 'NoticeView',
 };
 </script>
 

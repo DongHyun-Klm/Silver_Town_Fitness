@@ -1,8 +1,9 @@
 DROP DATABASE IF EXISTS STF;
 CREATE DATABASE STF;
 USE STF;
+set SQL_SAFE_UPDATES = 0;
 
--- 201452
+-- 202314
 -- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
 
 -- Exercise Table Create SQL
@@ -57,13 +58,13 @@ CREATE TABLE User
     `user_img`          VARCHAR(45)    NULL        COMMENT '회원 이미지. 이미지파일 명', 
     `user_birth`        DATE           NOT NULL    COMMENT '생년월일. YYYYMMDD, 8자', 
     `user_sex`          VARCHAR(2)     NOT NULL    COMMENT '성별. 남 / 여', 
-    `user_id`           VARCHAR(45)    NOT NULL    DEFAULT 'UNIQUE' COMMENT '아이디', 
+    `user_id`           VARCHAR(45)    NOT NULL    DEFAULT 'UNIQUE' COMMENT '유저 아이디', 
     `user_password`     VARCHAR(45)    NOT NULL    COMMENT '비밀번호', 
     `user_nick`         VARCHAR(45)    NOT NULL    COMMENT '닉네임', 
     `user_number`       VARCHAR(45)    NOT NULL    COMMENT '핸드폰. 010-0000-0000 / ''-''제외 11자', 
     `user_email`        VARCHAR(45)    NOT NULL    COMMENT '이메일', 
     `user_lecture_cnt`  INT            NULL        COMMENT '수강 개수', 
-     PRIMARY KEY (user_index)
+     PRIMARY KEY (user_index, user_id)
 );
 
 -- 테이블 Comment 설정 SQL - User
@@ -120,14 +121,13 @@ ALTER TABLE Program
 CREATE TABLE Teacher_review
 (
     `review_index`    INT              NOT NULL    AUTO_INCREMENT COMMENT '인덱스', 
-    `user_index`      INT              NOT NULL    COMMENT '작성자 인덱스', 
+    `user_id`         VARCHAR(45)      NOT NULL    COMMENT '유저 아이디', 
     `teacher_index`   INT              NOT NULL    COMMENT '강사 인덱스', 
     `review_title`    VARCHAR(100)     NOT NULL    COMMENT '리뷰 제목', 
     `review_content`  VARCHAR(1000)    NOT NULL    COMMENT '리뷰 내용', 
     `review_grade`    DOUBLE           NOT NULL    COMMENT '별점', 
      PRIMARY KEY (review_index)
 );
-
 
 -- 테이블 Comment 설정 SQL - Teacher_review
 ALTER TABLE Teacher_review COMMENT '강사 리뷰 테이블';
@@ -141,14 +141,14 @@ ALTER TABLE Teacher_review
 -- ALTER TABLE Teacher_review
 -- DROP FOREIGN KEY FK_Teacher_review_teacher_index_Teacher_teacher_index;
 
--- Foreign Key 설정 SQL - Teacher_review(user_index) -> User(user_index)
+-- Foreign Key 설정 SQL - Teacher_review(user_id) -> User(user_id)
 ALTER TABLE Teacher_review
-    ADD CONSTRAINT FK_Teacher_review_user_index_User_user_index FOREIGN KEY (user_index)
-        REFERENCES User (user_index) ON DELETE RESTRICT ON UPDATE RESTRICT;
+    ADD CONSTRAINT FK_Teacher_review_user_id_User_user_id FOREIGN KEY (user_id)
+        REFERENCES User (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
--- Foreign Key 삭제 SQL - Teacher_review(user_index)
+-- Foreign Key 삭제 SQL - Teacher_review(user_id)
 -- ALTER TABLE Teacher_review
--- DROP FOREIGN KEY FK_Teacher_review_user_index_User_user_index;
+-- DROP FOREIGN KEY FK_Teacher_review_user_id_User_user_id;
 
 
 -- Board Table Create SQL
@@ -156,7 +156,7 @@ ALTER TABLE Teacher_review
 CREATE TABLE Board
 (
     `board_index`    INT              NOT NULL    AUTO_INCREMENT COMMENT '인덱스', 
-    `user_index`     INT              NOT NULL    COMMENT '유저 인덱스', 
+    `user_id`        VARCHAR(45)      NOT NULL    COMMENT '유저 아이디', 
     `board_title`    VARCHAR(1000)    NOT NULL    COMMENT '제목', 
     `board_content`  VARCHAR(1000)    NOT NULL    COMMENT '글 내용', 
     `board_date`     DATE             NOT NULL    DEFAULT '1111-11-11' COMMENT '등록일', 
@@ -168,14 +168,14 @@ CREATE TABLE Board
 -- 테이블 Comment 설정 SQL - Board
 ALTER TABLE Board COMMENT '사랑방';
 
--- Foreign Key 설정 SQL - Board(user_index) -> Teacher(teacher_index)
+-- Foreign Key 설정 SQL - Board(user_id) -> User(user_id)
 ALTER TABLE Board
-    ADD CONSTRAINT FK_Board_user_index_Teacher_teacher_index FOREIGN KEY (user_index)
-        REFERENCES Teacher (teacher_index) ON DELETE RESTRICT ON UPDATE RESTRICT;
+    ADD CONSTRAINT FK_Board_user_id_User_user_id FOREIGN KEY (user_id)
+        REFERENCES User (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
--- Foreign Key 삭제 SQL - Board(user_index)
+-- Foreign Key 삭제 SQL - Board(user_id)
 -- ALTER TABLE Board
--- DROP FOREIGN KEY FK_Board_user_index_Teacher_teacher_index;
+-- DROP FOREIGN KEY FK_Board_user_id_User_user_id;
 
 
 -- Reservation Table Create SQL
@@ -227,7 +227,10 @@ CREATE TABLE Notice
 ALTER TABLE Notice COMMENT '공지사항';
 
 
+
+
 -- INPUT
+
 
 -- 운동종목 테이블
 DELETE FROM exercise;
@@ -325,13 +328,13 @@ AND month(current_date()) = lecture_month;
 -- 공지사항 테이블
 
 DELETE FROM Board;
-INSERT INTO Board(board_index, user_index, board_title, board_content, board_date, board_cnt, board_img)
-VALUES ( '0', 1, "안녕", "내용이에요", NOW(), 0, '이미지 경로');
+INSERT INTO Board(board_index, user_id, board_title, board_content, board_date, board_cnt, board_img)
+VALUES ( '0', "jay_id", "안녕", "내용이에요", NOW(), 0, '이미지 경로');
 SELECT * from Board;
 
 -- 선생 리뷰 테이블 
 
 DELETE FROM Teacher_review;
-INSERT INTO Teacher_review(review_index, user_index, teacher_index, review_title, review_content, review_grade)
-VALUES ( '0', 1, 1, "이 선생 최고",'에요', 2);
+INSERT INTO Teacher_review(review_index, user_id, teacher_index, review_title, review_content, review_grade)
+VALUES ( '0', "jay_id", 1, "이 선생 최고",'에요', 2);
 SELECT * from Teacher_review;
