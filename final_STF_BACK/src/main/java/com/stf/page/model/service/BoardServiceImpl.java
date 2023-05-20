@@ -30,10 +30,6 @@ public class BoardServiceImpl implements BoardService{
 	// 글 수정
 	@Override
 	public void updateBoard(Board board) {
-//		Board originBoard = boardDao.selectOne(board.getUser_index());
-//		originBoard.setBoard_title(board.getBoard_title()); // 제목
-//		originBoard.setBoard_content(board.getBoard_content()); // 글 내용
-//		boardDao.updateBoard(originBoard);
 		boardDao.updateBoard(board);
 	}
 	// board + nickname => dto nickboard <= join nick user, board join 

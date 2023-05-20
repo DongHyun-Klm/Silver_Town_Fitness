@@ -1,5 +1,8 @@
 package com.stf.page.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,8 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.stf.page.model.dto.Board;
 import com.stf.page.model.dto.Notice;
@@ -21,7 +27,12 @@ import com.stf.page.model.dto.Teacher_review;
 import com.stf.page.model.service.BoardService;
 import com.stf.page.model.service.NoticeService;
 import com.stf.page.model.service.ReviewService;
+import com.stf.page.util.JwtUtil;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import io.swagger.annotations.Api;
 
 @RestController
@@ -29,11 +40,14 @@ import io.swagger.annotations.Api;
 @Api(tags = "게시판 컨트롤러")
 public class BoardRestController {
 
-	private static final String SUCCESS = "succes";
-	private static final String FAIL = "fail";
-
+	@Autowired
+	private JwtUtil jwtUtil;
+	
 	@Autowired
 	private BoardService boardService;
+	
+	//파일 저장할 경로
+	final private String filedir = "C:/Users/김동현/Dropbox/STF/BSG_Silver_Town_Fitness/image/";
 
 	// 사랑방 글 전체 조회 // pass
 	@GetMapping("/board")
@@ -47,16 +61,32 @@ public class BoardRestController {
 
 	// 사랑방 글 등록
 	@PostMapping("/board")
-	public ResponseEntity<Board> love_create(Board board) {
+	public ResponseEntity<Board> love_create(@RequestHeader("access-token") String token, Board board, @RequestParam(value = "file", required = false) MultipartFile file) throws IllegalStateException, IOException {
+		// 파일 업로드
+		String fullpath = "";
+		if(!file.isEmpty()) {
+			fullpath = filedir + System.currentTimeMillis() + "_" + file.getOriginalFilename();
+			file.transferTo(new File(fullpath));
+			board.setBoard_img(fullpath);
+		}
+		// token에서 유저 id 가져오기
+		String user_id = (String) jwtUtil.parseToken(token).get("id");
+		board.setUser_id(user_id);
 		boardService.insertBoard(board);
 
 		return new ResponseEntity<>(board, HttpStatus.OK);
-
 	}
 
 	// 사랑방 글 수정
 	@PutMapping("/board")
-	public ResponseEntity<Void> love_modify(Board board) {
+	public ResponseEntity<Void> love_modify(Board board, @RequestParam(value = "file", required = false) MultipartFile file) throws IllegalStateException, IOException {
+		// 파일 업로드
+		String fullpath = "";
+		if(!file.isEmpty()) {
+			fullpath = filedir + System.currentTimeMillis() + "_" + file.getOriginalFilename();
+			file.transferTo(new File(fullpath));
+			board.setBoard_img(fullpath);
+		}
 		boardService.updateBoard(board);
 
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -83,12 +113,17 @@ public class BoardRestController {
 		return new ResponseEntity<Board>(result, HttpStatus.OK);
 	}
 	
-	// 샤랑방 글 검색
-//	@GetMapping("/board/search/{type}&{keyword}")
-//	public ResponseEntity<List<Board>> search()
-//	//List<Board> selectSearch(HashMap<String, String> params);
+	// 사랑방 게시판 검색
+	@GetMapping("/board/search")
+	public ResponseEntity<List<Board>> list(@RequestParam String type, @RequestParam String keyword) {
+		HashMap<String, String> params = new HashMap<String, String>();
+		System.out.println(type + " " + keyword);
+		params.put("type", type);
+		params.put("keyword", keyword);
 
-	// 게시글 view cnt 증가 =>> 이건 front에서 처리하지 않나?
+		return new ResponseEntity<List<Board>>(boardService.selectSearch(params), HttpStatus.OK);
+	}
+
 	
 	@Autowired
 	private NoticeService noticeService;
@@ -127,11 +162,12 @@ public class BoardRestController {
 	
 	// 강사별 리뷰 작성 /review
 	@PostMapping("/review")
-	public ResponseEntity<Teacher_review> teacher_reviewCreate(Teacher_review review) {
+	public ResponseEntity<Teacher_review> teacher_reviewCreate(@RequestHeader("access-token") String token, Teacher_review review) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException {
+		// token에서 유저 id 가져오기
+		String user_id = (String) jwtUtil.parseToken(token).get("id");
+		review.setUser_id(user_id);
 		reviewService.insertBoard(review);
-
 		return new ResponseEntity<>(review, HttpStatus.OK);
-
 	}
 }
 

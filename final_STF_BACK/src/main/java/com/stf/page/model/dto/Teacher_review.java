@@ -3,7 +3,7 @@ package com.stf.page.model.dto;
 public class Teacher_review {
 	
 	private int review_index;
-	private int user_index;
+	private String user_id;
 	private int teacher_index;
 	private String review_title;
 	private String review_content;
@@ -12,10 +12,10 @@ public class Teacher_review {
 	public Teacher_review() {
 	}
 
-	public Teacher_review(int review_index, int user_index, int teacher_index, String review_title,
+	public Teacher_review(int review_index, String user_id, int teacher_index, String review_title,
 			String review_content, double review_grade) {
 		this.review_index = review_index;
-		this.user_index = user_index;
+		this.user_id = user_id;
 		this.teacher_index = teacher_index;
 		this.review_title = review_title;
 		this.review_content = review_content;
@@ -30,12 +30,12 @@ public class Teacher_review {
 		this.review_index = review_index;
 	}
 
-	public int getUser_index() {
-		return user_index;
+	public String getUser_id() {
+		return user_id;
 	}
 
-	public void setUser_index(int user_index) {
-		this.user_index = user_index;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 
 	public int getTeacher_index() {
@@ -72,12 +72,10 @@ public class Teacher_review {
 
 	@Override
 	public String toString() {
-		return "Teacher_review [review_index=" + review_index + ", user_index=" + user_index + ", teacher_index="
+		return "Teacher_review [review_index=" + review_index + ", user_id=" + user_id + ", teacher_index="
 				+ teacher_index + ", review_title=" + review_title + ", review_content=" + review_content
 				+ ", review_grade=" + review_grade + "]";
 	}
-	
-	
-	
+
 	
 }
