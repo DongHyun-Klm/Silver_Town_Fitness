@@ -35,7 +35,7 @@ public class BoardRestController {
 	@Autowired
 	private BoardService boardService;
 
-	// 사랑방 글 전체 조회
+	// 사랑방 글 전체 조회 // pass
 	@GetMapping("/board")
 	public ResponseEntity<List<Board>> love_All() {
 		List<Board> list = boardService.selectList(); // 단순히 전제 조회
@@ -56,7 +56,7 @@ public class BoardRestController {
 
 	// 사랑방 글 수정
 	@PutMapping("/board")
-	public ResponseEntity<Void> love_modify(@RequestBody Board board) {
+	public ResponseEntity<Void> love_modify(Board board) {
 		boardService.updateBoard(board);
 
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -105,10 +105,10 @@ public class BoardRestController {
 	
 	// 공지사항 상세조회 /notice/{index}
 	@GetMapping("/notice/{notice_index}")
-	public ResponseEntity<Board> notice_detail(@PathVariable int notice_index){
-		Board result = boardService.selectOne(notice_index);
+	public ResponseEntity<Notice> notice_detail(@PathVariable int notice_index){
+		Notice result = noticeService.selectOne(notice_index);
 
-		return new ResponseEntity<Board>(result, HttpStatus.OK);
+		return new ResponseEntity<Notice>(result, HttpStatus.OK);
 	}
 	
 	

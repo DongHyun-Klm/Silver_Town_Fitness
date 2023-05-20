@@ -6,20 +6,23 @@ public class Teacher {
 	private String teacher_name;
 	private String teacher_sex;
 	private int teacher_follower;
-	private String teacher_exercise;
+	private int exercise_index;
 	private String teacher_img;
+	private String teacher_career;
 
 	public Teacher() {
 	}
 
-	public Teacher(int teacher_index, String teacher_name, String teacher_sex, int teacher_follower,
-			String teacher_exercise, String teacher_img) {
+	public Teacher(int teacher_index, String teacher_name, String teacher_sex, int teacher_follower, int exercise_index,
+			String teacher_img, String teacher_career) {
+		super();
 		this.teacher_index = teacher_index;
 		this.teacher_name = teacher_name;
 		this.teacher_sex = teacher_sex;
 		this.teacher_follower = teacher_follower;
-		this.teacher_exercise = teacher_exercise;
+		this.exercise_index = exercise_index;
 		this.teacher_img = teacher_img;
+		this.teacher_career = teacher_career;
 	}
 
 	public int getTeacher_index() {
@@ -54,12 +57,12 @@ public class Teacher {
 		this.teacher_follower = teacher_follower;
 	}
 
-	public String getTeacher_exercise() {
-		return teacher_exercise;
+	public int getExercise_index() {
+		return exercise_index;
 	}
 
-	public void setTeacher_exercise(String teacher_exercise) {
-		this.teacher_exercise = teacher_exercise;
+	public void setExercise_index(int exercise_index) {
+		this.exercise_index = exercise_index;
 	}
 
 	public String getTeacher_img() {
@@ -70,14 +73,22 @@ public class Teacher {
 		this.teacher_img = teacher_img;
 	}
 
+	public String getTeacher_career() {
+		return teacher_career;
+	}
+
+	public void setTeacher_career(String teacher_career) {
+		this.teacher_career = teacher_career;
+	}
+
 	@Override
 	public String toString() {
 		return "Teacher [teacher_index=" + teacher_index + ", teacher_name=" + teacher_name + ", teacher_sex="
-				+ teacher_sex + ", teacher_follower=" + teacher_follower + ", teacher_exercise=" + teacher_exercise
-				+ ", teacher_img=" + teacher_img + "]";
+				+ teacher_sex + ", teacher_follower=" + teacher_follower + ", exercise_index=" + exercise_index
+				+ ", teacher_img=" + teacher_img + ", teacher_career=" + teacher_career + "]";
 	}
+
 	
-	
-	
+
 	
 }
