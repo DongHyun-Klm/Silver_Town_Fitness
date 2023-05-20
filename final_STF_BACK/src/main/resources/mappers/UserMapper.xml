@@ -8,4 +8,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE user_id = #{user_id}
 	</select>
 	
+	<insert id="insertUser" parameterType="User">
+		Insert INTO User(user_index, user_name, user_img, user_birth, user_sex, user_id, user_password, user_nick, user_number, user_email , user_lecture_cnt)
+		VALUES (0, #{user_name}, #{user_img}, #{user_birth}, #{user_sex}, #{user_id}, #{user_password}, #{user_nick}, #{user_number}, #{user_email}, 0);
+	</insert>
+	
+	<update id="updateUser" parameterType="User">
+	    UPDATE User
+	    SET user_img = #{user_img},
+	        user_birth = #{user_birth},
+	        user_sex = #{user_sex},
+	        user_password = #{user_password},
+	        user_nick = #{user_nick},
+	        user_number = #{user_number},
+	        user_email = #{user_email}
+	    WHERE user_index = ${user_index}
+	</update>
+	
+	<delete id="deleteUser" parameterType="String">
+		DELETE FROM User
+		WHERE user_id = #{user_id};
+	</delete>
+	
 </mapper>

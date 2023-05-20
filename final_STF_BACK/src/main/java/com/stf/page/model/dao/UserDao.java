@@ -18,7 +18,7 @@ public interface UserDao {
 	public void updateUser(User user);
 	
 	// 회원 탈퇴
-	public void deleteUser(int index);
+	public void deleteUser(String id);
 	
 
 	

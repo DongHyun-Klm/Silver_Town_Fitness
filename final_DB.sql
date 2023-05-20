@@ -21,7 +21,7 @@ CREATE TABLE Exercise
 
         
 -- 운동 정보 테이블
-DELETE FROM exercise;
+
 INSERT INTO exercise(exercise_index, exercise_name, exercise_intro, exercise_img, exercise_force)
 VALUES ( '1', '수영', '수영(水泳, Swimming)은 물에서 나아가기 위해 손발을 움직이는 행위, 또는 물에서 누가 더 빨리 나가는지를 겨루는 스포츠이다.', '수영 URL', '수영 장점: '),
  ( '2', '요가', '요가는 신비적 명상법으로서, 종파를 초월하여 실천됨. 오늘날에는 심신의 건강법으로서도 응용되고 있다.', '요가 URL', '요가 장점은~'),
@@ -51,7 +51,7 @@ CREATE TABLE Teacher
 );
 
 -- 강사 정보 테이블
-DELETE FROM Teacher;
+
 INSERT INTO Teacher(teacher_index, teacher_name, teacher_sex, teacher_follower, exercise_index, teacher_img)
 VALUES ( 1, '일동현', '남',0, 1 , '일동현 이미지'),
  ( 2, '이동현', '여',0, 1 , '이동현 이미지'),
@@ -106,13 +106,15 @@ CREATE UNIQUE INDEX UQ_User_1
 ALTER TABLE User COMMENT '회원 정보 테이블';
 
 -- 회원 정보 테이블
-DELETE FROM User;
+
 INSERT INTO User(user_index, user_name, user_img, user_birth, user_sex, user_id, user_password, user_nick, user_number, user_email , user_lecture_cnt)
 VALUES ( '0', '김재이', '재이 사진 url','19970901','남', 'jay_id', 'ssafy', '재이다', '010-1111-1111','jay@naver.com',0),
  ( '0', '김라현',  '라현 사진 url','19980723','여', 'ra_id', 'ssafy', '라현이다', '010-2222-2222','dong@naver.com',0),
  ( '0', '김소연', '소연 사진 url','19981010', '여','so_id', 'ssafy','소연이다','010-3333-3333','so@gmail.com',0 );
-SELECT * from User;
-
+ 
+ DELETE User WHERE user_id = 'jay_id';
+    
+    select * from user;
 -- Program Table Create SQL
 -- 테이블 생성 SQL - Program
 CREATE TABLE Program
@@ -136,7 +138,7 @@ select * from program;
 SELECT * from program 
 		WHERE exercise_index =  1;
         
-DELETE FROM program;
+
 INSERT INTO program(lecture_index, lecture_name, lecture_time1, lecture_time2, lecture_event_1, lecture_event_2, lecture_month, lecture_max_cnt, lecture_cnt, lecture_place, exercise_index , teacher_index)
 VALUES 
 -- 수영 요가 게이트볼 댄스 스포츠 스쿼시
@@ -221,7 +223,7 @@ CREATE TABLE Notice
 ALTER TABLE Notice COMMENT '공지사항';
 
 -- 공지사항 테이블
-DELETE FROM Notice;
+
 INSERT INTO Notice(notice_index, notice_title, notice_content, notice_date, notice_cnt, notice_manager)
 VALUES ( '0', '수영 프로그램 안내', '수영 프로그램 안내입니다.', NOW(), 0, '관리자'),
 ( '0', '4월 프로그램 안내', '4월 프로그램 안내입니다.', NOW(), 0, '관리자'),

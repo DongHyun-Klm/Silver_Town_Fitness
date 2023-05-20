@@ -33,13 +33,20 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void deleteUser(int index) {
-		userDao.deleteUser(index);
+	public void deleteUser(String id) {
+		userDao.deleteUser(id);
 	}
 
 	@Override
 	public User selectOne(String id) {
 		return userDao.selectOne(id);
+	}
+
+	@Override
+	public boolean dupliChk(String id) {
+		User temp = userDao.selectOne(id);
+		if(temp == null) return false;
+		return true;
 	}
 		
 }

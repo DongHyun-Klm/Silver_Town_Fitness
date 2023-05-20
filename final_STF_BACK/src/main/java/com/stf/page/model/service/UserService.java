@@ -13,8 +13,11 @@ public interface UserService {
 		public void updateUser(User user);
 		
 		// 회원 탈퇴
-		public void deleteUser(int index);
+		public void deleteUser(String id);
 		
 		// 마이페이지 조회
 		public User selectOne(String id);
+		
+		// 아이디 중복검사
+		public boolean dupliChk(String id);
 }
