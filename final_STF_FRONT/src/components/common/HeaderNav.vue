@@ -1,28 +1,48 @@
 <template>
   <header>
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link :to="{ name: 'boardCreate' }">게시글 등록</router-link> |
-      <router-link :to="{ name: 'boardList' }">게시글 목록</router-link>
+    <nav class="header-nav">
+      <div >
+        <img class="text-center" src="@/assets/ssafy_logo.png" />
+      </div>
+      <div>
+        <!-- IF 로그인 상태 / 아닌 상태 -->
+        <router-link to="/movie/create">수강 신청</router-link> |
+        <router-link to="/movie">마이페이지</router-link> | 
+        <router-link to="/movie">마이페이지</router-link>
+      </div>
+
     </nav>
   </header>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "HeaderNav",
+};
 </script>
 
 <style>
-nav {
-  padding: 30px;
+header {
+  height: 70px;
+  background-color: black;
+  line-height: 70px;
+  padding: 0px 30px;
 }
 
-nav a {
+header a {
+  text-decoration: none;
+  color: white;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  display: inline-block;
+  font-size: 5rem;
   font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+  color: white;
 }
 </style>
