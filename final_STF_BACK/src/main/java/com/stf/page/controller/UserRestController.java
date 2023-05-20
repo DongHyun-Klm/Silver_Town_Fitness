@@ -23,9 +23,9 @@ import io.swagger.annotations.Api;
 
 @RestController
 @RequestMapping("/api")
-
+@Api(tags = "유저 컨트롤러")
 public class UserRestController {
-	//동현
+
 	@Autowired
 	private JwtUtil jwtUtil;
 	
@@ -94,7 +94,7 @@ public class UserRestController {
 	//회원 삭제
 	@DeleteMapping("/user")
 	public ResponseEntity<?> delete(String user_id){
-		userService.deleteUser(user_id);
+		userService.deleteUser(user_id); 
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
