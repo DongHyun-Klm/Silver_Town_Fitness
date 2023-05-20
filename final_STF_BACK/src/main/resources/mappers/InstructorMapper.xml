@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stf.page.model.dao.InstructorDao">
+
+	<!--종목 강사 조회 -->
+		<select id="selectList" parameterType="int" resultType="Teacher_career">
+		SELECT * from Teacher
+		WHERE exercise_index = ${exercise_index};
+	</select>
+
+	<!-- 강사 이력 조회-->
+	<select id="selectCareer" parameterType="int"
+		resultType="Teacher_career">
+		SELECT * from Teacher_career WHERE teacher_index = ${teacher_index};
+	</select>
+
+	
+</mapper>

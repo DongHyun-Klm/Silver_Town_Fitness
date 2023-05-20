@@ -15,13 +15,13 @@ public class InstructorServiceImpl implements InstructorService{
 	private InstructorDao instructorDao;
 	
 	// 종목 강사 조회
-	public List<Teacher_career> selectList(String exercise){
-		return instructorDao.selectList(exercise); 
+	public List<Teacher_career> selectList(int exercise_name){
+		return instructorDao.selectList(exercise_name); 
 	}
 	
 	// 강사 이력 조회
-	public Teacher_career selectCareer(String exercise) {
-		 return instructorDao.selectCareer(exercise);
+	public Teacher_career selectCareer(int teacher_index) {
+		 return instructorDao.selectCareer(teacher_index);
 	}
 	
 

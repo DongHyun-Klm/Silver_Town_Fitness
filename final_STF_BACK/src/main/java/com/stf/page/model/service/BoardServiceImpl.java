@@ -30,17 +30,18 @@ public class BoardServiceImpl implements BoardService{
 	// 글 수정
 	@Override
 	public void updateBoard(Board board) {
-		Board originBoard = boardDao.selectOne(board.getUser_index());
-		originBoard.setBoard_title(board.getBoard_title()); // 제목
-		originBoard.setBoard_content(board.getBoard_content()); // 글 내용
-		boardDao.updateBoard(originBoard);
+//		Board originBoard = boardDao.selectOne(board.getUser_index());
+//		originBoard.setBoard_title(board.getBoard_title()); // 제목
+//		originBoard.setBoard_content(board.getBoard_content()); // 글 내용
+//		boardDao.updateBoard(originBoard);
+		boardDao.updateBoard(board);
 	}
 	// board + nickname => dto nickboard <= join nick user, board join 
 
 	// 글 삭제
 	@Override
-	public int deleteBoard(Board index) {
-		return boardDao.deleteBoard(index) ;
+	public int deleteBoard(int board_index) {
+		return boardDao.deleteBoard(board_index) ;
 	}
 
 	// 검색 목록
@@ -51,15 +52,15 @@ public class BoardServiceImpl implements BoardService{
 
 	// index에 해당하는 상세 조회
 	@Override
-	public Board selectOne(int index) {
-//		this.updateViewCnt(index);
-		return boardDao.selectOne(index);
+	public Board selectOne(int board_index) {
+		boardDao.updateViewCnt(board_index);
+		return boardDao.selectOne(board_index);
 	}
 	
 	// 업데이트 카운트
 	@Override
-	public void updateViewCnt(int index) {
-		Board board = boardDao.selectOne(index);
+	public void updateViewCnt(int board_index) {
+		Board board = boardDao.selectOne(board_index);
 		board.setBoard_cnt(board.getBoard_cnt()+1);
 		boardDao.updateBoard(board);
 	}

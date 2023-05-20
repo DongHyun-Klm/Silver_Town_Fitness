@@ -10,7 +10,7 @@ public interface NoticeService{
 	List<Notice> selectList();
 	
 	// 공지사항 글 상세 조회
-	Notice selectOne(int index);
+	Notice selectOne(int notice_index);
 	
 	
 	
