@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.stf.page.model.dao.BoardDao">
-	
+
 	<!-- 사랑방 글 전체 조회 -->
 	<select id="selectList" resultType="Board">
 		SELECT *
@@ -11,45 +11,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 사랑방 글 등록 -->
-	<insert id="insertBoard" parameterType="Board" keyProperty="board_index">
-		INSERT INTO board (board_index, user_index, board_title, board_content, board_date, board_cnt, board_img)
-		VALUES (#{board_index}, #{user_index}, #{board_title}, #{board_content}, #{board_date}, #{board_cnt}, #{board_img} );
+	<insert id="insertBoard" parameterType="Board"
+		keyProperty="board_index">
+		INSERT INTO board (board_index, user_index, board_title,
+		board_content)
+		VALUES (#{board_index}, #{user_index}, #{board_title},
+		#{board_content} );
 	</insert>
-	
+
 	<!-- 사랑방 글 수정 -->
 	<update id="updateBoard" parameterType="Board">
 		UPDATE board
 		SET
 		board_title = #{board_title},
-		board_content = #{board_content}
-		WHERE board_index = #{board_index};
+		board_content = #{board_content},
+		board_cnt =
+		#{board_cnt},
+		board_date = Now()
+		WHERE board_index = #{board_index} ;
 	</update>
-	
+
 	<!-- 사랑방 글 삭제 -->
 	<delete id="deleteBoard" parameterType="int">
-		DELETE FROM board WHERE board_index = #{board_index}
+		DELETE FROM Board WHERE
+		board_index = #{board_index}
 	</delete>
-	
+
 	<!-- 사랑방 상세 조회 -->
-	<select id="selectOne" parameterType="int">
+	<select id="selectOne" parameterType="int" resultType="Board">
 		SELECT *
 		FROM board
 		WHERE board_index = #{board_index}
 	</select>
 
-	<!-- 사랑방 글 검색 
-	<select id="selectSearch" parameterType="HashMap<String, String> params">
-		SELECT *
-		FROM board
-		<if test="mode == 1">
-			WHERE board_content LIKE CONCAT('%', #{keyword},'%')
-		</if>
-		<if test="mode == 2">
-			WHERE content LIKE '%${keyword}%'
-		</if>
-		<if test="mode == 3">
-			WHERE title LIKE CONCAT('%', #{keyword},'%')
-			OR content LIKE '%${keyword}%'
-		</if>
-	</select> -->
+	<!-- 사랑방 글 검색 <select id="selectSearch" parameterType="HashMap<String, String> 
+		params"> </select> -->
+
 </mapper>

@@ -16,8 +16,8 @@ public class LectureServiceImpl implements LectureService{
 	private LectureDao lectureDao;
 	
 	// 종목별 정보 조회
-	public Exercise selectExercise(int index){
-		return lectureDao.selectExercise(index);
+	public Exercise selectExercise(int exercise_index){
+		return lectureDao.selectExercise(exercise_index);
 	}
 	
 	// 종목별 강의목록 조회

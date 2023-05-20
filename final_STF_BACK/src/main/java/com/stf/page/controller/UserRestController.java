@@ -15,8 +15,11 @@ import com.stf.page.model.dto.User;
 import com.stf.page.model.service.UserService;
 import com.stf.page.util.JwtUtil;
 
+import io.swagger.annotations.Api;
+
 @RestController
 @RequestMapping("/api")
+@Api(tags = "유저 컨트롤러")
 public class UserRestController {
 
 	@Autowired

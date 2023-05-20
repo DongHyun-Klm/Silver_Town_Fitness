@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 종목별 정보 조회 -->
 	<select id="selectExercise" parameterType="int"
 		resultType="Exercise">
-		SELECT * from exercise WHERE exercise_index = ${index};
+		SELECT * from exercise WHERE exercise_index = ${exercise_index};
 	</select>
 
 	<!-- 종목별 강의목록 조회 -->

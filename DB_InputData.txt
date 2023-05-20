@@ -90,3 +90,11 @@ SELECT * from program
 WHERE exercise_index = 1
 AND month(current_date()) = lecture_month;
 
+
+-- 공지사항 테이블
+
+DELETE FROM Board;
+INSERT INTO Board(board_index, user_index, board_title, board_content, board_date, board_cnt,board_img)
+VALUES ( '0', 1, "안녕", "내용이에요", NOW(), 0, '이미지 경로');
+SELECT * from Board;
+

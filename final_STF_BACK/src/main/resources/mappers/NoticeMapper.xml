@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.stf.page.model.dao.NoticeDao">
+	<!-- 공지사항 조회 /notice -->
+	<select id="selectList" resultType="Notice">
+		SELECT *
+		FROM Notice;
+	</select>
+
+	<!-- 공지사항 상세조회 /notice/{index} -->
+	<select id="selectOne" parameterType="int" resultType="Notice">
+		SELECT *
+		FROM Notice
+		WHERE notice_index = #{notice_index}
+	</select>
+	
+	
+</mapper>

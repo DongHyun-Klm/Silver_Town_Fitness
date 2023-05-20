@@ -23,8 +23,8 @@ public class NoticeServiceImpl implements NoticeService{
 	
 	// 공지사항 글 상세 조회
 	@Override
-	public Notice selectOne(int index) {
-		return noticedao.selectOne(index);
+	public Notice selectOne(int notice_index) {
+		return noticedao.selectOne(notice_index);
 	}
 
 	

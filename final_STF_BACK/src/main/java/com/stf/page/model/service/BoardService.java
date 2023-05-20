@@ -17,16 +17,17 @@ public interface BoardService {
 	void updateBoard(Board board);
 	
 	// 사랑방 글 삭제
-	int deleteBoard(Board index);
+	int deleteBoard(int board_index);
 	
 	// 사랑방 글 검색
 	List<Board> selectSearch(HashMap<String, String> params);
 		
 	// 사랑방 상세 조회
-	Board selectOne(int index);
+	Board selectOne(int board_index);
+
+	// 조회수 증가
+	void updateViewCnt(int board_index);
 	
-	//게시글 view cnt 증가
-	void updateViewCnt(int index);
 
 	
 }
