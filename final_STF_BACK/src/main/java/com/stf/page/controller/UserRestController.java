@@ -25,7 +25,7 @@ import io.swagger.annotations.Api;
 @RequestMapping("/api")
 @Api(tags = "유저 컨트롤러")
 public class UserRestController {
-
+	//동현
 	@Autowired
 	private JwtUtil jwtUtil;
 	
