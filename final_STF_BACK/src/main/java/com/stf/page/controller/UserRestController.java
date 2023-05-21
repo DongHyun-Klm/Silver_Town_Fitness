@@ -78,8 +78,8 @@ public class UserRestController {
 	//회원가입
 	@PostMapping("/user/signup")
 	public ResponseEntity<?> signup(User user, @RequestParam(value = "profileImage", required = false) MultipartFile file) throws IllegalStateException, IOException{
-		String fullpath = "";
-		if(!file.isEmpty()) {
+		if(file != null) {
+			String fullpath = "";
 			fullpath = filedir + System.currentTimeMillis() + "_" + file.getOriginalFilename();
 			file.transferTo(new File(fullpath));
 			user.setUser_img(fullpath);
@@ -99,7 +99,13 @@ public class UserRestController {
 	
 	//회원 정보수정
 	@PutMapping("/user")
-	public ResponseEntity<?> update(User user){
+	public ResponseEntity<?> update(User user, @RequestParam(value = "profileImage", required = false) MultipartFile file) throws IllegalStateException, IOException{
+		if(file != null) {
+			String fullpath = "";
+			fullpath = filedir + System.currentTimeMillis() + "_" + file.getOriginalFilename();
+			file.transferTo(new File(fullpath));
+			user.setUser_img(fullpath);
+		}
 		user.setUser_index(userService.selectOne(user.getUser_id()).getUser_index());
 		userService.updateUser(user);
 		return new ResponseEntity<>(HttpStatus.OK);

@@ -13,10 +13,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 강사별 리뷰 작성 /review -->
-	<insert id="insertBoard" parameterType="Teacher_review"
-		keyProperty="teacher_index">
-		INSERT INTO Teacher_review(review_index, user_index, teacher_index, review_title, review_content, review_grade)
-		VALUES (0, #{user_index}, #{teacher_index},  #{review_title}, #{review_content},  #{review_grade});
+	<insert id="insertBoard" parameterType="Teacher_review" keyProperty="teacher_index">
+		INSERT INTO Teacher_review(review_index, user_id, teacher_index, review_title, review_content, review_grade)
+		VALUES (0, #{user_id}, #{teacher_index},  #{review_title}, #{review_content},  #{review_grade});
 	</insert>
 
 </mapper>

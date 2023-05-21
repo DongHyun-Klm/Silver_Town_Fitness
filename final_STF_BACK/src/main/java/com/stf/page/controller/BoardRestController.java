@@ -49,7 +49,7 @@ public class BoardRestController {
 	//파일 저장할 경로
 	final private String filedir = "C:/Users/김동현/Dropbox/STF/BSG_Silver_Town_Fitness/image/";
 
-	// 사랑방 글 전체 조회 // pass
+	// 사랑방 글 전체 조회 
 	@GetMapping("/board")
 	public ResponseEntity<List<Board>> love_All() {
 		List<Board> list = boardService.selectList(); // 단순히 전제 조회
@@ -63,8 +63,8 @@ public class BoardRestController {
 	@PostMapping("/board")
 	public ResponseEntity<Board> love_create(@RequestHeader("access-token") String token, Board board, @RequestParam(value = "file", required = false) MultipartFile file) throws IllegalStateException, IOException {
 		// 파일 업로드
-		String fullpath = "";
-		if(!file.isEmpty()) {
+		if(file != null) {
+			String fullpath = "";
 			fullpath = filedir + System.currentTimeMillis() + "_" + file.getOriginalFilename();
 			file.transferTo(new File(fullpath));
 			board.setBoard_img(fullpath);
@@ -81,8 +81,8 @@ public class BoardRestController {
 	@PutMapping("/board")
 	public ResponseEntity<Void> love_modify(Board board, @RequestParam(value = "file", required = false) MultipartFile file) throws IllegalStateException, IOException {
 		// 파일 업로드
-		String fullpath = "";
-		if(!file.isEmpty()) {
+		if(file!=null) {
+			String fullpath = "";
 			fullpath = filedir + System.currentTimeMillis() + "_" + file.getOriginalFilename();
 			file.transferTo(new File(fullpath));
 			board.setBoard_img(fullpath);
@@ -105,7 +105,6 @@ public class BoardRestController {
 		}
 		boardService.deleteBoard(board_index);
 		return new ResponseEntity<Void>(HttpStatus.OK);
-		
 	}	
 	
 	// 사랑방 상세 조회
@@ -122,7 +121,6 @@ public class BoardRestController {
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("type", type);
 		params.put("keyword", keyword);
-
 		return new ResponseEntity<List<Board>>(boardService.selectSearch(params), HttpStatus.OK);
 	}
 

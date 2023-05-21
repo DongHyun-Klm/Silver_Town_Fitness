@@ -13,10 +13,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 사랑방 글 등록 -->
 	<insert id="insertBoard" parameterType="Board"
 		keyProperty="board_index">
-		INSERT INTO board (board_index, user_index, board_title,
+		INSERT INTO board (board_index, user_id, board_title,
 		board_content, board_date, board_cnt,board_img)
 		VALUES (0,
-		#{user_index}, #{board_title}, #{board_content}, NOW(), 0,
+		#{user_id}, #{board_title}, #{board_content}, NOW(), 0,
 		#{board_img} );
 	</insert>
 
@@ -26,7 +26,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET
 		board_title = #{board_title},
 		board_content = #{board_content},
-		board_date = Now()
+		board_date = Now(),
+		board_img = #{board_img}
 		WHERE board_index = #{board_index} ;
 	</update>
 
@@ -53,13 +54,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 사랑방 검색 -->
 	<select id="selectSearch" resultType="Board" parameterType="java.util.HashMap">
 	  SELECT * FROM board
-	    <if test="type == title">
-	      WHERE board_title LIKE CONCAT('%', #{keyword}, '%')
-	    </if>
-	    <if test="type == 'content'">
+    	<if test="type.equals('title')">
+      		WHERE board_title LIKE CONCAT('%', #{keyword}, '%')
+    	</if>
+	    <if test="type.equals('content')">
 	      WHERE board_content LIKE CONCAT('%', #{keyword}, '%')
 	    </if>
-	    <if test="type == 'author'">
+	    <if test="type.equals('author')">
 	      WHERE user_index LIKE CONCAT('%', #{keyword}, '%')
 	    </if>
 	</select>
