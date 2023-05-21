@@ -2,7 +2,7 @@
 
 <script>
 export default {
-  name: "BoardUpdate",
+  name: "MypageWithdrawal",
 };
 </script>
 

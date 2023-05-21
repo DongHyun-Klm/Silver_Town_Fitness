@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h2>사랑방 뷰</h2>
+    <h2>수강신청 뷰</h2>
     <router-view />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'BoardView',
+  name: 'RegisterView',
 };
 </script>
 

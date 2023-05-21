@@ -1,51 +1,175 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import BoardView from "../views/BoardView.vue";
-// import TMDBView from "../views/TMDBView.vue";
-
-import BoardCreate from "../components/board/BoardCreate.vue";
-import BoardList from "../components/board/BoardList.vue";
-import BoardDetail from "../components/board/BoardDetail.vue";
-import BoardUpdate from "../components/board/BoardUpdate.vue";
 
 Vue.use(VueRouter);
 
+import HomeView from "../views/HomeView.vue";
+import BoardView from "../views/BoardView.vue";
+import ExerciseView from "../views/ExerciseView.vue";
+import LoginView from "../views/LoginView.vue";
+import MypageView from "../views/MypageView.vue";
+import NoticeView from "../views/NoticeView.vue";
+import RegisterView from "../views/RegisterView.vue";
+import ReviewView from "../views/ReviewView.vue";
+
+// Board
+import BoardMain from "../components/Board/BoardMain.vue";
+import BoardCreate from "../components/Board/BoardCreate.vue";
+import BoardDetail from "../components/Board/BoardDetail.vue";
+import BoardUpdate from "../components/Board/BoardUpdate.vue";
+// Exercise
+import ExerciseMain from "../components/Exercise/ExerciseMain.vue";
+// Login
+import LoginMain from "../components/Login/LoginMain.vue";
+import LoginJoin from "../components/Login/LoginJoin.vue";
+// Mypage
+import MypageMain from "../components/Mypage/MypageMain.vue";
+import MypageSchedule from "../components/Mypage/MypageSchedule.vue";
+import MypageUpdate from "../components/Mypage/MypageUpdate.vue";
+import MypageWithdrawal from "../components/Mypage/MypageWithdrawal.vue";
+// Notice
+import NoticeMain from "../components/Notice/NoticeMain.vue";
+// Register
+import RegisterMain from "../components/Register/RegisterMain.vue";
+// Review
+import ReviewMain from "../components/Notice/ReviewMain.vue";
+
 const routes = [
+  // Home
   {
     path: "/",
-    name: "home",
+    name: "Home",
     component: HomeView,
   },
+  // Board
   {
-    path: "/board",
+    path: "/Board",
+    name: "Board",
     component: BoardView,
     children: [
       {
         path: "",
-        name: "boardList",
-        component: BoardList,
+        name: "BoardMain",
+        component: BoardMain,
       },
       {
-        path: "create",
-        name: "boardCreate",
+        path: "BoardCreate",
+        name: "BoardCreate",
         component: BoardCreate,
       },
       {
-        path: ":id",
+        // path 경로 확인할 것!
+        path: ":index",
         name: "boardDetail",
         component: BoardDetail,
       },
       {
-        path: "update",
-        name: "boardUpdate",
+        path: "BoardUpdate",
+        name: "BoardUpdate",
         component: BoardUpdate,
       },
     ],
   },
+  // Exercise
   {
-    path: "",
+    path: "/Exercise",
+    name: "Exercise",
+    component: ExerciseView,
+    children: [
+      {
+        path: "",
+        name: "ExerciseMain",
+        component: ExerciseMain,
+      },
+      
+    ],
   },
+  // Login
+  {
+    path: "/Login",
+    name: "Login",
+    component: LoginView,
+    children: [
+      {
+        path: "",
+        name: "LoginMain",
+        component: LoginMain,
+      },
+      {
+        path: "LoginJoin",
+        name: "LoginJoin",
+        component: LoginJoin,
+      },
+    ],
+  },
+  // Mypage
+  {
+    path: "/Mypage",
+    name: "Mypage",
+    component: MypageView,
+    children: [
+      {
+        path: "",
+        name: "MypageMain",
+        component: MypageMain,
+      },
+      {
+        path: "MypageSchedule",
+        name: "MypageSchedule",
+        component: MypageSchedule,
+      },
+      {
+        path: "MypageUpdate",
+        name: "MypageUpdate",
+        component: MypageUpdate,
+      },
+      {
+        path: "MypageWithdrawal",
+        name: "MypageWithdrawal",
+        component: MypageWithdrawal,
+      },
+    ],
+  },
+  // Notice
+  {
+    path: "/Notice",
+    name: "Notice",
+    component: NoticeView,
+    children: [
+      {
+        path: "",
+        name: "NoticeMain",
+        component: NoticeMain,
+      },
+    ],
+  },
+  // Register
+  {
+    path: "/Register",
+    name: "Register",
+    component: RegisterView,
+    children: [
+      {
+        path: "",
+        name: "RegisterMain",
+        component: RegisterMain,
+      },
+    ],
+  },
+  // Review
+  {
+    path: "/Review",
+    name: "Review",
+    component: ReviewView,
+    children: [
+      {
+        path: "",
+        name: "ReviewMain",
+        component: ReviewMain,
+      },
+    ],
+  },
+  
 ];
 
 const router = new VueRouter({

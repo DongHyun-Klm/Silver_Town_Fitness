@@ -1,10 +1,13 @@
 <template>
+  
 </template>
 
 <script>
 export default {
-  name: "BoardCreate",
-};
+name: "BoardMain"
+}
 </script>
 
-<style></style>
+<style>
+
+</style>

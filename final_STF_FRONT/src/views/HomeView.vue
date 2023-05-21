@@ -1,12 +1,20 @@
 <template>
+   <header>
+    <nav class="header-nav">
+      <div>
+      </div>
 
-  <div class="home">
+      <div>
+        <!-- IF 로그인 상태 / 아닌 상태 -->
+        <router-link to="/">수강 신청</router-link> |
+        <router-link to="/">마이페이지</router-link> |
+        <router-link to="/">공지사항</router-link>
+      </div>
+    </nav>
+
     <img src="@/assets/ssafy_logo.png" />
     <h2>게시판 환영!</h2>
-  </div>
-
-
-     
+   </header>
 </template>
 
 <script>
@@ -25,3 +33,12 @@ export default {
   },
 };
 </script>
+
+<style >
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+</style>
