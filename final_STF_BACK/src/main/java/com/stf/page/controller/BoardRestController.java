@@ -94,15 +94,18 @@ public class BoardRestController {
 
 	// 사랑방 글 삭제
 	@DeleteMapping("/board/{board_index}")
-	public ResponseEntity<?> love_delete(@PathVariable int board_index) {
-
-		int result = boardService.deleteBoard(board_index);
-
-		if (result != 0) {
-			return new ResponseEntity<Integer>(result, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<Integer>(HttpStatus.NOT_FOUND);
+	public ResponseEntity<Void> love_delete(@RequestHeader("access-token") String token, @PathVariable int board_index) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException {
+		// 토큰에서 가져온 유저 id
+		String user_id = (String) jwtUtil.parseToken(token).get("id");
+		// 삭제하려는 글의 유저 id
+		String board_user_id = boardService.selectOne(board_index).getUser_id();
+		// 다르다면 삭제 불가
+		if(!user_id.equals(board_user_id)) {
+			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
 		}
+		boardService.deleteBoard(board_index);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+		
 	}	
 	
 	// 사랑방 상세 조회
@@ -117,7 +120,6 @@ public class BoardRestController {
 	@GetMapping("/board/search")
 	public ResponseEntity<List<Board>> list(@RequestParam String type, @RequestParam String keyword) {
 		HashMap<String, String> params = new HashMap<String, String>();
-		System.out.println(type + " " + keyword);
 		params.put("type", type);
 		params.put("keyword", keyword);
 

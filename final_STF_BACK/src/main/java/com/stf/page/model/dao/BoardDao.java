@@ -18,7 +18,7 @@ public interface BoardDao {
 	void updateBoard(Board board);
 	
 	// 사랑방 글 삭제
-	int deleteBoard(int board_index);
+	void deleteBoard(int board_index);
 	
 	// 사랑방 글 검색
 	List<Board> selectSearch(HashMap<String, String> params);
