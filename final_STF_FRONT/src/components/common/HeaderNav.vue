@@ -1,48 +1,33 @@
 <template>
-  <header>
-    <nav class="header-nav">
-      <div >
-        <img class="text-center" src="@/assets/ssafy_logo.png" />
-      </div>
-      <div>
-        <!-- IF 로그인 상태 / 아닌 상태 -->
-        <router-link to="/movie/create">수강 신청</router-link> |
-        <router-link to="/movie">마이페이지</router-link> | 
-        <router-link to="/movie">마이페이지</router-link>
-      </div>
+  <v-app-bar app color="success" dark>
+    <!-- 홈으로 이동하는 이미지 -->
+    <v-app-bar-nav-icon @click="navigateToHome">
+      <img src="@/assets/STF_Logo.png" alt="Home" class="home-icon" />
+    </v-app-bar-nav-icon>
 
-    </nav>
-  </header>
+    <v-spacer></v-spacer> 
+
+    <v-btn text to="/Mypage/MypageSchedule">내 일정 관리</v-btn>
+    <v-btn text to="/">로그아웃</v-btn>
+    <!-- 로그아웃 후 홈으로 -->
+  </v-app-bar>
 </template>
 
 <script>
 export default {
   name: "HeaderNav",
+    methods: {
+    navigateToHome() {
+      this.$router.push('/');
+    }
+  }
 };
 </script>
 
 <style>
-header {
-  height: 70px;
-  background-color: black;
-  line-height: 70px;
-  padding: 0px 30px;
-}
-
-header a {
-  text-decoration: none;
-  color: white;
-}
-
-.header-nav {
-  display: flex;
-  justify-content: space-between;
-}
-
-.logo {
-  display: inline-block;
-  font-size: 5rem;
-  font-weight: bold;
-  color: white;
+.home-icon {
+  width: 100px; /* 원하는 너비로 설정 */
+  height: auto; /* 높이는 자동으로 조정됨 */
+  margin-left: 20px; /* 왼쪽 간격 설정 */
 }
 </style>

@@ -32,7 +32,7 @@ import NoticeMain from "../components/Notice/NoticeMain.vue";
 // Register
 import RegisterMain from "../components/Register/RegisterMain.vue";
 // Review
-import ReviewMain from "../components/Notice/ReviewMain.vue";
+import ReviewMain from "../components/Review/ReviewMain.vue";
 
 const routes = [
   // Home

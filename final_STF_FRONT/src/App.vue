@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
+  <v-app id="app">
     <header-nav></header-nav>
     <router-view />
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -12,6 +12,12 @@ export default {
   components: {
     HeaderNav,
   },
+
+  name: "App",
+
+  data: () => ({
+    //
+  }),
 };
 </script>
 

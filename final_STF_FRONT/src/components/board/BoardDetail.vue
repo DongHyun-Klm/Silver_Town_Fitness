@@ -1,5 +1,7 @@
 <template>
-  
+   <div>
+    <h2>사랑방 상세</h2>
+  </div>
 </template>
 
 <script>
