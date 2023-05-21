@@ -30,7 +30,7 @@ public class JwtUtil {
 				.claim("age", "25")
 				.claim("담아보자", "한글도가능?")
 				.claim("user_name", "donghyun")
-				.signWith(SignatureAlgorithm.HS256, "STF".getBytes("UTF-8"))
+				.signWith(SignatureAlgorithm.HS256, SALT.getBytes("UTF-8"))
 				.compact();
 	}
 	

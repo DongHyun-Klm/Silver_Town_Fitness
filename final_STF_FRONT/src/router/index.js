@@ -33,7 +33,10 @@ import NoticeMain from "../components/Notice/NoticeMain.vue";
 import RegisterMain from "../components/Register/RegisterMain.vue";
 // Review
 import ReviewMain from "../components/Review/ReviewMain.vue";
-
+// Test
+import test from "../views/Test/test.vue";
+import test2 from "../views/Test/test2.vue";
+// import test3 from "../views/test/test3.vue";
 const routes = [
   // Home
   {
@@ -41,6 +44,22 @@ const routes = [
     name: "Home",
     component: HomeView,
   },
+  // test
+  {
+    path: "/test",
+    name: "test",
+    component: test,
+  },
+  {
+    path: "/test2",
+    name: "test2",
+    component: test2,
+  },
+  // {
+  //   path: "/test3",
+  //   name: "test3",
+  //   component: test3,
+  // },
   // Board
   {
     path: "/Board",
@@ -81,7 +100,6 @@ const routes = [
         name: "ExerciseMain",
         component: ExerciseMain,
       },
-      
     ],
   },
   // Login
@@ -169,7 +187,6 @@ const routes = [
       },
     ],
   },
-  
 ];
 
 const router = new VueRouter({
