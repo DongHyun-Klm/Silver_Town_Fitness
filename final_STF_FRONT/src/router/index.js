@@ -21,7 +21,6 @@ import BoardUpdate from "../components/Board/BoardUpdate.vue";
 import ExerciseMain from "../components/Exercise/ExerciseMain.vue";
 // Login
 import LoginMain from "../components/Login/LoginMain.vue";
-import LoginJoin from "../components/Login/LoginJoin.vue";
 // Mypage
 import MypageMain from "../components/Mypage/MypageMain.vue";
 import MypageSchedule from "../components/Mypage/MypageSchedule.vue";
@@ -94,11 +93,6 @@ const routes = [
         path: "",
         name: "LoginMain",
         component: LoginMain,
-      },
-      {
-        path: "LoginJoin",
-        name: "LoginJoin",
-        component: LoginJoin,
       },
     ],
   },
