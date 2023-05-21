@@ -1,6 +1,5 @@
 <template>
   <v-app-bar app color="success" dark>
-    <!-- 홈으로 이동하는 이미지 -->
     <v-app-bar-nav-icon @click="navigateToHome">
       <img src="@/assets/STF_Logo.png" alt="Home" class="home-icon" />
     </v-app-bar-nav-icon>
@@ -16,11 +15,11 @@
 <script>
 export default {
   name: "HeaderNav",
-    methods: {
+  methods: {
     navigateToHome() {
       this.$router.push('/');
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -28,6 +27,6 @@ export default {
 .home-icon {
   width: 100px; /* 원하는 너비로 설정 */
   height: auto; /* 높이는 자동으로 조정됨 */
-  margin-left: 20px; /* 왼쪽 간격 설정 */
+  margin-left: 70px; /* 왼쪽 간격 설정 */
 }
 </style>
