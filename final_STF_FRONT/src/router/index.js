@@ -77,8 +77,8 @@ const routes = [
       },
       {
         // path 경로 확인할 것!
-        path: ":index",
-        name: "boardDetail",
+        path: "BoardDetail",
+        name: "BoardDetail",
         component: BoardDetail,
       },
       {

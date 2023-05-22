@@ -137,8 +137,8 @@ export default {
 }
 
 .avatar {
-  width: 200px;
-  height: 200px;
+  width: 350px;
+  height: 350px;
   border-radius: 50%;
   overflow: hidden;
 }
