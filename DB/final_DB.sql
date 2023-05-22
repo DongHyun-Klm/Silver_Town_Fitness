@@ -3,7 +3,9 @@ CREATE DATABASE STF;
 USE STF;
 set SQL_SAFE_UPDATES = 0;
 
+
 -- 221213
+
 
 -- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
 
@@ -226,8 +228,6 @@ CREATE TABLE Notice
 ALTER TABLE Notice COMMENT '공지사항';
 
 
--- INPUT
-
 -- 운동종목 테이블
 DELETE FROM exercise;
 INSERT INTO exercise(exercise_index, exercise_name, exercise_intro, exercise_img, exercise_force)
@@ -333,4 +333,18 @@ SELECT * from Board;
 DELETE FROM Teacher_review;
 INSERT INTO Teacher_review(review_index, user_id, teacher_index, review_title, review_content, review_grade)
 VALUES ( '0', "jay_id", 1, "이 선생 최고",'에요', 2);
+
 SELECT * from Teacher_review;
+
+-- 예약 테이블
+INSERT INTO Reservation(reservation_index, user_index, lecture_index)
+VALUES (0, 1, 1), (0, 1, 2), (0, 1, 3);
+
+SELECT * FROM Reservation;
+
+-- 이수 목록
+SELECT R.*, P.lecture_event_1, P.lecture_event_2, P.lecture_time1, P.lecture_time2  
+FROM Reservation AS R join program AS P ON R.lecture_index = P.lecture_index
+WHERE R.user_index = 1
+AND P.lecture_month = 5;
+

@@ -4,10 +4,8 @@ public class Program {
 	
 	private int lecture_index;
 	private String lecture_name;
-	private int lecture_time1;
-	private int lecture_time2;
-	private String lecture_event_1;
-	private String lecture_event_2;
+	private String lecture_time1;
+	private String lecture_time2;
 	private int lecture_month;
 	private int lecture_max_cnt;
 	private int lecture_cnt;
@@ -18,15 +16,14 @@ public class Program {
 	public Program() {
 	}
 
-	public Program(int lecture_index, String lecture_name, int lecture_time1, int lecture_time2, String lecture_event_1,
-			String lecture_event_2, int lecture_month, int lecture_max_cnt, int lecture_cnt, String lecture_place,
-			int exercise_index, int teacher_index) {
+	public Program(int lecture_index, String lecture_name, String lecture_time1, String lecture_time2,
+			int lecture_month, int lecture_max_cnt, int lecture_cnt, String lecture_place, int exercise_index,
+			int teacher_index) {
+		super();
 		this.lecture_index = lecture_index;
 		this.lecture_name = lecture_name;
 		this.lecture_time1 = lecture_time1;
 		this.lecture_time2 = lecture_time2;
-		this.lecture_event_1 = lecture_event_1;
-		this.lecture_event_2 = lecture_event_2;
 		this.lecture_month = lecture_month;
 		this.lecture_max_cnt = lecture_max_cnt;
 		this.lecture_cnt = lecture_cnt;
@@ -34,8 +31,6 @@ public class Program {
 		this.exercise_index = exercise_index;
 		this.teacher_index = teacher_index;
 	}
-
-
 
 	public int getLecture_index() {
 		return lecture_index;
@@ -53,36 +48,20 @@ public class Program {
 		this.lecture_name = lecture_name;
 	}
 
-	public int getLecture_time1() {
+	public String getLecture_time1() {
 		return lecture_time1;
 	}
 
-	public void setLecture_time1(int lecture_time1) {
+	public void setLecture_time1(String lecture_time1) {
 		this.lecture_time1 = lecture_time1;
 	}
 
-	public int getLecture_time2() {
+	public String getLecture_time2() {
 		return lecture_time2;
 	}
 
-	public void setLecture_time2(int lecture_time2) {
+	public void setLecture_time2(String lecture_time2) {
 		this.lecture_time2 = lecture_time2;
-	}
-
-	public String getLecture_event_1() {
-		return lecture_event_1;
-	}
-
-	public void setLecture_event_1(String lecture_event_1) {
-		this.lecture_event_1 = lecture_event_1;
-	}
-
-	public String getLecture_event_2() {
-		return lecture_event_2;
-	}
-
-	public void setLecture_event_2(String lecture_event_2) {
-		this.lecture_event_2 = lecture_event_2;
 	}
 
 	public int getLecture_month() {
@@ -136,9 +115,10 @@ public class Program {
 	@Override
 	public String toString() {
 		return "Program [lecture_index=" + lecture_index + ", lecture_name=" + lecture_name + ", lecture_time1="
-				+ lecture_time1 + ", lecture_time2=" + lecture_time2 + ", lecture_event_1=" + lecture_event_1
-				+ ", lecture_event_2=" + lecture_event_2 + ", lecture_month=" + lecture_month + ", lecture_max_cnt="
-				+ lecture_max_cnt + ", lecture_cnt=" + lecture_cnt + ", lecture_place=" + lecture_place
-				+ ", exercise_index=" + exercise_index + ", teacher_index=" + teacher_index + "]";
+				+ lecture_time1 + ", lecture_time2=" + lecture_time2 + ", lecture_month=" + lecture_month
+				+ ", lecture_max_cnt=" + lecture_max_cnt + ", lecture_cnt=" + lecture_cnt + ", lecture_place="
+				+ lecture_place + ", exercise_index=" + exercise_index + ", teacher_index=" + teacher_index + "]";
 	}
+	
+	
 }
