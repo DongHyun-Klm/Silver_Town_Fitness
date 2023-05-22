@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>마이페이지 뷰</h2>
     <router-view />
   </div>
 </template>
@@ -11,4 +10,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.main-container {
+  padding: 0px 0px 0px;
+}
+</style>

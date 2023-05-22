@@ -21,9 +21,7 @@
             required
           />
           <!-- <a class="outer-link pull-left" href="#/forgot">Forgot Password</a> -->
-          <button type="submit" class="btn btn-submit btn-default pull-right">
-            로그인
-          </button>
+          <button type="submit" class="btn">로그인</button>
         </form>
       </div>
     </div>
@@ -71,14 +69,14 @@
             type="number"
             v-model="birth"
             class="form-control form-control-birth"
-            placeholder="생년월일 입력해주세요~(970619 처럼요~)"
+            placeholder="생년월일 숫자만 입력해주세요~"
             required
           />
           <input
             type="text"
             v-model="sex"
             class="form-control form-control-sex"
-            placeholder="성별 입력해주세요~(남 / 여)"
+            placeholder="성별 입력해주세요~ (남성 / 여성)"
             required
           />
           <input
@@ -89,17 +87,25 @@
             required
           />
           <!-- handleImageUpload 메소드는 파일을 선택한 후 실행되는 함수 -->
-           <input
+          <input
             type="file"
+            id="fileInput"
             accept="image/*"
             @change="handleImageUpload"
             class="form-control form-control-image"
-            placeholder="사진을 넣어주세요~ (선택)"
             required
+            style="display: none"
           />
-          <button type="submit" class="btn btn-submit btn-default pull-right">
-            회원가입
-          </button>
+          <div class="mg-1">
+            <v-btn color="primary" dark class="btn">
+              <label for="fileInput" class="custom-file-upload">
+                사진 넣기
+              </label>
+            </v-btn>
+          </div>
+          <div class="mg-1">
+          <button type="submit" class="btn">회원가입</button>
+          </div>
         </form>
       </div>
     </div>
@@ -122,7 +128,7 @@ export default {
   name: "LoginView",
   data() {
     return {
-      showSignIn: true,
+      showSignIn: false,
       id: "",
       password: "",
       name: "",
@@ -284,6 +290,8 @@ button:active {
 
 .login-content-signin > div,
 .login-content-signup > div {
+  width: 360px;
+
   overflow: hidden;
   top: 50%;
   position: relative;
@@ -305,7 +313,7 @@ button:active {
   bottom: 0;
   left: 0;
   margin: auto;
-  width: 660px;
+  width: 800px;
   height: 400px;
   box-shadow: 0 0px 20px rgba(0, 0, 0, 0.03);
 }
@@ -364,7 +372,7 @@ h3 {
 .login-content {
   width: 420px;
   padding: 40px;
-  height: 500px;
+  height: 600px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -405,10 +413,11 @@ h2 {
 }
 
 form.wrapper-box {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 form.wrapper-box input.form-control {
   margin-bottom: 2px;
+  width: 500px;
 }
 
 input {
@@ -551,4 +560,33 @@ h3 {
   color: #7ac142;
   background: #fff;
 }
+
+.btn {
+  /* 버튼 스타일을 일치시키는 CSS 속성 설정 */
+  /* 예시로 일부 스타일을 추가했습니다. 필요에 따라 수정하십시오. */
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.mg-1 {
+  margin-bottom: 0.5px; /* 원하는 간격으로 수정하세요 */
+  margin-top: 0.5px; /* 원하는 간격으로 수정하세요 */
+}
+
+
+.login-page {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    top: 0;
+    left: 0;
+    background: #fff;
+}
+
 </style>
