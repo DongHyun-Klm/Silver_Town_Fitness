@@ -105,6 +105,7 @@ SELECT * from Board;
 DELETE FROM Teacher_review;
 INSERT INTO Teacher_review(review_index, user_id, teacher_index, review_title, review_content, review_grade)
 VALUES ( '0', "jay_id", 1, "이 선생 최고",'에요', 2);
+
 SELECT * from Teacher_review;
 
 -- 달력 select문

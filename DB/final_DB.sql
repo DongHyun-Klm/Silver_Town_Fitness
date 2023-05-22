@@ -3,7 +3,9 @@ CREATE DATABASE STF;
 USE STF;
 set SQL_SAFE_UPDATES = 0;
 
--- 202314
+
+-- 221213
+
 
 -- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
 
@@ -56,9 +58,9 @@ CREATE TABLE User
 (
     `user_index`        INT            NOT NULL    AUTO_INCREMENT COMMENT '인덱스', 
     `user_name`         VARCHAR(20)    NOT NULL    COMMENT '이름', 
-    `user_img`          VARCHAR(1000)    NULL        COMMENT '회원 이미지. 이미지파일 명', 
+    `user_img`          VARCHAR(45)    NULL        COMMENT '회원 이미지. 이미지파일 명', 
     `user_birth`        DATE           NOT NULL    COMMENT '생년월일. YYYYMMDD, 8자', 
-    `user_sex`          VARCHAR(2)     NOT NULL    COMMENT '성별. 남 / 여', 
+    `user_sex`          VARCHAR(45)    NOT NULL    COMMENT '성별. 남성 / 여성', 
     `user_id`           VARCHAR(45)    NOT NULL    DEFAULT 'UNIQUE' COMMENT '유저 아이디', 
     `user_password`     VARCHAR(45)    NOT NULL    COMMENT '비밀번호', 
     `user_nick`         VARCHAR(45)    NOT NULL    COMMENT '닉네임', 
@@ -82,10 +84,8 @@ CREATE TABLE Program
 (
     `lecture_index`    INT            NOT NULL    AUTO_INCREMENT COMMENT '인덱스', 
     `lecture_name`     VARCHAR(10)    NOT NULL    COMMENT '강의명', 
-    `lecture_time1`    INT            NOT NULL    COMMENT '1교시', 
-    `lecture_time2`    INT            NOT NULL    COMMENT '2교시', 
-    `lecture_event_1`  VARCHAR(45)    NOT NULL    COMMENT '주 1차 강의', 
-    `lecture_event_2`  VARCHAR(45)    NOT NULL    COMMENT '주 2차 강의', 
+    `lecture_time1`    VARCHAR(45)    NOT NULL    COMMENT '주 1차 수업', 
+    `lecture_time2`    VARCHAR(45)    NOT NULL    COMMENT '주 2차 수업', 
     `lecture_month`    INT            NOT NULL    COMMENT '프로그램 월 차수', 
     `lecture_max_cnt`  INT            NOT NULL    COMMENT '수강 최대 인원', 
     `lecture_cnt`      INT            NOT NULL    COMMENT '수강 인원', 
@@ -228,13 +228,8 @@ CREATE TABLE Notice
 ALTER TABLE Notice COMMENT '공지사항';
 
 
-
-
--- INPUT
-
-
 -- 운동종목 테이블
-
+DELETE FROM exercise;
 INSERT INTO exercise(exercise_index, exercise_name, exercise_intro, exercise_img, exercise_force)
 VALUES ( '0', '수영', '수영(水泳, Swimming)은 물에서 나아가기 위해 손발을 움직이는 행위, 또는 물에서 누가 더 빨리 나가는지를 겨루는 스포츠이다.', '수영 URL', '수영 장점: '),
  ( '0', '요가', '요가는 신비적 명상법으로서, 종파를 초월하여 실천됨. 오늘날에는 심신의 건강법으로서도 응용되고 있다.', '요가 URL', '요가 장점은~'),
@@ -244,7 +239,7 @@ VALUES ( '0', '수영', '수영(水泳, Swimming)은 물에서 나아가기 위�
 SELECT * from exercise;
 
 -- 강사 정보 테이블
-
+DELETE FROM Teacher;
 INSERT INTO Teacher(teacher_index, teacher_name, teacher_sex, teacher_follower, exercise_index, teacher_img, teacher_career)
 VALUES ( 0, '일동현', '남',0, 1 , '일동현 이미지', 'X'),
 ( 0, '이동현', '여',0, 1 , '이동현 이미지', 'X'),
@@ -259,7 +254,7 @@ VALUES ( 0, '일동현', '남',0, 1 , '일동현 이미지', 'X'),
 SELECT * from Teacher;
 
 -- 공지사항 테이블
-
+DELETE FROM Notice;
 INSERT INTO Notice(notice_index, notice_title, notice_content, notice_date, notice_cnt, notice_manager)
 VALUES ( '0', '수영 프로그램 안내', '수영 프로그램 안내입니다.', NOW(), 0, '관리자'),
 ( '0', '4월 프로그램 안내', '4월 프로그램 안내입니다.', NOW(), 0, '관리자'),
@@ -271,6 +266,7 @@ VALUES ( '0', '수영 프로그램 안내', '수영 프로그램 안내입니다
 SELECT * from Notice;
 
 -- 회원 정보 테이블
+DELETE FROM User;
 INSERT INTO User(user_index, user_name, user_img, user_birth, user_sex, user_id, user_password, user_nick, user_number, user_email , user_lecture_cnt)
 VALUES ( '0', '김재이', '재이 사진 url','19970901','남', 'jay_id', 'ssafy', '재이다', '010-1111-1111','jay@naver.com',0),
  ( '0', '김라현',  '라현 사진 url','19980723','여', 'ra_id', 'ssafy', '라현이다', '010-2222-2222','dong@naver.com',0),
@@ -280,6 +276,7 @@ SELECT * from User;
 
 -- 프로그램 정보 테이블
 
+DELETE FROM program;
 INSERT INTO program(lecture_index, lecture_name, lecture_time1, lecture_time2, lecture_event_1, lecture_event_2, lecture_month, lecture_max_cnt, lecture_cnt, lecture_place, exercise_index , teacher_index)
 VALUES 
 -- 수영 요가 게이트볼 댄스 스포츠 스쿼시
@@ -336,6 +333,7 @@ SELECT * from Board;
 DELETE FROM Teacher_review;
 INSERT INTO Teacher_review(review_index, user_id, teacher_index, review_title, review_content, review_grade)
 VALUES ( '0', "jay_id", 1, "이 선생 최고",'에요', 2);
+
 SELECT * from Teacher_review;
 
 -- 예약 테이블
@@ -349,6 +347,4 @@ SELECT R.*, P.lecture_event_1, P.lecture_event_2, P.lecture_time1, P.lecture_tim
 FROM Reservation AS R join program AS P ON R.lecture_index = P.lecture_index
 WHERE R.user_index = 1
 AND P.lecture_month = 5;
-
-
 
