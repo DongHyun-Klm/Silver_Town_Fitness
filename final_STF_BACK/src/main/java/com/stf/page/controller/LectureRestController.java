@@ -21,9 +21,6 @@ import io.swagger.annotations.Api;
 @Api(tags = "강의 컨트롤러")
 public class LectureRestController {
 
-	private static final String SUCCESS = "succes";
-	private static final String FAIL = "fail";
-
 	@Autowired
 	private LectureService lectureService;
 

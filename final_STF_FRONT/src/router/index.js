@@ -34,7 +34,7 @@ import RegisterMain from "../components/Register/RegisterMain.vue";
 import ReviewMain from "../components/Review/ReviewMain.vue";
 // Test
 import test from "../views/Test/test.vue";
-import test2 from "../views/Test/test2.vue";
+import testSc from "../views/Test/testSc.vue";
 // import test3 from "../views/test/test3.vue";
 const routes = [
   // Home
@@ -51,8 +51,8 @@ const routes = [
   },
   {
     path: "/test2",
-    name: "test2",
-    component: test2,
+    name: "testSc",
+    component: testSc,
   },
   // {
   //   path: "/test3",
