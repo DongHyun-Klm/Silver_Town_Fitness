@@ -33,8 +33,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 사랑방 글 삭제 -->
 	<delete id="deleteBoard" parameterType="int">
-		DELETE FROM Board WHERE
-		board_index = #{board_index}
+		DELETE FROM Board 
+		WHERE board_index = #{board_index}
 	</delete>
 
 	<!-- 사랑방 상세 조회 -->
@@ -61,7 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	      WHERE board_content LIKE CONCAT('%', #{keyword}, '%')
 	    </if>
 	    <if test="type.equals('author')">
-	      WHERE user_index LIKE CONCAT('%', #{keyword}, '%')
+	      WHERE user_id LIKE CONCAT('%', #{keyword}, '%')
 	    </if>
 	</select>
 	

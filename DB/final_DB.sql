@@ -183,23 +183,14 @@ ALTER TABLE Board
 -- 테이블 생성 SQL - Reservation
 CREATE TABLE Reservation
 (
-    `reservation_index`  INT    NOT NULL    AUTO_INCREMENT COMMENT '인덱스', 
-    `user_index`         INT    NOT NULL    COMMENT '유저 인덱스', 
-    `lecture_index`      INT    NOT NULL    COMMENT '강의명 인덱스', 
+    `reservation_index`  INT            NOT NULL    AUTO_INCREMENT COMMENT '인덱스', 
+    `user_id`            VARCHAR(45)    NOT NULL    COMMENT '유저 아이디', 
+    `lecture_index`      INT            NOT NULL    COMMENT '강의명 인덱스', 
      PRIMARY KEY (reservation_index)
 );
 
 -- 테이블 Comment 설정 SQL - Reservation
 ALTER TABLE Reservation COMMENT '프로그램 예약 테이블';
-
--- Foreign Key 설정 SQL - Reservation(user_index) -> User(user_index)
-ALTER TABLE Reservation
-    ADD CONSTRAINT FK_Reservation_user_index_User_user_index FOREIGN KEY (user_index)
-        REFERENCES User (user_index) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
--- Foreign Key 삭제 SQL - Reservation(user_index)
--- ALTER TABLE Reservation
--- DROP FOREIGN KEY FK_Reservation_user_index_User_user_index;
 
 -- Foreign Key 설정 SQL - Reservation(lecture_index) -> Program(lecture_index)
 ALTER TABLE Reservation
@@ -209,6 +200,15 @@ ALTER TABLE Reservation
 -- Foreign Key 삭제 SQL - Reservation(lecture_index)
 -- ALTER TABLE Reservation
 -- DROP FOREIGN KEY FK_Reservation_lecture_index_Program_lecture_index;
+
+-- Foreign Key 설정 SQL - Reservation(user_id) -> User(user_id)
+ALTER TABLE Reservation
+    ADD CONSTRAINT FK_Reservation_user_id_User_user_id FOREIGN KEY (user_id)
+        REFERENCES User (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+-- Foreign Key 삭제 SQL - Reservation(user_id)
+-- ALTER TABLE Reservation
+-- DROP FOREIGN KEY FK_Reservation_user_id_User_user_id;
 
 
 -- Notice Table Create SQL
@@ -226,7 +226,6 @@ CREATE TABLE Notice
 
 -- 테이블 Comment 설정 SQL - Notice
 ALTER TABLE Notice COMMENT '공지사항';
-
 
 -- 운동종목 테이블
 DELETE FROM exercise;
@@ -273,46 +272,44 @@ VALUES ( '0', '김재이', '재이 사진 url','19970901','남', 'jay_id', 'ssaf
  ( '0', '김소연', '소연 사진 url','19981010', '여','so_id', 'ssafy','소연이다','010-3333-3333','so@gmail.com',0 );
 SELECT * from User;
 
-
 -- 프로그램 정보 테이블
-
 DELETE FROM program;
-INSERT INTO program(lecture_index, lecture_name, lecture_time1, lecture_time2, lecture_event_1, lecture_event_2, lecture_month, lecture_max_cnt, lecture_cnt, lecture_place, exercise_index , teacher_index)
+INSERT INTO program(lecture_index, lecture_name, lecture_time1, lecture_time2, lecture_month, lecture_max_cnt, lecture_cnt, lecture_place, exercise_index , teacher_index)
 VALUES 
 -- 수영 요가 게이트볼 댄스 스포츠 스쿼시
+-- 4월
+( 0, '수영1', '2023-05-22T09:00:00', '2023-05-25T09:00:00', 4, 0, 10,'수영장 1호', 1, 1),
+( 0, '수영2', '2023-05-23T13:00:00','2023-05-24T13:00:00', 4, 0, 10,'수영장 2호', 1, 2),
+( 0, '요가1', '2023-05-23T09:00:00','2023-05-24T09:00:00', 4, 0, 10,'요가교실 1호', 2, 3),
+( 0, '요가2', '2023-05-22T15:00:00','2023-05-26T15:00:00', 4, 0, 10,'요가교실 2호', 2, 4),
+( 0, '게이트볼1', '2023-05-23T17:00:00','2023-05-25T17:00:00', 4, 0, 10,'게이트볼장 1호', 3, 5),
+( 0, '게이트볼2', '2023-05-22T10:00:00','2023-05-25T10:00:00', 4, 0, 10,'게이트볼장 2호', 3, 6),
+( 0, '댄스1', '2023-05-23T14:00:00','2023-05-24T14:00:00', 4, 0, 10,'댄스교실 1호', 4, 7),
+( 0, '댄스2', '2023-05-22T14:00:00','2023-05-25T14:00:00', 4, 0, 10,'댄스교실 2호', 4, 8),
+( 0, '스쿼시1', '2023-05-22T10:00:00','2023-05-26T10:00:00', 4, 0, 10,'스쿼시장 1호', 5, 9),
+( 0, '스쿼시2', '2023-05-22T17:00:00','2023-05-23T17:00:00', 4, 0, 10,'스쿼시장 2호', 5, 10),
 -- 5월 시작시간 끝시간 월
-( 0, '수영1', '9', '10','월', '목', 5, 0, 10,'수영장 1호', 1, 1),
-( 0, '수영2', '13','14','화', '수', 5, 0, 10,'수영장 2호', 1, 2),
-( 0, '요가1', '9','10','화', '수', 5, 0, 10,'요가교실 1호', 2, 3),
-( 0, '요가2', '15','16','월', '금', 5, 0, 10,'요가교실 2호', 2, 4),
-( 0, '게이트볼1', '17','18','화', '목', 5, 0, 10,'게이트볼장 1호', 3, 5),
-( 0, '게이트볼2', '10','11','월', '목', 5, 0, 10,'게이트볼장 2호', 3, 6),
-( 0, '댄스1', '14','15','화', '수', 5, 0, 10,'댄스교실 1호', 4, 7),
-( 0, '댄스2', '14','15','월', '목', 5, 0, 10,'댄스교실 2호', 4, 8),
-( 0, '스쿼시1', '10','11','수', '금', 5, 0, 10,'스쿼시장 1호', 5, 9),
-( 0, '스쿼시2', '17','18','월', '화', 5, 0, 10,'스쿼시장 2호', 5, 10),
+( 0, '수영1', '2023-05-22T09:00:00', '2023-05-25T09:00:00', 5, 0, 10,'수영장 1호', 1, 1),
+( 0, '수영2', '2023-05-23T13:00:00','2023-05-24T13:00:00', 5, 0, 10,'수영장 2호', 1, 2),
+( 0, '요가1', '2023-05-23T09:00:00','2023-05-24T09:00:00', 5, 0, 10,'요가교실 1호', 2, 3),
+( 0, '요가2', '2023-05-22T15:00:00','2023-05-26T15:00:00', 5, 0, 10,'요가교실 2호', 2, 4),
+( 0, '게이트볼1', '2023-05-23T17:00:00','2023-05-25T17:00:00', 5, 0, 10,'게이트볼장 1호', 3, 5),
+( 0, '게이트볼2', '2023-05-22T10:00:00','2023-05-25T10:00:00', 5, 0, 10,'게이트볼장 2호', 3, 6),
+( 0, '댄스1', '2023-05-23T14:00:00','2023-05-24T14:00:00', 5, 0, 10,'댄스교실 1호', 4, 7),
+( 0, '댄스2', '2023-05-22T14:00:00','2023-05-25T14:00:00', 5, 0, 10,'댄스교실 2호', 4, 8),
+( 0, '스쿼시1', '2023-05-22T10:00:00','2023-05-26T10:00:00', 5, 0, 10,'스쿼시장 1호', 5, 9),
+( 0, '스쿼시2', '2023-05-22T17:00:00','2023-05-23T17:00:00', 5, 0, 10,'스쿼시장 2호', 5, 10),
 -- 6월 
-( 0, '수영1', '9', '10','월', '목', 6, 0, 10,'수영장 1호', 1, 1),
-( 0, '수영2', '13','14','화', '수', 6, 0, 10,'수영장 2호', 1, 2),
-( 0, '요가1', '9','10','화', '수', 6, 0, 10,'요가교실 1호', 2, 3),
-( 0, '요가2', '15','16','월', '금', 6, 0, 10,'요가교실 2호', 2, 4),
-( 0, '게이트볼1', '17','18','화', '목', 6, 0, 10,'게이트볼장 1호', 3, 5),
-( 0, '게이트볼2', '10','11','월', '목', 6, 0, 10,'게이트볼장 2호', 3, 6),
-( 0, '댄스1', '14','15','화', '수', 6, 0, 10,'댄스교실 1호', 4, 7),
-( 0, '댄스2', '14','15','월', '목', 6, 0, 10,'댄스교실 2호', 4, 8),
-( 0, '스쿼시1', '10','11','수', '금', 6, 0, 10,'스쿼시장 1호', 5, 9),
-( 0, '스쿼시2', '17','18','월', '화', 6, 0, 10,'스쿼시장 2호', 5, 10),
--- 7월
-( 0, '수영1', '9', '10','월', '목', 7, 0, 10,'수영장 1호', 1, 1),
-( 0, '수영2', '13','14','화', '수', 7, 0, 10,'수영장 2호', 1, 2),
-( 0, '요가1', '9','10','화', '수', 7, 0, 10,'요가교실 1호', 2, 3),
-( 0, '요가2', '15','16','월', '금', 7, 0, 10,'요가교실 2호', 2, 4),
-( 0, '게이트볼1', '17','18','화', '목', 7, 0, 10,'게이트볼장 1호', 3, 5),
-( 0, '게이트볼2', '10','11','월', '목', 7, 0, 10,'게이트볼장 2호', 3, 6),
-( 0, '댄스1', '14','15','화', '수', 7, 0, 10,'댄스교실 1호', 4, 7),
-( 0, '댄스2', '14','15','월', '목', 7, 0, 10,'댄스교실 2호', 4, 8),
-( 0, '스쿼시1', '10','11','수', '금', 7, 0, 10,'스쿼시장 1호', 5, 9),
-( 0, '스쿼시2', '17','18','월', '화', 7, 0, 10,'스쿼시장 2호', 5, 10);
+( 0, '수영1', '2023-05-22T09:00:00', '2023-05-25T09:00:00', 6, 0, 10,'수영장 1호', 1, 1),
+( 0, '수영2', '2023-05-23T13:00:00','2023-05-24T13:00:00', 6, 0, 10,'수영장 2호', 1, 2),
+( 0, '요가1', '2023-05-23T09:00:00','2023-05-24T09:00:00', 6, 0, 10,'요가교실 1호', 2, 3),
+( 0, '요가2', '2023-05-22T15:00:00','2023-05-26T15:00:00', 6, 0, 10,'요가교실 2호', 2, 4),
+( 0, '게이트볼1', '2023-05-23T17:00:00','2023-05-25T17:00:00', 6, 0, 10,'게이트볼장 1호', 3, 5),
+( 0, '게이트볼2', '2023-05-22T10:00:00','2023-05-25T10:00:00', 6, 0, 10,'게이트볼장 2호', 3, 6),
+( 0, '댄스1', '2023-05-23T14:00:00','2023-05-24T14:00:00', 6, 0, 10,'댄스교실 1호', 4, 7),
+( 0, '댄스2', '2023-05-22T14:00:00','2023-05-25T14:00:00', 6, 0, 10,'댄스교실 2호', 4, 8),
+( 0, '스쿼시1', '2023-05-22T10:00:00','2023-05-26T10:00:00', 6, 0, 10,'스쿼시장 1호', 5, 9),
+( 0, '스쿼시2', '2023-05-22T17:00:00','2023-05-23T17:00:00', 6, 0, 10,'스쿼시장 2호', 5, 10);
 
 SELECT * from program; 		
 
@@ -337,14 +334,37 @@ VALUES ( '0', "jay_id", 1, "이 선생 최고",'에요', 2);
 SELECT * from Teacher_review;
 
 -- 예약 테이블
-INSERT INTO Reservation(reservation_index, user_index, lecture_index)
-VALUES (0, 1, 1), (0, 1, 2), (0, 1, 3);
+INSERT INTO Reservation(reservation_index, user_id, lecture_index)
+VALUES 
+(0, 'jay_id', 1), (0, 'jay_id', 2), (0, 'jay_id', 3),
+(0, 'jay_id', 11), (0, 'jay_id', 12), (0, 'jay_id', 13),
+(0, 'jay_id', 21), (0, 'jay_id', 22), (0, 'jay_id', 23),
+(0, 'ra_id', 14), (0, 'ra_id', 15), (0, 'ra_id', 16);
 
-SELECT * FROM Reservation;
+SELECT * FROM Reservation;                          
 
--- 이수 목록
-SELECT R.*, P.lecture_event_1, P.lecture_event_2, P.lecture_time1, P.lecture_time2  
-FROM Reservation AS R join program AS P ON R.lecture_index = P.lecture_index
-WHERE R.user_index = 1
-AND P.lecture_month = 5;
+-- 이수 완료 목룍
+SELECT R.*, P.lecture_name, P.lecture_place, P.lecture_time1, P.lecture_time2, T.teacher_name
+FROM Reservation AS R
+JOIN program AS P ON R.lecture_index = P.lecture_index
+JOIN teacher AS T ON P.teacher_index = T.teacher_index
+WHERE R.user_id = 'jay_id'
+AND P.lecture_month = MONTH(CURRENT_DATE)-1;
+
+-- 이수 중 목록
+SELECT R.*, P.lecture_name, P.lecture_place, P.lecture_time1, P.lecture_time2, T.teacher_name
+FROM Reservation AS R
+JOIN program AS P ON R.lecture_index = P.lecture_index
+JOIN teacher AS T ON P.teacher_index = T.teacher_index
+WHERE R.user_id = 'jay_id'
+AND P.lecture_month = MONTH(CURRENT_DATE);
+
+-- 이수 예약 목록
+SELECT R.*, P.lecture_name, P.lecture_place, P.lecture_time1, P.lecture_time2, T.teacher_name
+FROM Reservation AS R
+JOIN program AS P ON R.lecture_index = P.lecture_index
+JOIN teacher AS T ON P.teacher_index = T.teacher_index
+WHERE R.user_id = 'jay_id'
+AND P.lecture_month = MONTH(CURRENT_DATE)+1;
+
 

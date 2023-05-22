@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stf.page.model.dao.ReservationDao">
+
+	<select id="selectRList" parameterType="String" resultType="Reservation">
+		SELECT R.*, P.lecture_name, P.lecture_place,
+		P.lecture_time1, P.lecture_time2, T.teacher_name
+		FROM Reservation AS R
+		JOIN program AS P ON R.lecture_index = P.lecture_index
+		JOIN teacher AS T ON P.teacher_index = T.teacher_index
+		WHERE R.user_id = #{user_id}
+		AND P.lecture_month = MONTH(CURRENT_DATE)+1;
+	</select>
+	
+	<select id="selectList" parameterType="String" resultType="Reservation">
+		SELECT R.*, P.lecture_name, P.lecture_place,
+		P.lecture_time1, P.lecture_time2, T.teacher_name
+		FROM Reservation AS R
+		JOIN program AS P ON R.lecture_index = P.lecture_index
+		JOIN teacher AS T ON P.teacher_index = T.teacher_index
+		WHERE R.user_id = #{user_id}
+		AND P.lecture_month = MONTH(CURRENT_DATE);
+	</select>
+	
+	<select id="selectDList" parameterType="String" resultType="Reservation">
+		SELECT R.*, P.lecture_name, P.lecture_place,
+		P.lecture_time1, P.lecture_time2, T.teacher_name
+		FROM Reservation AS R
+		JOIN program AS P ON R.lecture_index = P.lecture_index
+		JOIN teacher AS T ON P.teacher_index = T.teacher_index
+		WHERE R.user_id = #{user_id}
+		AND P.lecture_month = MONTH(CURRENT_DATE)-1;
+	</select>
+	
+	<insert id="insertReservation" parameterType="Regist">
+		INSERT INTO Reservation(reservation_index, user_id, lecture_index)
+		VALUES (0, #{user_id}, #{lecture_index})
+	</insert>
+	
+	<delete id="deleteReservation" parameterType="int">
+		DELETE FROM Reservation
+		WHERE reservation_index = #{index}
+	</delete>
+</mapper>
