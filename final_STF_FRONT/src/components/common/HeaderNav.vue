@@ -6,6 +6,7 @@
           <v-list-item-avatar>
             <v-img :src="image"></v-img>
           </v-list-item-avatar>
+
           <v-list-item-content>
             <v-list-item-title>{{ name }}</v-list-item-title>
             <v-list-item-subtitle>{{ email }}</v-list-item-subtitle>
@@ -34,14 +35,16 @@
     <v-app-bar app color="success" dark height="80">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>
-        <v-img
-          src="@/assets/STF_Logo.png"
-          alt="로고"
-          width="150"
-          height="auto"
-        ></v-img>
-      </v-toolbar-title>
+      <router-link to="/">
+        <v-toolbar-title>
+          <v-img
+            src="@/assets/STF_Logo.png"
+            alt="로고"
+            width="150"
+            height="auto"
+          ></v-img>
+        </v-toolbar-title>
+      </router-link>
 
       <v-spacer></v-spacer>
 
@@ -78,6 +81,8 @@ export default {
           icon: "mdi-calendar-week",
           route: "/Mypage/MypageSchedule",
         },
+        { title: "사랑방", icon: "mdi-heart", route: "/Board/" },
+        { title: "운동목록(temp)", icon: "mdi-home", route: "/Exercise" },
         // 추가 메뉴 아이템
       ],
     };

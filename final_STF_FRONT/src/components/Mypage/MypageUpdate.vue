@@ -6,7 +6,10 @@
           <v-col cols="4">
             <div class="avatar">
               <v-img class="avatar-image" :src="img"></v-img>
+              <input type="file" @change="handleImageChange" />
             </div>
+              <br>
+              <h2>새로운 이미지를 원한다면 사진을 누르세요!</h2>
           </v-col>
 
           <v-col cols="8">
@@ -47,7 +50,10 @@
                   <v-row>
                     <v-col cols="12">
                       <h3>성별</h3>
-                      <v-select v-model="sex" :items="['남성', '여성']"></v-select>
+                      <v-select
+                        v-model="sex"
+                        :items="['남성', '여성']"
+                      ></v-select>
                     </v-col>
                   </v-row>
 
@@ -70,7 +76,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-btn color="primary">저장</v-btn>
-                <v-btn color="error">취소</v-btn>
+                <v-btn color="error" @click="cancel">취소</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -87,14 +93,15 @@ export default {
   name: "MyPageEdit",
   data() {
     return {
+      id: "",
       img: require("@/assets/게이트볼_이미지.jpg"), // 임시
-      // img: "", 
-      nick: "", 
-      name: "", 
-      birth: "", 
+      // img: "",
+      nick: "",
+      name: "",
+      birth: "",
       sex: "",
       email: "",
-      number: "", 
+      number: "",
     };
   },
   mounted() {
@@ -108,6 +115,7 @@ export default {
       axios
         .get("/api/personal-info") // 실제 엔드포인트를 사용해야 합니다.
         .then((response) => {
+          this.id = response.data.id;
           this.img = response.data.img;
           this.nick = response.data.nick;
           this.name = response.data.name;
@@ -121,6 +129,30 @@ export default {
           console.error("Error fetching personal info:", error);
         });
     },
+    cancel() {
+      // 마이페이지로 돌아가기
+      this.$router.push("/Mypage");
+    },
+     handleImageChange(event) {
+      const file = event.target.files[0];
+      if (file) {
+        // 선택된 파일을 업로드하거나 처리하는 작업을 수행합니다.
+        // 실제 업로드 및 처리 방법은 사용하는 백엔드에 따라 다를 수 있습니다.
+        // 아래는 예시 코드로, FormData를 사용하여 이미지 파일을 업로드하는 방법을 보여줍니다.
+        const formData = new FormData();
+        formData.append("image", file);
+
+        axios
+          .post("/api/upload-image", formData) // 실제 엔드포인트를 사용해야 합니다.
+          .then((response) => {
+            this.img = response.data.imageUrl; // 업로드한 이미지의 URL을 받아와서 이미지를 업데이트합니다.
+          })
+          .catch((error) => {
+            console.error("Error uploading image:", error);
+          });
+      }
+    },
+  
   },
 };
 </script>
@@ -131,8 +163,8 @@ export default {
 }
 
 .avatar {
-  width: 200px;
-  height: 200px;
+  width: 260px;
+  height: 260px;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -141,5 +173,16 @@ export default {
   width: 100%;
   height: 100%;
 }
-</style>
 
+.avatar input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+
+</style>
