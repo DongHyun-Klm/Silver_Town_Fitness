@@ -47,7 +47,7 @@ public class BoardRestController {
 	private BoardService boardService;
 	
 	//파일 저장할 경로
-	final private String filedir = "C:/Users/김동현/Dropbox/STF/BSG_Silver_Town_Fitness/image/";
+	final private String filedir = "C:/Users/SSAFY/Dropbox/seong/Final/BSG_Silver_Town_Fitness/final_STF_FRONT/src/assets/upload/";
 
 	// 사랑방 글 전체 조회 
 	@GetMapping("/board")
@@ -63,6 +63,10 @@ public class BoardRestController {
 	@PostMapping("/board")
 	public ResponseEntity<Board> love_create(@RequestHeader("access-token") String token, Board board, @RequestParam(value = "file", required = false) MultipartFile file) throws IllegalStateException, IOException {
 		// 파일 업로드
+		System.out.println("---------------------------");
+		System.out.println(token);
+		System.out.println(board);
+		System.out.println(file);
 		if(file != null) {
 			String fullpath = "";
 			fullpath = filedir + System.currentTimeMillis() + "_" + file.getOriginalFilename();

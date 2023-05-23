@@ -429,8 +429,8 @@ h3 {
 .login-content {
   width: 420px;
   padding: 40px;
-  height: 600px;
-  top: 50%;
+  height: 800px;
+  top: 80%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;

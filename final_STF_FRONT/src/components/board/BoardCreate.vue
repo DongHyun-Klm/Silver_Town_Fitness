@@ -3,23 +3,26 @@
     <v-row justify="center">
       <v-col cols="12" sm="8" md="6">
         <h1 class="title">사랑방 작성 페이지</h1>
-        <v-form @submit.prevent="submitForm">
+        <v-form @submit.prevent="submitForm" enctype="multipart/form-data">
           <v-text-field
-            v-model="form.title"
+            v-model="form.board_title"
             label="게시글 제목"
             required
           ></v-text-field>
-          <v-text-field
-            v-model="form.author"
-            label="작성자"
-            required
-          ></v-text-field>
           <v-textarea
-            v-model="form.content"
+            v-model="form.board_content"
             label="내용"
             required
           ></v-textarea>
-          <v-btn type="submit" class="form-button" color="primary">작성 완료</v-btn>
+
+          <v-file-input
+            v-model="form.user_img"
+            label="이미지"
+            accept="image/*"
+          ></v-file-input>
+          <v-btn type="submit" class="form-button" color="primary"
+            >작성 완료</v-btn
+          >
         </v-form>
       </v-col>
     </v-row>
@@ -33,26 +36,36 @@ export default {
   data() {
     return {
       form: {
-        title: "",
-        author: "",
-        content: ""
-      }
+        board_title: "",
+        board_content: "",
+        user_img: null, // 파일 업로드를 위해 null로 초기화
+      },
     };
   },
   methods: {
     submitForm() {
+      const formData = new FormData(); // FormData 객체 생성
+      formData.append("board_title", this.form.board_title);
+      formData.append("board_content", this.form.board_content);
+      formData.append("file", this.form.user_img); // 파일 업로드 추가
+      const token = localStorage.getItem("access-token");
+      console.log(token);
       axios
-        .post("/api/posts", this.form)
-        .then((response) => {
-          console.log(response.data); // 응답 데이터 확인
+        .post(`http://localhost:9999/api/board`, formData, {
+          headers: {
+            "Content-type": "multipart/form-data",
+            "access-token": token,
+          },
+        })
+        .then(() => {
           console.log("게시글이 작성되었습니다.");
-          // 추가적인 작업 수행
+          this.$router.push("/Board");
         })
         .catch((error) => {
           console.error(error);
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

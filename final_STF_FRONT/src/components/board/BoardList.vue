@@ -2,7 +2,7 @@
   <div class="container">
     <!-- 게시글 목록 -->
     <div class="table-container">
-      <table class="table" style="width: 3000px">
+      <table class="table">
         <thead>
           <tr>
             <th style="width: 50%">게시글 제목</th>
@@ -12,7 +12,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="post in paginatedPosts" :key="post.board_index">
+          <tr v-for="post in displayedPosts" :key="post.board_index">
             <td>
               <router-link :to="'/Board/BoardDetail/' + post.board_index">
                 <v-btn text color="primary">{{ post.board_title }}</v-btn>
@@ -25,6 +25,13 @@
         </tbody>
       </table>
     </div>
+
+    <!-- 페이지네이션 -->
+    <div class="pagination">
+      <v-btn v-for="pageNumber in totalPages" :key="pageNumber" @click="changePage(pageNumber)">
+        {{ pageNumber }}
+      </v-btn>
+    </div>
   </div>
 </template>
 
@@ -36,19 +43,19 @@ export default {
   data() {
     return {
       posts: [],
-      pageSize: 5, // 한 페이지에 표시되는 게시글 수
-      currentPage: 1, // 현재 페이지 번호
+      currentPage: 1,
+      postsPerPage: 8
     };
   },
   computed: {
-    paginatedPosts() {
-      const startIndex = (this.currentPage - 1) * this.pageSize;
-      const endIndex = startIndex + this.pageSize;
-      return this.posts.slice(startIndex, endIndex);
-    },
     totalPages() {
-      return Math.ceil(this.posts.length / this.pageSize);
+      return Math.ceil(this.posts.length / this.postsPerPage);
     },
+    displayedPosts() {
+      const startIndex = (this.currentPage - 1) * this.postsPerPage;
+      const endIndex = startIndex + this.postsPerPage;
+      return this.posts.slice(startIndex, endIndex);
+    }
   },
   mounted() {
     // 데이터 로드
@@ -56,60 +63,47 @@ export default {
   },
   methods: {
     fetchPosts() {
-      // 여기에서 데이터베이스로부터 게시글 데이터를 가져오는 요청을 수행합니다.
-      // 예시로 axios를 사용하여 GET 요청을 보내고, 응답을 받아옵니다.
-      // console.log(this.posts);
       axios
         .get("http://localhost:9999/api/board")
         .then((response) => {
-          this.posts = response.data; // 응답에서 받아온 게시글 데이터를 저장합니다.
+          this.posts = response.data;
         })
         .catch((error) => {
           console.error(error);
         });
     },
-    previousPage() {
-      this.currentPage--;
-    },
-    nextPage() {
-      this.currentPage++;
-    },
-  },
+    changePage(pageNumber) {
+      this.currentPage = pageNumber;
+    }
+  }
 };
 </script>
 
 <style scoped>
 .container {
-  /* display: flex; */
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .table-container {
-  max-height: 400px; /* 테이블의 최대 높이 설정 */
-  overflow-y: auto; /* 세로 스크롤 추가 */
-  overflow-x: auto; /* 가로 스크롤 추가 */
   margin-top: 20px;
 }
 
 .table {
   width: 100%;
-  max-width: 100%; /* 테이블의 최대 너비를 100%로 설정 */
+  max-width: 100%;
   border-collapse: collapse;
+  table-layout: fixed; /* 추가: 테이블의 너비를 고정으로 설정 */
 }
 
 .table th,
 .table td {
   border: 1px solid #ccc;
   padding: 10px;
-}
-
-.pagination {
-  margin-top: 20px;
-}
-
-.pagination button {
-  margin: 0 5px;
+  white-space: nowrap; /* 추가: 텍스트 줄바꿈 방지 */
+  overflow: hidden; /* 추가: 내용이 너무 길어도 숨기고 나머지는 보이지 않도록 설정 */
+  text-overflow: ellipsis; /* 추가: 내용이 너무 길어지면 말줄임표(...) 표시 */
 }
 
 .title-container {
@@ -136,5 +130,14 @@ export default {
   .table {
     width: auto;
   }
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination v-btn {
+  margin: 0 5px;
 }
 </style>

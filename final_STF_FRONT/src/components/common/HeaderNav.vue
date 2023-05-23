@@ -48,7 +48,6 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn text to="/test2">TEST</v-btn>
       <v-btn text to="/Mypage/MypageSchedule">내 일정 관리</v-btn>
       <v-btn v-if="!hasAccessToken" text to="/Login">로그인</v-btn>
       <v-btn v-else text @click="logout" to="/">로그아웃</v-btn>
