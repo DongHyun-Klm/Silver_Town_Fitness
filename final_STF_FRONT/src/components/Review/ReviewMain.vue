@@ -2,7 +2,6 @@
   <v-container class="container" fluid>
     <v-row justify="center">
       <v-col cols="12" sm="8" md="6">
-
         <!-- 별점 버튼 -->
         <v-row justify="center">
           <v-rating
@@ -15,8 +14,21 @@
         </v-row>
 
         <h1 class="title">강사님에 대한 한 줄 리뷰 작성하기</h1>
-        <!-- 한 줄 작성 컨테이너와 입력 버튼 -->
+
+        <!-- 리뷰 제목 -->
         <v-row justify="center">
+          <v-col cols="12" sm="10">
+            <v-text-field
+              v-model="reviewTitle"
+              label="리뷰 제목"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+        </v-row>
+
+        <!-- 리뷰 작성 -->
+        <v-row justify="center" class="review-row">
           <v-col cols="12" sm="10">
             <v-textarea
               v-model="review"
@@ -27,14 +39,18 @@
               dense
             ></v-textarea>
           </v-col>
-          <v-col cols="12" sm="2">
+        </v-row>
+
+        <!-- 보내기 버튼 -->
+        <v-row justify="center">
+          <v-col cols="12" sm="10">
             <v-btn
               @click="submitReview"
               color="primary"
               class="form-button"
               :disabled="!review"
             >
-              입력
+              리뷰 보내기~
             </v-btn>
           </v-col>
         </v-row>
@@ -49,21 +65,34 @@ import axios from "axios";
 export default {
   data() {
     return {
-      rating: 0,
+      review_grade: 0,
+      reviewTitle: "",
       review: "",
     };
   },
   methods: {
     submitReview() {
-      const data = {
-        rating: this.rating,
-        review: this.review,
+      // 리뷰 데이터 구성
+      const reviewData = {
+        review_grade: this.review_grade, // 별표의 개수
+        review_title: this.reviewTitle, // 리뷰 제목
+        review_content: this.review, // 리뷰 작성
+        user_id: "ra_id", // 현재 로그인된 사용자의 ID를 여기에 추가하시면 됩니다.
       };
+      const token = localStorage.getItem("access-token");
+      console.log(reviewData);
+      // Spring 백엔드로 데이터 전송
       axios
-        .post("/api/reviews", data)
+        .post("http://localhost:9999/api/review", reviewData, {
+                  headers: {
+            "Content-type": "multipart/form-data",
+            "access-token": token,
+          },
+        })
+        
         .then((response) => {
-          console.log(response.data); // 응답 데이터 확인
-          console.log("리뷰가 작성되었습니다.");
+          console.log(response); // 응답 데이터 확인
+          alert("리뷰가 작성되었습니다.");
           // 추가적인 작업 수행
         })
         .catch((error) => {
@@ -76,6 +105,7 @@ export default {
 
 <style scoped>
 .container {
+  margin-top: 100px;
   background-color: rgba(255, 255, 255, 0.7);
   padding: 20px;
   border-radius: 5px;
@@ -87,7 +117,11 @@ export default {
 }
 
 .form-button {
-  margin-top: 10px;
+  margin-top: 20px;
   width: 100%;
+}
+
+.review-row {
+  margin-top: 20px;
 }
 </style>

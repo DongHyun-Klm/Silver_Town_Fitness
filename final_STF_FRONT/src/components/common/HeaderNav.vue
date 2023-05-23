@@ -68,7 +68,7 @@ export default {
       drawer: false,
       // image: require("@/assets/ssafy_logo.png"), // 임시
       //C:\Users\SSAFY\Dropbox\STF\BSG_Silver_Town_Fitness\final_STF_BACK/src/main/resources/img/1684829116446_말라무트.jpg
-      image: require("C:/Users/SSAFY/Dropbox/STF/BSG_Silver_Town_Fitness/final_STF_BACK/src/main/resources/img/1684829599962_말라무트.jpg"),
+      image: require("C:/Users/EUNSEONG/Dropbox/Seong/Final/BSG_Silver_Town_Fitness/final_STF_BACK/src/main/resources/img/1684830879519_ZS.jpg"),
       // image: 'your img',
       name: "Your Name",
       email: "your@email",
@@ -84,7 +84,6 @@ export default {
           route: "/Mypage/MypageSchedule",
         },
         { title: "사랑방", icon: "mdi-heart", route: "/Board/" },
-        { title: "운동목록(temp)", icon: "mdi-home", route: "/Exercise" },
         // 추가 메뉴 아이템
       ],
     };

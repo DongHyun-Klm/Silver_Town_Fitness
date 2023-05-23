@@ -1,48 +1,54 @@
 <template>
   <div class="container">
-    <!-- 타이틀 -->
-    <div class="title-container">
-      <v-icon
-        class="heart-icon"
-        size="40"
-        v-animation="{
-          name: 'heart-animation',
-          duration: '2s',
-          iteration: 'infinite',
-          timingFunction: 'linear',
-        }"
-        >mdi-heart</v-icon
-      >
-      <h1 class="title">사랑방</h1>
-      <v-icon
-        class="heart-icon"
-        size="40"
-        v-animation="{
-          name: 'heart-animation',
-          duration: '2s',
-          iteration: 'infinite',
-          timingFunction: 'linear',
-        }"
-        >mdi-heart</v-icon
-      >
-    </div>
-    <!-- 이미지 -->
-    <div class="banner">
-      <img src="@/assets/사랑방.jpg" alt="사랑방 이미지" class="banner-image" />
-    </div>
-    <br />
-    <!-- 글 등록 버튼 -->
-    <div class="register-container">
-      <v-btn class="register-button" color="primary" @click="goToCreatePage">
-        글 등록하기
-      </v-btn>
-    </div>
-    <!-- 게시글 목록 -->
-    <div class="table-container">
-      <table class="table">
-        <BoardList></BoardList>
-      </table>
-    </div>
+    <v-container>
+      <!-- 타이틀 -->
+      <div class="title-container">
+        <v-icon
+          class="heart-icon"
+          size="40"
+          v-animation="{
+            name: 'heart-animation',
+            duration: '2s',
+            iteration: 'infinite',
+            timingFunction: 'linear',
+          }"
+          >mdi-heart</v-icon
+        >
+        <h1 class="title">사랑방</h1>
+        <v-icon
+          class="heart-icon"
+          size="40"
+          v-animation="{
+            name: 'heart-animation',
+            duration: '2s',
+            iteration: 'infinite',
+            timingFunction: 'linear',
+          }"
+          >mdi-heart</v-icon
+        >
+      </div>
+      <!-- 이미지 -->
+      <div class="banner">
+        <img
+          src="@/assets/사랑방.jpg"
+          alt="사랑방 이미지"
+          class="banner-image"
+        />
+      </div>
+      <br />
+      <!-- 글 등록 버튼 -->
+      <div class="register-container">
+        <v-btn class="register-button" color="primary" @click="goToCreatePage">
+          글 등록하기
+        </v-btn>
+      </div>
+      <!-- 게시글 목록 -->
+      <div class="table-container">
+        <table class="table">
+          <BoardList></BoardList>
+        </table>
+      </div>
+    </v-container>
   </div>
 </template>
 
@@ -81,7 +87,6 @@ export default {
 </script>
 
 <style scoped>
-
 .register-button {
   display: flex;
   justify-content: flex-end;
@@ -138,5 +143,4 @@ export default {
   color: #333;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
-
 </style>

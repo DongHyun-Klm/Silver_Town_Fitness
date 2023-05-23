@@ -1,69 +1,84 @@
 <template>
   <div id="app" class="home-container">
-    <!-- 카드 -->
-    <div class="card-container">
-      <v-container class="card-group" fluid>
+    <v-container style= "margin-bottom: 100px">
+      <!-- 카드 -->
+      <div class="card-container">
+        <v-container class="card-group" fluid>
+          <v-row>
+            <v-col
+              :cols="getCardColumns"
+              v-for="(item, index) in cards"
+              :key="index"
+            >
+              <v-card max-width="300px" class="custom-card" height="500px">
+                <v-img
+                  :src="item.image"
+                  alt="card image"
+                  height="150px"
+                ></v-img>
+                <v-card-text>
+                  <h5 class="card-title">{{ item.title }}</h5>
+                  <p class="card-description">{{ item.description }}</p>
+                </v-card-text>
+                <v-card-text class="card-text">
+                  <small class="text-muted">강사: {{ item.instructor }}</small>
+                </v-card-text>
+              </v-card>
+              <v-btn text color="primary" @click="goToDetail(index)"
+                >더보기</v-btn
+              >
+            </v-col>
+          </v-row>
+        </v-container>
+      </div>
+
+      <!-- -->
+      <v-container fluid>
         <v-row>
-          <v-col
-            :cols="getCardColumns"
-            v-for="(item, index) in cards"
-            :key="index"
-          >
-            <v-card max-width="300px" class="custom-card" height="500px">
-              <v-img :src="item.image" alt="card image" height="150px"></v-img>
-              <v-card-text>
-                <h5 class="card-title">{{ item.title }}</h5>
-                <p class="card-description">{{ item.description }}</p>
-              </v-card-text>
-              <v-card-text class="card-text">
-                <small class="text-muted">강사: {{ item.instructor }}</small>
-              </v-card-text>
-            </v-card>
+          <v-col cols="6">
+            <div class="container-with-icon">
+              <h2 class="container-title">
+                사랑방
+                <router-link to="/Board" class="heart-icon">
+                  <v-icon>mdi-heart</v-icon>
+                </router-link>
+              </h2>
+            </div>
+            <v-container fluid class="container-with-border">
+              <v-row>
+                <!-- board-list 뷰 불러오기 -->
+                <board-list></board-list>
+              </v-row>
+            </v-container>
+          </v-col>
+
+          <v-col cols="6">
+            <div class="container-with-icon">
+              <h2 class="container-title">
+                주간 스케줄 표
+                <router-link to="/Mypage/MypageSchedule" class="right-icon">
+                  <v-icon>mdi-calendar</v-icon>
+                </router-link>
+              </h2>
+            </div>
+            <v-container fluid class="container-with-border">
+              <v-row>
+                <v-col cols="12">
+                  <test-sc />
+                </v-col>
+              </v-row>
+            </v-container>
           </v-col>
         </v-row>
       </v-container>
-    </div>
-
-    <!-- -->
-    <v-container fluid>
-      <v-row>
-        <v-col cols="6">
-          <div class="container-with-icon">
-            <h2 class="container-title">
-              사랑방
-              <router-link to="/Board" class="heart-icon">
-                <v-icon>mdi-heart</v-icon>
-              </router-link>
-            </h2>
-          </div>
-          <v-container fluid class="container-with-border">
-            <v-row>
-              <!-- board-list 뷰 불러오기 -->
-              <board-list></board-list>
-            </v-row>
-          </v-container>
-        </v-col>
-
-        <v-col cols="6">
-          우측 컨테이너 제목
-          <v-container fluid class="container-with-border">
-            <v-row>
-              <v-col cols="12">
-                <test-sc />
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-col>
-      </v-row>
     </v-container>
-
     <!-- 푸터 -->
     <v-footer class="footer" color="success" dark>
       <v-container fluid fill-height>
         <v-row align="center" justify="center">
           <v-col cols="12" class="text-center">
             <span class="white--text"
-              >&copy; 2023 Your Company. All rights reserved.</span
+              >&copy; 2023 김동현이은성의 피와살 페이지..</span
             >
           </v-col>
         </v-row>
@@ -85,6 +100,20 @@ export default {
     return {
       cards: [
         {
+          image: require("@/assets/수영_이미지.jpg"),
+          title: "수영",
+          description:
+            "수영은 물 속에서 몸을 움직이는 운동으로 인간이 수행하는 가장 오래된 운동 중 하나입니다. 수영은 재미있고 즐겁게 즐길 수 있는 스포츠이면서 동시에 전신 운동으로 알려져 있습니다 ",
+          instructor: "일동현, 이동현",
+        },
+        {
+          image: require("@/assets/요가_이미지.jpg"),
+          title: "요가",
+          description:
+            "요가는 신체와 마음을 조화롭게 발전시키는 종합적인 운동입니다. 노인에게 요가는 건강과 품질 좋은 노후 생활을 위한 많은 이점을 제공합니다.",
+          instructor: "일은성, 이은성",
+        },
+        {
           image: require("@/assets/게이트볼_이미지.jpg"),
           title: "게이트볼",
           description:
@@ -99,28 +128,20 @@ export default {
           instructor: "일동익, 이동익",
         },
         {
-          image: require("@/assets/수영_이미지.jpg"),
-          title: "수영",
-          description:
-            "수영은 물 속에서 몸을 움직이는 운동으로 인간이 수행하는 가장 오래된 운동 중 하나입니다. 수영은 재미있고 즐겁게 즐길 수 있는 스포츠이면서 동시에 전신 운동으로 알려져 있습니다 ",
-          instructor: "일동현, 이동현",
-        },
-        {
           image: require("@/assets/스쿼시_이미지.jpg"),
           title: "스쿼시",
           description:
             "스쿼시는 나이에 관계없이 즐길 수 있는 운동이며, 노인들에게도 많은 이점을 제공합니다. 스쿼시는 다른 운동과는 달리 부상의 위험이 적은 편이며, 관절을 부드럽게 움직일 수 있는 유연성과 근력을 향상시키는 데 도움이 됩니다.",
           instructor: "일동교, 이동교",
         },
-        {
-          image: require("@/assets/요가_이미지.jpg"),
-          title: "요가",
-          description:
-            "요가는 신체와 마음을 조화롭게 발전시키는 종합적인 운동입니다. 노인에게 요가는 건강과 품질 좋은 노후 생활을 위한 많은 이점을 제공합니다.",
-          instructor: "일은성, 이은성",
-        },
       ],
     };
+  },
+  methods: {
+    goToDetail(index) {
+      // 상세 보기 페이지로 이동
+      this.$router.push(`/Exercise/${index + 1}`);
+    },
   },
   computed: {
     getCardColumns() {
@@ -134,7 +155,6 @@ export default {
       }
     },
   },
-  methods: {},
 };
 </script>
 
@@ -151,27 +171,48 @@ export default {
   background-color: #e0f2f1; /* 푸른색 배경으로 변경 */
   padding: 20px; /* 적절한 여백 추가 */
 }
-#app {
-  margin-top: 20px;
-}
+
 .card-group {
   display: flex;
   flex-wrap: wrap;
 }
-.card {
-  margin: 10px;
-  width: 300px;
+
+.custom-card {
+  font-family: "Arial", sans-serif;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease-in-out;
 }
 
-.card-image {
-  position: relative;
-  height: 200px;
+.custom-card:hover {
+  box-shadow: 0 4px 8px rgba(240, 4, 4, 0.2);
 }
 
-.card-image img {
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #0307f9;
+}
+
+.card-description {
+  font-size: 14px;
+  color: #000000;
+}
+
+.card-text {
+  display: flex;
+  align-items: flex-end;
+  padding-top: 0;
+  position: absolute;
+  bottom: 0;
+}
+
+.text-muted {
+  font-weight: bold;
+  font-size: 14px;
+  color: #999999;
 }
 
 .container-with-border {
@@ -181,8 +222,15 @@ export default {
   margin-top: 16px;
 }
 
-.custom-card:hover {
-  box-shadow: 0 4px 8px rgba(240, 4, 4, 0.2);
+.container-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.heart-icon,
+.right-icon {
+  margin-left: 8px;
 }
 
 .footer {
@@ -199,46 +247,11 @@ export default {
   font-weight: bold;
 }
 
-.card-text {
-  display: flex;
-  align-items: flex-end;
-  padding-top: 0;
-  position: absolute; /* 추가: 절대 위치 설정 */
-  bottom: 0; /* 추가: 바닥에 정렬 */
-}
-
-.custom-card {
-  font-family: "Arial", sans-serif;
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.3s ease-in-out;
-}
-
-.card-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 8px;
-  color: #0307f9;
-}
-
-.text-muted {
-  font-weight: bold;
-  font-size: 14px;
-}
-
-.card-description {
-  font-size: 14px;
-  color: #000000;
-}
-
-.text-muted {
-  color: #999999;
-}
 .v-application--wrap {
-  min-height: 0vh !important; /* 원하는 높이로 설정 */
+  min-height: 0vh !important;
   margin: 0;
 }
+
 * {
   margin: 0;
 }
