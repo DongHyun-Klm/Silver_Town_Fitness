@@ -1,21 +1,20 @@
 <template>
   <div class="login-page">
     <router-view />
-
     <div class="login-content login-content-signin" v-show="!showSignIn">
       <div>
         <h2>로그인</h2>
         <form class="wrapper-box" @submit.prevent="login">
           <input
             type="id"
-            v-model="id"
+            v-model="id_login"
             class="form-control form-control-id"
             placeholder="아이디를 입력하세요."
             required
           />
           <input
             type="password"
-            v-model="password"
+            v-model="password_login"
             class="form-control form-control-password"
             placeholder="비밀번호를 입력하세요"
             required
@@ -29,71 +28,83 @@
     <div class="login-content login-content-signup" v-show="showSignIn">
       <div>
         <h2>회원가입</h2>
-        <form class="wrapper-box" @submit.prevent="register">
+        <form
+          class="wrapper-box"
+          @submit.prevent="register"
+          enctype="multipart/form-data"
+        >
           <input
             type="text"
             v-model="name"
+            name="name"
             class="form-control form-control-name"
-            placeholder="이름 입력해주세요~"
+            placeholder="이름 입력"
             required
           />
           <input
             type="id"
             v-model="id"
+            name="id"
             class="form-control form-control-id"
-            placeholder="아이디 입력해주세요~"
+            placeholder="아이디 입력"
             required
           />
           <input
             type="password"
             v-model="password"
+            name="password"
             class="form-control form-control-password"
-            placeholder="비밀번호 입력해주세요~"
+            placeholder="비밀번호 입력"
             required
           />
           <input
             type="text"
             v-model="nick"
+            name="nick"
             class="form-control form-control-nick"
-            placeholder="별명 입력해주세요~"
+            placeholder="별명 입력"
             required
           />
           <input
             type="number"
             v-model="number"
+            name="number"
             class="form-control form-control-number"
-            placeholder="휴대전화 번호 입력해주세요~"
+            placeholder="휴대전화 번호 입력"
             required
           />
           <input
             type="number"
             v-model="birth"
+            name="birth"
             class="form-control form-control-birth"
-            placeholder="생년월일 숫자만 입력해주세요~"
+            placeholder="생년월일(ex:970830) 입력"
             required
           />
           <input
             type="text"
             v-model="sex"
+            name="sex"
             class="form-control form-control-sex"
-            placeholder="성별 입력해주세요~ (남성 / 여성)"
+            placeholder="성별 입력(남/여)"
             required
           />
           <input
             type="email"
             v-model="email"
+            name="email"
             class="form-control form-control-email"
-            placeholder="이메일 입력해주세요~"
+            placeholder="이메일 입력"
             required
           />
           <!-- handleImageUpload 메소드는 파일을 선택한 후 실행되는 함수 -->
           <input
             type="file"
             id="fileInput"
+            name="fileInput"
             accept="image/*"
             @change="handleImageUpload"
             class="form-control form-control-image"
-            required
             style="display: none"
           />
           <div class="mg-1">
@@ -130,6 +141,8 @@ export default {
   data() {
     return {
       showSignIn: false,
+      id_login: "",
+      password_login: "",
       id: "",
       password: "",
       name: "",
@@ -143,27 +156,56 @@ export default {
   },
   methods: {
     login() {
-      // 로그인 로직 구현
-      console.log(this.id);
-      console.log(this.password);
+      // 로그인 로직
       http
         .post("/user/login", {
-          user_id: this.id,
-          user_password: this.password,
+          user_id: this.id_login,
+          user_password: this.password_login,
         })
-        .then((response) => {
-          console.log(response.data);
-          localStorage.setItem("access-token", response.data.access_token);
-          localStorage.setItem("id", this.id);
-          alert("로그인 성공");
-          this.$router.push("/");
+        .then(({ data }) => {
+          console.log(data);
+          localStorage.setItem("access-token", data.access_token);
+          const msg = data.message;
+          alert(msg);
+          window.location.href = "http://localhost:8080/";
+        })
+        .catch((error) => {
+          const msg = error.response.data.message;
+          alert(msg);
+          window.location.href = "http://localhost:8080/Login";
         });
     },
     register() {
-      // 회원가입 로직 구현
+      console.log(this.id);
+      console.log(this.image);
+      // Create a FormData object
+      const formData = new FormData();
+      formData.append("user_id", this.id);
+      formData.append("user_password", this.password);
+      formData.append("user_name", this.name);
+      formData.append("user_nick", this.nick);
+      formData.append("user_number", this.number);
+      formData.append("user_birth", this.birth);
+      formData.append("user_sex", this.sex);
+      formData.append("user_email", this.email);
+      formData.append("profileImage", this.image);
+
+      http
+        .post("/user/signup", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch(() => {
+          alert("잘못된 입력입니다.");
+          window.location.href = "http://localhost:8080/Login";
+        });
     },
     handleImageUpload(event) {
       const file = event.target.files[0];
+      console.log(event.target.files);
+      console.log(file);
       this.image = file;
     },
   },

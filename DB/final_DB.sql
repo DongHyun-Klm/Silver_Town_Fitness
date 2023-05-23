@@ -58,7 +58,7 @@ CREATE TABLE User
 (
     `user_index`        INT            NOT NULL    AUTO_INCREMENT COMMENT '인덱스', 
     `user_name`         VARCHAR(20)    NOT NULL    COMMENT '이름', 
-    `user_img`          VARCHAR(45)    NULL        COMMENT '회원 이미지. 이미지파일 명', 
+    `user_img`          VARCHAR(1000)    NULL        COMMENT '회원 이미지. 이미지파일 명', 
     `user_birth`        DATE           NOT NULL    COMMENT '생년월일. YYYYMMDD, 8자', 
     `user_sex`          VARCHAR(45)    NOT NULL    COMMENT '성별. 남성 / 여성', 
     `user_id`           VARCHAR(45)    NOT NULL    DEFAULT 'UNIQUE' COMMENT '유저 아이디', 
