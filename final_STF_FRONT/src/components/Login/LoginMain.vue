@@ -165,6 +165,7 @@ export default {
         .then(({ data }) => {
           console.log(data);
           localStorage.setItem("access-token", data.access_token);
+          localStorage.setItem("id", this.id_login);
           const msg = data.message;
           alert(msg);
           window.location.href = "http://localhost:8080/";
@@ -194,8 +195,9 @@ export default {
         .post("/user/signup", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         })
-        .then((response) => {
-          console.log(response);
+        .then(() => {
+          alert("회원가입 성공!");
+          this.$router.push("/");
         })
         .catch(() => {
           alert("잘못된 입력입니다.");

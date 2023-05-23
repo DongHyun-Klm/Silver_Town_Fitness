@@ -3,6 +3,7 @@ package com.stf.page.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class BoardRestController {
 	private BoardService boardService;
 	
 	//파일 저장할 경로
-	final private String filedir = "C:/Users/SSAFY/Dropbox/seong/Final/BSG_Silver_Town_Fitness/final_STF_FRONT/src/assets/upload/";
+	final private String filedir = Paths.get("").toAbsolutePath().toString().replace("\\", "/") + "/src/main/resources/img/";
 
 	// 사랑방 글 전체 조회 
 	@GetMapping("/board")

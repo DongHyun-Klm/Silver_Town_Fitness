@@ -25,7 +25,7 @@
     </div>
 
     <!-- -->
-    <v-container fluid >
+    <v-container fluid>
       <v-row>
         <v-col cols="6">
           <div class="container-with-icon">
