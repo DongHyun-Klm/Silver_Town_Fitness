@@ -25,8 +25,8 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "POST", "PUT", "DELETE");
 	}
 	
-	@Autowired
-	private JwtInterceptor JwtInterceptor;
+//	@Autowired
+//	private JwtInterceptor JwtInterceptor;
 	
 //	@Override
 //	public void addInterceptors(InterceptorRegistry registry) {

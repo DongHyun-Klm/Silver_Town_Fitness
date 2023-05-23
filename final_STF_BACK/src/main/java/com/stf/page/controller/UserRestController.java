@@ -43,12 +43,11 @@ public class UserRestController {
 	private UserService userService;
 
 	//파일 저장할 경로
-	final private String filedir = Paths.get("").toAbsolutePath().toString().replace("\\", "/") + "/src/main/resources/img/";
+	final private String filedir = Paths.get("").toAbsolutePath().toString().replace("\\", "/") + "/src/main/resources/static/";
 	
 	//로그인
 	@PostMapping("/user/login")
 	public ResponseEntity<Map<String, Object>> login(@RequestBody User user) {
-		System.out.println("Current Directory: " + filedir);
 		Map<String, Object> result = new HashMap<String, Object>();
 		HttpStatus status = null;
 		// 로그인 결과 확인
@@ -75,7 +74,6 @@ public class UserRestController {
 				status = HttpStatus.INTERNAL_SERVER_ERROR;
 			}
 		}
-		System.out.println(result);
 		return new ResponseEntity<Map<String,Object>>(result, status);
 	}
 	
@@ -88,8 +86,6 @@ public class UserRestController {
 			file.transferTo(new File(fullpath));
 			user.setUser_img(fullpath);
 		}
-		System.out.println(user);
-		System.out.println(file);
 		userService.signup(user);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
@@ -122,6 +118,7 @@ public class UserRestController {
 	public ResponseEntity<?> delete(@RequestHeader("access-token") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException{
 		String user_id = (String) jwtUtil.parseToken(token).get("id");
 		userService.deleteUser(user_id); 
+		System.out.println(user_id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	

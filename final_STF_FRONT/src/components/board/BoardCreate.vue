@@ -49,7 +49,6 @@ export default {
       formData.append("board_content", this.form.board_content);
       formData.append("file", this.form.user_img); // 파일 업로드 추가
       const token = localStorage.getItem("access-token");
-      console.log(token);
       axios
         .post(`http://localhost:9999/api/board`, formData, {
           headers: {
@@ -58,7 +57,7 @@ export default {
           },
         })
         .then(() => {
-          console.log("게시글이 작성되었습니다.");
+          alert("게시글이 작성되었습니다.");
           this.$router.push("/Board");
         })
         .catch((error) => {

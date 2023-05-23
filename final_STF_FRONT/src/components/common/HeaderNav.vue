@@ -48,30 +48,27 @@
 
       <v-spacer></v-spacer>
 
+      <div v-if="hasAccessToken">{{ name }}님 환영합니다</div>
       <v-btn text to="/Mypage/MypageSchedule">내 일정 관리</v-btn>
       <v-btn v-if="!hasAccessToken" text to="/Login">로그인</v-btn>
       <v-btn v-else text @click="logout" to="/">로그아웃</v-btn>
-      <!-- 로그아웃 후 홈으로 -->
     </v-app-bar>
 
-    <v-main>
-      <!-- 나머지 컨텐츠 -->
-    </v-main>
+    <v-main> </v-main>
   </v-app>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "MyPage",
   data() {
     return {
       drawer: false,
-      // image: require("@/assets/ssafy_logo.png"), // 임시
-      //C:\Users\SSAFY\Dropbox\STF\BSG_Silver_Town_Fitness\final_STF_BACK/src/main/resources/img/1684829116446_말라무트.jpg
-      image: require("C:/Users/EUNSEONG/Dropbox/Seong/Final/BSG_Silver_Town_Fitness/final_STF_BACK/src/main/resources/img/1684830879519_ZS.jpg"),
-      // image: 'your img',
-      name: "Your Name",
-      email: "your@email",
+      image: require("@/assets/upload/다운로드.jpg"),
+      temp: "",
+      name: "",
+      email: "",
       hasAccessToken: false,
       menuItems: [
         { title: "메인페이지", icon: "mdi-home", route: "/" },
@@ -84,7 +81,6 @@ export default {
           route: "/Mypage/MypageSchedule",
         },
         { title: "사랑방", icon: "mdi-heart", route: "/Board/" },
-        // 추가 메뉴 아이템
       ],
     };
   },
@@ -98,10 +94,32 @@ export default {
       this.hasAccessToken = false;
       window.location.href = "http://localhost:8080/";
     },
+    fetchUserData() {
+      axios
+        .get("http://localhost:9999/api/user/mypage", {
+          headers: { "access-token": localStorage.getItem("access-token") },
+        })
+        .then(({ data }) => {
+          console.log(data);
+          // this.img = data.user_img;
+          this.name = data.user_name;
+          this.email = data.user_email;
+        });
+    },
   },
   mounted() {
     const AccessToken = localStorage.getItem("access-token");
     this.hasAccessToken = AccessToken !== null;
+  },
+  watch: {
+    hasAccessToken(newValue) {
+      if (newValue) {
+        this.fetchUserData();
+      } else {
+        this.name = "";
+        this.email = "";
+      }
+    },
   },
 };
 </script>

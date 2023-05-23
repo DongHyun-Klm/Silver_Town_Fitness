@@ -8,8 +8,8 @@
               <v-img class="avatar-image" :src="img"></v-img>
               <input type="file" @change="handleImageChange" />
             </div>
-              <br>
-              <h2>새로운 이미지를 원한다면 사진을 누르세요!</h2>
+            <br />
+            <h2>새로운 이미지를 원한다면 사진을 누르세요!</h2>
           </v-col>
 
           <v-col cols="8">
@@ -22,7 +22,7 @@
                   <v-row>
                     <v-col cols="12">
                       <h3>아이디</h3>
-                      <v-text-field v-model="id"></v-text-field>
+                      <v-text-field v-model="id" readonly></v-text-field>
                     </v-col>
                   </v-row>
 
@@ -36,7 +36,7 @@
                   <v-row>
                     <v-col cols="12">
                       <h3>이름</h3>
-                      <v-text-field v-model="name"></v-text-field>
+                      <v-text-field v-model="name" readonly></v-text-field>
                     </v-col>
                   </v-row>
 
@@ -75,7 +75,7 @@
                 </v-container>
               </v-card-text>
               <v-card-actions>
-                <v-btn color="primary">저장</v-btn>
+                <v-btn color="primary" @click="save">저장</v-btn>
                 <v-btn color="error" @click="cancel">취소</v-btn>
               </v-card-actions>
             </v-card>
@@ -94,7 +94,7 @@ export default {
   data() {
     return {
       id: "",
-      img: require("@/assets/게이트볼_이미지.jpg"), // 임시
+      img: require("@/assets/upload/말라무트1.jpg"), // 임시
       // img: "",
       nick: "",
       name: "",
@@ -109,21 +109,19 @@ export default {
   },
   methods: {
     fetchData() {
-      // API 요청을 통해 개인 정보 데이터를 불러옵니다.
-      // 실제로 사용할 데이터베이스 백엔드와의 통신 방법에 따라 구현해야 합니다.
-      // 아래는 예시 코드로, axios 라이브러리를 사용하여 GET 요청을 보냅니다.
       axios
-        .get("/api/personal-info") // 실제 엔드포인트를 사용해야 합니다.
+        .get("http://localhost:9999/api/user/mypage", {
+          headers: { "access-token": localStorage.getItem("access-token") },
+        })
         .then((response) => {
-          this.id = response.data.id;
-          this.img = response.data.img;
-          this.nick = response.data.nick;
-          this.name = response.data.name;
-          this.birth = response.data.birth;
-          this.sex = response.data.sex;
-          this.email = response.data.email;
-          this.number = response.data.number;
-          // 추가적인 개인정보 데이터를 바인딩
+          this.id = response.data.user_id;
+          this.nick = response.data.user_nick;
+          this.name = response.data.user_name;
+          this.birth = response.data.user_birth;
+          this.sex = response.data.user_sex;
+          this.email = response.data.user_email;
+          this.number = response.data.user_number;
+          this.img = response.data.user_img;
         })
         .catch((error) => {
           console.error("Error fetching personal info:", error);
@@ -133,12 +131,9 @@ export default {
       // 마이페이지로 돌아가기
       this.$router.push("/Mypage");
     },
-     handleImageChange(event) {
+    handleImageChange(event) {
       const file = event.target.files[0];
       if (file) {
-        // 선택된 파일을 업로드하거나 처리하는 작업을 수행합니다.
-        // 실제 업로드 및 처리 방법은 사용하는 백엔드에 따라 다를 수 있습니다.
-        // 아래는 예시 코드로, FormData를 사용하여 이미지 파일을 업로드하는 방법을 보여줍니다.
         const formData = new FormData();
         formData.append("image", file);
 
@@ -152,7 +147,26 @@ export default {
           });
       }
     },
-  
+    save() {
+      const formData = new FormData(); // FormData 객체 생성
+      formData.append("user_birth", this.birth);
+      formData.append("user_sex", this.sex);
+      formData.append("user_nick", this.nick);
+      formData.append("user_number", this.number);
+      formData.append("user_email", this.email);
+      formData.append("user_id", this.id);
+      axios
+        .put("http://localhost:9999/api/user", formData, {
+          "Content-type": "multipart/form-data",
+        })
+        .then(() => {
+          alert("저장완료");
+          this.$router.push("/Mypage");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
   },
 };
 </script>
@@ -183,6 +197,4 @@ export default {
   opacity: 0;
   cursor: pointer;
 }
-
-
 </style>
