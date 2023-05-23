@@ -177,8 +177,6 @@ export default {
         });
     },
     register() {
-      console.log(this.id);
-      console.log(this.image);
       // Create a FormData object
       const formData = new FormData();
       formData.append("user_id", this.id);
@@ -206,8 +204,6 @@ export default {
     },
     handleImageUpload(event) {
       const file = event.target.files[0];
-      console.log(event.target.files);
-      console.log(file);
       this.image = file;
     },
   },

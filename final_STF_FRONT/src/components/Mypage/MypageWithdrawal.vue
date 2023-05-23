@@ -27,21 +27,16 @@ export default {
   name: "WithdrawalPage",
   methods: {
     confirmDelete() {
-      // 회원 탈퇴 로직을 처리하는 메소드입니다.
-      // 실제로 사용할 데이터베이스 백엔드와의 통신 방법에 따라 구현해야 합니다.
-      // 아래는 예시 코드로, axios 라이브러리를 사용하여 DELETE 요청을 보냅니다.
       axios
-        .delete("/api/user") // 실제 엔드포인트를 사용해야 합니다.
+        .delete("http://localhost:9999/api/user", {
+          headers: { "access-token": localStorage.getItem("access-token") },
+        })
         .then(() => {
-          // 탈퇴 성공 시, 필요한 처리를 수행합니다.
-          // 예를 들어, 로그아웃 처리나 홈페이지로 리다이렉트 등을 할 수 있습니다.
-          // 이 예시에서는 홈페이지로 리다이렉트하는 것으로 가정합니다.
+          alert("그동안 이용해주셔서 감사합니다");
           this.$router.push("/");
         })
         .catch((error) => {
           console.error("Error withdrawing user:", error);
-          // 탈퇴 실패 시, 에러 처리를 수행합니다.
-          // 예를 들어, 에러 메시지를 사용자에게 표시하거나 다른 작업을 수행할 수 있습니다.
         });
     },
     cancel() {

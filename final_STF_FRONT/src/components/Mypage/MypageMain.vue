@@ -64,8 +64,6 @@
                       <p>{{ number }}</p>
                     </v-col>
                   </v-row>
-
-                  <!-- 추가적인 개인정보 항목들을 원하는 만큼 추가 -->
                 </v-container>
               </v-card-text>
             </v-card>
@@ -75,12 +73,21 @@
         <v-row>
           <v-col cols="12" class="button-container">
             <div class="button-wrapper">
-              <router-link to="/Mypage/MypageUpdate" tag="v-btn" :class="['custom-button', 'primary-button']">수정하기</router-link>
-              <router-link to="/Mypage/MypageWithdrawal" tag="v-btn" :class="['custom-button', 'error-button']">탈퇴하기</router-link>
+              <router-link
+                to="/Mypage/MypageUpdate"
+                tag="v-btn"
+                :class="['custom-button', 'primary-button']"
+                >수정하기</router-link
+              >
+              <router-link
+                to="/Mypage/MypageWithdrawal"
+                tag="v-btn"
+                :class="['custom-button', 'error-button']"
+                >탈퇴하기</router-link
+              >
             </div>
           </v-col>
         </v-row>
-
       </v-container>
     </v-main>
   </v-app>
@@ -93,8 +100,9 @@ export default {
   name: "MyPageMain",
   data() {
     return {
-      img: require("@/assets/게이트볼_이미지.jpg"), // 임시
+      img: require("@/assets/upload/말라무트2.gif"), // 임시
       // img: "",
+      id: "",
       nick: "",
       name: "",
       birth: "",
@@ -108,20 +116,18 @@ export default {
   },
   methods: {
     fetchData() {
-      // API 요청을 통해 개인 정보 데이터를 불러옵니다.
-      // 실제로 사용할 데이터베이스 백엔드와의 통신 방법에 따라 구현해야 합니다.
-      // 아래는 예시 코드로, axios 라이브러리를 사용하여 GET 요청을 보냅니다.
       axios
-        .get("/api/personal-info") // 실제 엔드포인트를 사용해야 합니다.
+        .get("http://localhost:9999/api/user/mypage", {
+          headers: { "access-token": localStorage.getItem("access-token") },
+        })
         .then((response) => {
-          this.img = response.data.img;
-          this.nick = response.data.nick;
-          this.name = response.data.name;
-          this.birth = response.data.birth;
-          this.sex = response.data.sex;
-          this.email = response.data.email;
-          this.number = response.data.number;
-          // 추가적인 개인정보 데이터를 바인딩
+          this.id = response.data.user_id;
+          this.nick = response.data.user_nick;
+          this.name = response.data.user_name;
+          this.birth = response.data.user_birth;
+          this.sex = response.data.user_sex;
+          this.email = response.data.user_email;
+          this.number = response.data.user_number;
         })
         .catch((error) => {
           console.error("Error fetching personal info:", error);
@@ -136,6 +142,12 @@ export default {
   padding: 0px;
 }
 
+h2,
+h3,
+p {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 .avatar {
   width: 350px;
   height: 350px;
@@ -174,13 +186,12 @@ export default {
 }
 
 .primary-button {
-  background-color: #1976d2; /* 원하는 primary 색상 값으로 변경하세요 */
+  background-color: #1976d2;
   color: white;
 }
 
 .error-button {
-  background-color: #f44336; /* 원하는 error 색상 값으로 변경하세요 */
+  background-color: #f44336;
   color: white;
 }
-
 </style>

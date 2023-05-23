@@ -17,7 +17,7 @@ import BoardMain from "../components/Board/BoardMain.vue";
 import BoardCreate from "../components/Board/BoardCreate.vue";
 import BoardDetail from "../components/Board/BoardDetail.vue";
 import BoardUpdate from "../components/Board/BoardUpdate.vue";
-// Exercise 
+// Exercise
 import ExerciseMain from "../components/Exercise/ExerciseMain.vue";
 // Login
 import LoginMain from "../components/Login/LoginMain.vue";
