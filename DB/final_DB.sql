@@ -318,11 +318,13 @@ WHERE exercise_index = 1
 AND month(current_date()) = lecture_month;
 
 
--- 공지사항 테이블
+-- 사랑방 테이블
 
 DELETE FROM Board;
 INSERT INTO Board(board_index, user_id, board_title, board_content, board_date, board_cnt, board_img)
-VALUES ( '0', "jay_id", "안녕", "내용이에요", NOW(), 0, '이미지 경로');
+VALUES ( '0', "jay_id", "안녕", "내용이에요", NOW(), 0, '이미지 경로'),
+( '0', "jay_id", "안녕", "내용이에요", NOW(), 0, '이미지 경로'),( '0', "jay_id", "안녕", "내용이에요", NOW(), 0, '이미지 경로'),( '0', "jay_id", "안녕", "내용이에요", NOW(), 0, '이미지 경로'),
+( '0', "ra_id", "하이", "내용이다!", 20230524, 1, '이미지 경로');
 SELECT * from Board;
 
 -- 선생 리뷰 테이블 

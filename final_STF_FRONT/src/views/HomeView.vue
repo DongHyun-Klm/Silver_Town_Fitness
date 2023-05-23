@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="home-container">
     <!-- 카드 -->
     <div class="card-container">
       <v-container class="card-group" fluid>
@@ -15,9 +15,9 @@
                 <h5 class="card-title">{{ item.title }}</h5>
                 <p class="card-description">{{ item.description }}</p>
               </v-card-text>
-              <v-card-footer class="card-footer">
+              <v-card-text class="card-text">
                 <small class="text-muted">강사: {{ item.instructor }}</small>
-              </v-card-footer>
+              </v-card-text>
             </v-card>
           </v-col>
         </v-row>
@@ -25,7 +25,7 @@
     </div>
 
     <!-- -->
-    <v-container fluid>
+    <v-container fluid >
       <v-row>
         <v-col cols="6">
           <div class="container-with-icon">
@@ -139,9 +139,13 @@ export default {
   justify-content: center;
   max-width: 1200px;
   margin: 0 auto;
-  position: relative; /* 추가: 상대 위치 설정 */
+  position: relative;
 }
 
+.home-container {
+  background-color: #e0f2f1; /* 푸른색 배경으로 변경 */
+  padding: 20px; /* 적절한 여백 추가 */
+}
 #app {
   margin-top: 20px;
 }
@@ -191,7 +195,7 @@ export default {
   font-weight: bold;
 }
 
-.card-footer {
+.card-text {
   display: flex;
   align-items: flex-end;
   padding-top: 0;

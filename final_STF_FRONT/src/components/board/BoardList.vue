@@ -2,7 +2,7 @@
   <div class="container">
     <!-- 게시글 목록 -->
     <div class="table-container">
-      <table class="table" style="width: 3000px;">
+      <table class="table" style="width: 3000px">
         <thead>
           <tr>
             <th style="width: 50%">게시글 제목</th>
@@ -12,11 +12,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="post in paginatedPosts" :key="post.id">
-            <td>{{ post.title }}</td>
-            <td>{{ post.author }}</td>
-            <td>{{ post.date }}</td>
-            <td>{{ post.views }}</td>
+          <tr v-for="post in paginatedPosts" :key="post.board_index">
+            <td>
+              <router-link :to="'/Board/BoardDetail/' + post.board_index">
+                <v-btn text color="primary">{{ post.board_title }}</v-btn>
+              </router-link>
+            </td>
+            <td>{{ post.user_id }}</td>
+            <td>{{ post.board_date }}</td>
+            <td>{{ post.board_cnt }}</td>
           </tr>
         </tbody>
       </table>
@@ -28,6 +32,7 @@
 import axios from "axios";
 
 export default {
+  name: "BoardList",
   data() {
     return {
       posts: [],
@@ -53,8 +58,9 @@ export default {
     fetchPosts() {
       // 여기에서 데이터베이스로부터 게시글 데이터를 가져오는 요청을 수행합니다.
       // 예시로 axios를 사용하여 GET 요청을 보내고, 응답을 받아옵니다.
+      // console.log(this.posts);
       axios
-        .get("/api/posts")
+        .get("http://localhost:9999/api/board")
         .then((response) => {
           this.posts = response.data; // 응답에서 받아온 게시글 데이터를 저장합니다.
         })
@@ -124,5 +130,11 @@ export default {
   font-weight: bold;
   color: #333;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 600px) {
+  .table {
+    width: auto;
+  }
 }
 </style>

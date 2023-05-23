@@ -79,7 +79,7 @@ public class BoardRestController {
 
 	// 사랑방 글 수정
 	@PutMapping("/board")
-	public ResponseEntity<Void> love_modify(Board board, @RequestParam(value = "file", required = false) MultipartFile file) throws IllegalStateException, IOException {
+	public ResponseEntity<Void> love_modify(@RequestBody Board board, @RequestParam(value = "file", required = false) MultipartFile file) throws IllegalStateException, IOException {
 		// 파일 업로드
 		if(file!=null) {
 			String fullpath = "";
@@ -115,7 +115,7 @@ public class BoardRestController {
 		return new ResponseEntity<Board>(result, HttpStatus.OK);
 	}
 	
-	// 사랑방 게시판 검색
+	// 사랑방 게시판 검색 // vue에서 처리
 	@GetMapping("/board/search")
 	public ResponseEntity<List<Board>> list(@RequestParam String type, @RequestParam String keyword) {
 		HashMap<String, String> params = new HashMap<String, String>();

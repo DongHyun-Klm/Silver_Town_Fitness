@@ -17,7 +17,7 @@ import BoardMain from "../components/Board/BoardMain.vue";
 import BoardCreate from "../components/Board/BoardCreate.vue";
 import BoardDetail from "../components/Board/BoardDetail.vue";
 import BoardUpdate from "../components/Board/BoardUpdate.vue";
-// Exercise
+// Exercise 
 import ExerciseMain from "../components/Exercise/ExerciseMain.vue";
 // Login
 import LoginMain from "../components/Login/LoginMain.vue";
@@ -54,12 +54,6 @@ const routes = [
     name: "testSc",
     component: testSc,
   },
-  // {
-  //   path: "/test3",
-  //   name: "test3",
-  //   component: test3,
-  // },
-  // Board
   {
     path: "/Board",
     name: "Board",
@@ -77,12 +71,12 @@ const routes = [
       },
       {
         // path 경로 확인할 것!
-        path: "BoardDetail",
+        path: "BoardDetail/:board_index",
         name: "BoardDetail",
         component: BoardDetail,
       },
       {
-        path: "BoardUpdate",
+        path: "BoardUpdate/:board_index",
         name: "BoardUpdate",
         component: BoardUpdate,
       },

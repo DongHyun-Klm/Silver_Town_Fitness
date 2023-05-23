@@ -154,6 +154,7 @@ export default {
         .then((response) => {
           console.log(response.data);
           localStorage.setItem("access-token", response.data.access_token);
+          localStorage.setItem("id", this.id);
           alert("로그인 성공");
           this.$router.push("/");
         });

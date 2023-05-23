@@ -1,14 +1,19 @@
 <template>
-  <div class="container">
-    <h1>사랑방 상세 페이지</h1>
-    <div>
-      <h2>{{ post.title }}</h2>
-      <p>작성자: {{ post.author }}</p>
-      <p>작성일: {{ post.date }}</p>
-      <p>조회수: {{ post.views }}</p>
-      <div v-html="post.content"></div>
-    </div>
-  </div>
+  <v-container class="container">
+    <v-card>
+      <v-card-title class="board-title">{{ post.board_title }}</v-card-title>
+      <v-card-subtitle>작성자: {{ post.user_id }}</v-card-subtitle>
+      <v-card-subtitle>작성일: {{ post.board_date }}</v-card-subtitle>
+      <v-card-subtitle>조회수: {{ post.board_cnt }}</v-card-subtitle>
+      <v-card-text>
+        <div v-html="post.board_content"></div>
+      </v-card-text>
+      <v-card-actions>
+        <v-btn v-if="AccessUpdate" color="primary" @click="editPost">수정하기</v-btn>
+        <v-btn color="error" @click="deletePost">삭제하기</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -17,47 +22,86 @@ import axios from "axios";
 export default {
   data() {
     return {
-      post: null
+      post: null,
+      AccessUpdate: false,
     };
   },
   mounted() {
-    // 데이터 로드
     this.fetchPost();
+    
+  },
+  watch: {
+    post(newValue) {
+      const user_id = localStorage.getItem("id");
+      this.AccessUpdate = user_id === newValue.user_id;
+    },
   },
   methods: {
     fetchPost() {
-      const postId = this.$route.params.id; // 게시글의 식별자를 경로 매개변수에서 가져옵니다.
-      // 여기에서 데이터베이스로부터 특정 게시글 데이터를 가져오는 요청을 수행합니다.
-      // 예시로 axios를 사용하여 GET 요청을 보내고, 응답을 받아옵니다.
+      const postId = this.$route.params.board_index;
       axios
-        .get(`/api/posts/${postId}`)
+        .get(`http://localhost:9999/api/board/${postId}`)
         .then((response) => {
-          this.post = response.data; // 응답에서 받아온 게시글 데이터를 저장합니다.
+          this.post = response.data;
         })
         .catch((error) => {
           console.error(error);
         });
-    }
-  }
+    },
+    editPost() {
+      this.$router.push({
+        name: "BoardUpdate",
+        params: {
+          board_index: this.$route.params.board_index,
+        },
+      });
+    },
+    deletePost() {
+      const postId = this.$route.params.board_index;
+      axios({
+        // 임시 헤더(j)
+        headers: {
+          "access-token":
+            //라현
+            // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InJhX2lkIiwiYWdlIjoiMjUiLCLri7TslYTrs7TsnpAiOiLtlZzquIDrj4TqsIDriqU_IiwidXNlcl9uYW1lIjoiZG9uZ2h5dW4ifQ.NtCnbyxayVDbbp1g7h0AGS36uLG81CsaQ_V8VCqlgTY",
+            //재이
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImpheV9pZCIsImFnZSI6IjI1Iiwi64u07JWE67O07J6QIjoi7ZWc6riA64-E6rCA64qlPyIsInVzZXJfbmFtZSI6ImRvbmdoeXVuIn0.1jp8iMua6E1EvyUEKeZmc9p7V-Aq6PKZ6vg4Wc5GgYE",
+        },
+        method: "delete",
+        url: `http://localhost:9999/api/board/${postId}`,
+      })
+        .then((response) => {
+          this.$router.push("/");
+          console.log(response.data);
+        })
+        .catch(() => {
+          alert("본인 글만 삭제할 수 있습니다. 사랑방 페이지로 돌아갑니다~");
+          this.$router.push("/Board");
+        });
+    },
+  },
 };
 </script>
 
 <style scoped>
 .container {
-  background-color: rgba(255, 255, 255, 0.7);
   padding: 20px;
-  border-radius: 5px;
 }
 
-.container h1 {
-  margin-bottom: 20px;
-}
-
-.container h2 {
+.board-title {
+  font-size: 24px;
   margin-bottom: 10px;
 }
 
-.container p {
+.v-card-subtitle {
   margin-bottom: 5px;
+}
+
+.v-card-text {
+  margin-top: 20px;
+}
+
+.v-card-actions {
+  margin-top: 20px;
 }
 </style>
