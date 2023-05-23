@@ -1,7 +1,5 @@
 <template>
   <div id="app">
-
-
     <!-- 카드 -->
     <div class="card-container">
       <v-container class="card-group" fluid>
@@ -30,13 +28,21 @@
     <v-container fluid>
       <v-row>
         <v-col cols="6">
-          좌측 컨테이너 제목
+          <div class="container-with-icon">
+            <h2 class="container-title">
+              사랑방 <router-link to="/Board" class="heart-icon">
+                <v-icon>mdi-heart</v-icon>
+              </router-link>
+            </h2>
+          </div>
           <v-container fluid class="container-with-border">
             <v-row>
-              <v-col cols="12"> 좌측 컨테이너 내용 </v-col>
+              <!-- board-list 뷰 불러오기 -->
+              <board-list></board-list>
             </v-row>
           </v-container>
         </v-col>
+
         <v-col cols="6">
           우측 컨테이너 제목
           <v-container fluid class="container-with-border">
@@ -64,7 +70,12 @@
 </template>
 
 <script>
+import BoardList from "@/components/Board/BoardList.vue";
+
 export default {
+  components: {
+    BoardList,
+  },
   data() {
     return {
       cards: [
@@ -132,7 +143,7 @@ export default {
 }
 
 #app {
-  margin-top: 56px;
+  margin-top: 20px;
 }
 .card-group {
   display: flex;
@@ -161,13 +172,23 @@ export default {
   margin-top: 16px;
 }
 
+.custom-card:hover {
+  box-shadow: 0 4px 8px rgba(240, 4, 4, 0.2);
+}
+
+
 .footer {
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 60px; /* 원하는 높이 값으로 설정 */
+  height: 60px;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00a98f;
+  color: #ffffff;
+  font-weight: bold;
 }
 
 .card-footer {
@@ -186,9 +207,6 @@ export default {
   transition: box-shadow 0.3s ease-in-out;
 }
 
-.custom-card:hover {
-  box-shadow: 0 4px 8px rgba(240, 4, 4, 0.2);
-}
 
 .card-title {
   font-size: 18px;
@@ -212,9 +230,23 @@ export default {
 }
 .v-application--wrap {
   min-height: 0vh !important; /* 원하는 높이로 설정 */
-    margin: 0;
+  margin: 0;
 }
 * {
   margin: 0;
 }
+
+.container-with-border {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+@media (max-width: 1279px) {
+  .container-with-icon {
+    display: none;
+  }
+}
+
 </style>

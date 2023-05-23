@@ -2,9 +2,9 @@
   <div class="container">
     <!-- 타이틀 -->
     <div class="title-container">
-      <v-icon class="heart-icon">mdi-heart</v-icon>
+      <v-icon class="heart-icon" size="40" v-animation="{ name: 'heart-animation', duration: '2s', iteration: 'infinite', timingFunction: 'linear' }">mdi-heart</v-icon>
       <h1 class="title">사랑방</h1>
-      <v-icon class="heart-icon">mdi-heart</v-icon>
+      <v-icon class="heart-icon" size="40" v-animation="{ name: 'heart-animation', duration: '2s', iteration: 'infinite', timingFunction: 'linear' }">mdi-heart</v-icon>
     </div>
     <!-- 이미지 -->
     <div class="banner">
@@ -12,38 +12,41 @@
     </div>
 
     <!-- 게시글 목록 -->
-    <table class="table">
-      <thead>
-        <tr>
-          <th style="width: 50%">게시글 제목</th>
-          <th style="width: 20%">작성자</th>
-          <th style="width: 20%">작성일</th>
-          <th style="width: 10%">조회수</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="post in paginatedPosts" :key="post.id">
-          <td>{{ post.title }}</td>
-          <td>{{ post.author }}</td>
-          <td>{{ post.date }}</td>
-          <td>{{ post.views }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-container">
+      <table class="table">
+        <board-list></board-list>
+      </table>
+    </div>
 
     <!-- 페이지네이션 -->
     <div class="pagination">
-      <button :disabled="currentPage === 1" @click="previousPage">이전</button>
+      <v-btn
+        :disabled="currentPage === 1"
+        @click="previousPage"
+        class="pagination-button"
+      >
+        이전
+      </v-btn>
       <span>{{ currentPage }}</span>
-      <button :disabled="currentPage === totalPages" @click="nextPage">다음</button>
+      <v-btn
+        :disabled="currentPage === totalPages"
+        @click="nextPage"
+        class="pagination-button"
+      >
+        다음
+      </v-btn>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import BoardList from "@/components/Board/BoardList.vue";
 
 export default {
+  components: {
+    BoardList,
+  },
   data() {
     return {
       posts: [],
@@ -95,39 +98,6 @@ export default {
   align-items: center;
 }
 
-.banner {
-  width: 100%;
-  text-align: center;
-  padding: 20px;
-}
-
-.banner-image {
-  width: 100%;
-  max-height: 500px; /* 이미지의 최대 높이 설정 */
-  object-fit: cover;
-}
-
-.table {
-  width: 100%;
-  max-width: 1700px; /* 테이블의 최대 너비 설정 */
-  margin-top: 20px;
-  border-collapse: collapse;
-}
-
-.table th,
-.table td {
-  border: 1px solid #ccc;
-  padding: 10px;
-}
-
-.pagination {
-  margin-top: 20px;
-}
-
-.pagination button {
-  margin: 0 5px;
-}
-
 .title-container {
   display: flex;
   justify-content: center;
@@ -136,16 +106,64 @@ export default {
 }
 
 .heart-icon {
-  font-size: 24px;
-  color: #f44336;
-  margin-right: 10px;
+  color: #f00707;
+  margin: 0 10px;
 }
 
 .title {
   font-size: 40px;
   font-weight: bold;
   color: #333;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 4px rgba(246, 9, 9, 0.3);
+}
+
+.banner {
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+}
+
+.banner-image {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+}
+
+.table-container {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 20px;
+}
+
+.table-card {
+  padding: 20px;
+}
+
+.pagination {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination-button {
+  margin: 0 5px;
+}
+
+@keyframes heart-animation {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+.heart-icon.v-animation {
+  animation: heart-animation 2s linear infinite;
 }
 
 </style>
