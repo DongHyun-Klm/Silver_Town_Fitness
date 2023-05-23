@@ -35,33 +35,33 @@ export default {
         start: new Date("2023-05-27T08:00:00"),
         end: new Date("2023-05-27T19:00:00"),
         timed: true,
-        color: "#000000",
+        color: "#b2dfdb",
       },
       {
         name: "주말",
         start: new Date("2023-05-21T08:00:00"),
         end: new Date("2023-05-21T19:00:00"),
         timed: true,
-        color: "#000000",
+        color: "#b2dfdb",
       },
     ],
-    colors: ["#00c0a0", "#ff9900", "#e91e63", "#3f51b5", "#4caf50"],
+    colors: [
+      "#1abc9c", // Mint
+      "#3498db", // Dodger Blue
+      "#e74c3c", // Alizarin
+      "#2ecc71", // Emerald
+      "#9b59b6", // Amethyst
+      "#f39c12", // Orange
+    ],
     Schedules: [],
   }),
   methods: {
     addEvent() {
       console.log(this.Schedules);
-      const newEvent = {
-        name: "수영 강습1",
-        start: new Date("2023-05-22T10:00:00"), // 시작 시간 설정
-        end: new Date("2023-05-22T11:30:00"), // 종료 시간 설정
-        timed: true, // 시간 지정 여부 설정
-        color: "#00c0a0", // 이벤트 색상 설정
-      };
-      this.events.push(newEvent);
     },
   },
   created() {
+    const usedColors = new Set();
     axios({
       headers: {
         "access-token":
@@ -75,27 +75,48 @@ export default {
     }).then((response) => {
       this.Schedules = response.data;
       this.Schedules.forEach((schedule) => {
-        console.log(schedule.teacher_name);
         const start1 = new Date(schedule.lecture_time1);
         const end1 = new Date(start1.getTime() + 90 * 60 * 1000);
 
         const start2 = new Date(schedule.lecture_time2);
         const end2 = new Date(start2.getTime() + 90 * 60 * 1000);
 
+        let color_index = Math.floor(Math.random() * this.colors.length);
+        let color = this.colors[color_index];
+
+        while (usedColors.has(color)) {
+          // 이미 사용된 색상인 경우 다른 색상을 선택
+          color_index = Math.floor(Math.random() * this.colors.length);
+          color = this.colors[color_index];
+        }
+        usedColors.add(color);
         const newEvent1 = {
-          name: schedule.lecture_name + " - " + schedule.teacher_name,
+          name:
+            schedule.lecture_name +
+            " - " +
+            schedule.teacher_name +
+            "(" +
+            schedule.lecture_place +
+            ")",
+          place: schedule.lecture_place,
           start: start1,
           end: end1,
           timed: true,
-          color: this.colors[Math.floor(Math.random() * this.colors.length)],
+          color: this.colors[color_index],
         };
 
         const newEvent2 = {
-          name: schedule.lecture_name + " - " + schedule.teacher_name,
+          name:
+            schedule.lecture_name +
+            " - " +
+            schedule.teacher_name +
+            "(" +
+            schedule.lecture_place +
+            ")",
           start: start2,
           end: end2,
           timed: true,
-          color: this.colors[Math.floor(Math.random() * this.colors.length)],
+          color: this.colors[color_index],
         };
 
         this.events.push(newEvent1);

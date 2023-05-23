@@ -104,7 +104,7 @@
             </v-btn>
           </div>
           <div class="mg-1">
-          <button type="submit" class="btn">회원가입</button>
+            <button type="submit" class="btn">회원가입</button>
           </div>
         </form>
       </div>
@@ -124,6 +124,7 @@
 </template>
 
 <script>
+import http from "@/util/http-common";
 export default {
   name: "LoginView",
   data() {
@@ -143,6 +144,19 @@ export default {
   methods: {
     login() {
       // 로그인 로직 구현
+      console.log(this.id);
+      console.log(this.password);
+      http
+        .post("/user/login", {
+          user_id: this.id,
+          user_password: this.password,
+        })
+        .then((response) => {
+          console.log(response.data);
+          localStorage.setItem("access-token", response.data.access_token);
+          alert("로그인 성공");
+          this.$router.push("/");
+        });
     },
     register() {
       // 회원가입 로직 구현
@@ -579,18 +593,16 @@ h3 {
   margin-top: 0.5px; /* 원하는 간격으로 수정하세요 */
 }
 
-
 .login-page {
-    position: relative;
-    width: 100%;
-    height: 500px;
-    top: 0;
-    left: 0;
-    background: #fff;
+  position: relative;
+  width: 100%;
+  height: 500px;
+  top: 0;
+  left: 0;
+  background: #fff;
 }
 
-.login-content[data-v-0a49c508]{
+.login-content[data-v-0a49c508] {
   height: 700px;
 }
-
 </style>
