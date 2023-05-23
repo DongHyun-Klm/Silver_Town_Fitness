@@ -31,32 +31,27 @@
         </v-row>
 
         <template v-if="notices.length > 0 || filteredNotices.length > 0">
-          <v-data-table
-            :headers="headers"
-            :items="paginatedNotices"
-            :rows-per-page-items="[4, 8, 12]"
-            hide-default-footer
-            class="notice-table"
-          >
-            <template v-slot:item="{ item, index }">
-              <td>{{ index + 1 }}</td>
-              <td>{{ item.title }}</td>
-              <td>{{ item.date }}</td>
-              <td>{{ item.author }}</td>
-              <td>{{ item.views }}</td>
-              <td>
-                <v-btn text color="primary">자세히 보기</v-btn>
-              </td>
-            </template>
-          </v-data-table>
+  <v-data-table
+    :headers="headers"
+    :items="filteredNotices"
+    hide-default-footer
+    class="notice-table"
+  >
+    <template v-slot:item="{ item, index }">
+      <tr>
+        <td>{{ index + 1 }}</td>
+        <td>
+          <v-btn text color="primary">{{ item.notice_title }}</v-btn>
+        </td>
+        <td>{{ item.notice_content }}</td>
+        <td>{{ item.notice_date }}</td>
+        <td>{{ item.notice_manager }}</td>
+        <td>{{ item.notice_cnt }}</td>
+      </tr>
+    </template>
+  </v-data-table>
+</template>
 
-          <v-pagination
-            v-model="currentPage"
-            :length="totalPages"
-            @input="handlePageChange"
-            class="pagination"
-          ></v-pagination>
-        </template>
 
         <template v-if="notices.length === 0 && filteredNotices.length === 0">
           <v-card class="notice-card">
@@ -79,16 +74,14 @@ export default {
       searchCategory: "제목",
       searchKeyword: "",
       searchCategories: ["제목", "내용", "작성자"],
-      currentPage: 1,
-      pageSize: 4,
       filteredNotices: [],
       headers: [
         { text: "번호", value: "index" },
-        { text: "제목", value: "title" },
-        { text: "날짜", value: "date" },
-        { text: "작성자", value: "author" },
-        { text: "조회수", value: "views" },
-        { text: "자세히 보기", value: "actions" },
+        { text: "제목", value: "notice_title" },
+        { text: "내용", value: "notice_content" },
+        { text: "등록일", value: "notice_date" },
+        { text: "작성자", value: "notice_manager" },
+        { text: "조회수", value: "notice_cnt" },
       ],
     };
   },
@@ -98,7 +91,7 @@ export default {
   methods: {
     fetchNotices() {
       axios
-        .get("/api/notices")
+        .get("http://localhost:9999/api/notice")
         .then((response) => {
           this.notices = response.data;
           this.filteredNotices = this.notices;
@@ -112,35 +105,17 @@ export default {
         const keyword = this.searchKeyword.toLowerCase();
         this.filteredNotices = this.notices.filter((notice) => {
           if (this.searchCategory === "제목") {
-            return notice.title.toLowerCase().includes(keyword);
+            return notice.notice_title.toLowerCase().includes(keyword);
           } else if (this.searchCategory === "내용") {
-            return notice.content.toLowerCase().includes(keyword);
+            return notice.notice_content.toLowerCase().includes(keyword);
           } else if (this.searchCategory === "작성자") {
-            return notice.author.toLowerCase().includes(keyword);
+            return notice.notice_manager.toLowerCase().includes(keyword);
           }
           return false;
         });
       } else {
         this.filteredNotices = this.notices;
       }
-      this.currentPage = 1;
-    },
-    handlePageChange(page) {
-      this.currentPage = page;
-    },
-  },
-  computed: {
-    paginatedNotices() {
-      const startIndex = (this.currentPage - 1) * this.pageSize;
-      const endIndex = startIndex + this.pageSize;
-      return this.filteredNotices.map((notice, index) => ({
-        ...notice,
-        index: startIndex + index + 1,
-        actions: <v-btn text color="primary">자세히 보기</v-btn>,
-      })).slice(startIndex, endIndex);
-    },
-    totalPages() {
-      return Math.ceil(this.filteredNotices.length / this.pageSize);
     },
   },
 };
@@ -162,11 +137,6 @@ export default {
   margin-top: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
-}
-
-.pagination {
-  margin-top: 20px;
-  justify-content: center;
 }
 
 .no-notice-text {
