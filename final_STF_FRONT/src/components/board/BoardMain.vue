@@ -30,18 +30,19 @@
     <div class="banner">
       <img src="@/assets/사랑방.jpg" alt="사랑방 이미지" class="banner-image" />
     </div>
-
+    <br />
+    <!-- 글 등록 버튼 -->
+    <div class="register-container">
+      <v-btn class="register-button" color="primary" @click="goToCreatePage">
+        글 등록하기
+      </v-btn>
+    </div>
     <!-- 게시글 목록 -->
     <div class="table-container">
       <table class="table">
         <BoardList></BoardList>
       </table>
     </div>
-
-    <!-- 글 등록 버튼 -->
-    <v-btn class="register-button" color="primary" @click="goToCreatePage">
-      글 등록하기
-    </v-btn>
   </div>
 </template>
 
@@ -80,10 +81,42 @@ export default {
 </script>
 
 <style scoped>
+
+.register-button {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+.register-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.table-container {
+  margin-top: 20px;
+}
+
+.table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* 추가: 테이블의 너비를 고정으로 설정 */
+}
+
+.table th,
+.table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  white-space: nowrap; /* 추가: 텍스트 줄바꿈 방지 */
+  overflow: hidden; /* 추가: 내용이 너무 길어도 숨기고 나머지는 보이지 않도록 설정 */
+  text-overflow: ellipsis; /* 추가: 내용이 너무 길어지면 말줄임표(...) 표시 */
 }
 
 .title-container {
@@ -94,59 +127,16 @@ export default {
 }
 
 .heart-icon {
-  color: #f00707;
-  margin: 0 10px;
+  font-size: 24px;
+  color: #f44336;
+  margin-right: 10px;
 }
 
 .title {
   font-size: 40px;
   font-weight: bold;
   color: #333;
-  text-shadow: 2px 2px 4px rgba(246, 9, 9, 0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.banner {
-  width: 100%;
-  text-align: center;
-  padding: 20px;
-}
-
-.banner-image {
-  width: 100%;
-  max-height: 500px;
-  object-fit: cover;
-}
-
-.table-container {
-  width: 100%;
-  max-width: 100%;
-  margin-top: 20px;
-}
-
-.table-card {
-  padding: 20px;
-}
-
-.register-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 100;
-}
-
-@keyframes heart-animation {
-  0% {
-    transform: scale(1) rotate(0deg);
-  }
-  50% {
-    transform: scale(1.2) rotate(180deg);
-  }
-  100% {
-    transform: scale(1) rotate(360deg);
-  }
-}
-
-.heart-icon.v-animation {
-  animation: heart-animation 2s linear infinite;
-}
 </style>

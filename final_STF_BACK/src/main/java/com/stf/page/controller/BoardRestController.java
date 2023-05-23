@@ -49,7 +49,6 @@ public class BoardRestController {
 	
 	//파일 저장할 경로
 	final private String filedir = Paths.get("").toAbsolutePath().toString().replace("\\", "/") + "/src/main/resources/img/";
-	
 
 	// 사랑방 글 전체 조회 
 	@GetMapping("/board")
@@ -65,6 +64,10 @@ public class BoardRestController {
 	@PostMapping("/board")
 	public ResponseEntity<Board> love_create(@RequestHeader("access-token") String token, Board board, @RequestParam(value = "file", required = false) MultipartFile file) throws IllegalStateException, IOException {
 		// 파일 업로드
+		System.out.println("---------------------------");
+		System.out.println(token);
+		System.out.println(board);
+		System.out.println(file);
 		if(file != null) {
 			String fullpath = "";
 			fullpath = filedir + System.currentTimeMillis() + "_" + file.getOriginalFilename();
