@@ -30,7 +30,8 @@
         <v-col cols="6">
           <div class="container-with-icon">
             <h2 class="container-title">
-              사랑방 <router-link to="/Board" class="heart-icon">
+              사랑방
+              <router-link to="/Board" class="heart-icon">
                 <v-icon>mdi-heart</v-icon>
               </router-link>
             </h2>
@@ -47,7 +48,9 @@
           우측 컨테이너 제목
           <v-container fluid class="container-with-border">
             <v-row>
-              <v-col cols="12"> 우측 컨테이너 내용 </v-col>
+              <v-col cols="12">
+                <test-sc />
+              </v-col>
             </v-row>
           </v-container>
         </v-col>
@@ -71,10 +74,12 @@
 
 <script>
 import BoardList from "@/components/Board/BoardList.vue";
+import TestSc from "./Test/testSc.vue";
 
 export default {
   components: {
     BoardList,
+    TestSc,
   },
   data() {
     return {
@@ -176,7 +181,6 @@ export default {
   box-shadow: 0 4px 8px rgba(240, 4, 4, 0.2);
 }
 
-
 .footer {
   position: fixed;
   left: 0;
@@ -206,7 +210,6 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s ease-in-out;
 }
-
 
 .card-title {
   font-size: 18px;
@@ -248,5 +251,4 @@ export default {
     display: none;
   }
 }
-
 </style>

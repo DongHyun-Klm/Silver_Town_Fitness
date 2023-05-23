@@ -50,8 +50,8 @@
 
       <v-btn text to="/test2">TEST</v-btn>
       <v-btn text to="/Mypage/MypageSchedule">내 일정 관리</v-btn>
-      <v-btn text to="/Login">로그인</v-btn>
-      <v-btn text to="/">로그아웃</v-btn>
+      <v-btn v-if="!hasAccessToken" text to="/Login">로그인</v-btn>
+      <v-btn v-else text @click="logout" to="/">로그아웃</v-btn>
       <!-- 로그아웃 후 홈으로 -->
     </v-app-bar>
 
@@ -71,6 +71,7 @@ export default {
       // image: 'your img',
       name: "Your Name",
       email: "your@email",
+      hasAccessToken: false,
       menuItems: [
         { title: "메인페이지", icon: "mdi-home", route: "/" },
         { title: "마이페이지", icon: "mdi-account", route: "/Mypage" },
@@ -91,6 +92,15 @@ export default {
     navigateToHome() {
       this.$router.push("/");
     },
+    logout() {
+      localStorage.removeItem("access-token");
+      this.hasAccessToken = false;
+      window.location.href = "http://localhost:8080/";
+    },
+  },
+  mounted() {
+    const AccessToken = localStorage.getItem("access-token");
+    this.hasAccessToken = AccessToken !== null;
   },
 };
 </script>

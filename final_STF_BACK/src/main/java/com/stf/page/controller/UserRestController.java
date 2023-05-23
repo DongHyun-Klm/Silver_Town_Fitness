@@ -42,12 +42,11 @@ public class UserRestController {
 	private UserService userService;
 
 	//파일 저장할 경로
-	final private String filedir = "C:/Users/김동현/Dropbox/STF/BSG_Silver_Town_Fitness/image/";
+	final private String filedir =  "C:/Users/SSAFY/Dropbox/STF/BSG_Silver_Town_Fitness/final_STF_FRONT/src/assets/upload/";
 	
 	//로그인
 	@PostMapping("/user/login")
 	public ResponseEntity<Map<String, Object>> login(@RequestBody User user) {
-		System.out.println(user);
 		Map<String, Object> result = new HashMap<String, Object>();
 		HttpStatus status = null;
 		// 로그인 결과 확인
@@ -56,12 +55,12 @@ public class UserRestController {
 		// 아이디가 존재하지 않는 경우(check => 1)
 		if(check == 1) {
 			result.put("message", "존재하지 않는 아이디입니다.");
-			status = HttpStatus.NO_CONTENT;
+			status = HttpStatus.UNAUTHORIZED;
 		}
 		// 비밀번호가 틀린 경우(check => 2)
 		else if(check == 2) {
 			result.put("message", "비밀번호가 틀렸습니다.");
-			status = HttpStatus.NO_CONTENT;
+			status = HttpStatus.UNAUTHORIZED;
 		}
 		// 로그인 성공(check => 0)
 		else if(check == 0){
@@ -74,6 +73,7 @@ public class UserRestController {
 				status = HttpStatus.INTERNAL_SERVER_ERROR;
 			}
 		}
+		System.out.println(result);
 		return new ResponseEntity<Map<String,Object>>(result, status);
 	}
 	
@@ -86,6 +86,8 @@ public class UserRestController {
 			file.transferTo(new File(fullpath));
 			user.setUser_img(fullpath);
 		}
+		System.out.println(user);
+		System.out.println(file);
 		userService.signup(user);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
