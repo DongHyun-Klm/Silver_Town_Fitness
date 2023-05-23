@@ -19,6 +19,7 @@ import BoardDetail from "../components/Board/BoardDetail.vue";
 import BoardUpdate from "../components/Board/BoardUpdate.vue";
 // Exercise
 import ExerciseMain from "../components/Exercise/ExerciseMain.vue";
+import ExerciseMain_sub from "../components/Exercise/ExerciseMain_sub.vue";
 // Login
 import LoginMain from "../components/Login/LoginMain.vue";
 // Mypage
@@ -84,14 +85,19 @@ const routes = [
   },
   // Exercise
   {
-    path: "/Exercise",
+    path: "/Exercise/:exercise_index",
     name: "Exercise",
     component: ExerciseView,
     children: [
       {
-        path: "",
+        path: "ExerciseMain/:exercise_index",
         name: "ExerciseMain",
         component: ExerciseMain,
+      },
+      {
+        path: "ExerciseMain_sub/:exercise_index",
+        name: "ExerciseMain_sub",
+        component: ExerciseMain_sub,
       },
     ],
   },

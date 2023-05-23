@@ -81,7 +81,6 @@ export default {
           route: "/Mypage/MypageSchedule",
         },
         { title: "사랑방", icon: "mdi-heart", route: "/Board/" },
-        { title: "운동목록(temp)", icon: "mdi-home", route: "/Exercise" },
       ],
     };
   },

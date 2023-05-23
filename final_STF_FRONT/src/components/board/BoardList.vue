@@ -44,7 +44,7 @@ export default {
     return {
       posts: [],
       currentPage: 1,
-      postsPerPage: 8
+      postsPerPage: 11
     };
   },
   computed: {
@@ -134,7 +134,7 @@ export default {
 .pagination {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .pagination v-btn {
