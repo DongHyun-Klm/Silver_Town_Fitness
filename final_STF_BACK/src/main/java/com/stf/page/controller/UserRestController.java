@@ -3,6 +3,7 @@ package com.stf.page.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;import org.springframework.web.jsf.FacesContextUtils;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.stf.page.model.dto.User;
@@ -42,11 +43,12 @@ public class UserRestController {
 	private UserService userService;
 
 	//파일 저장할 경로
-	final private String filedir =  "C:/Users/SSAFY/Dropbox/STF/BSG_Silver_Town_Fitness/final_STF_FRONT/src/assets/upload/";
+	final private String filedir = Paths.get("").toAbsolutePath().toString().replace("\\", "/") + "/src/main/resources/img/";
 	
 	//로그인
 	@PostMapping("/user/login")
 	public ResponseEntity<Map<String, Object>> login(@RequestBody User user) {
+		System.out.println("Current Directory: " + filedir);
 		Map<String, Object> result = new HashMap<String, Object>();
 		HttpStatus status = null;
 		// 로그인 결과 확인
