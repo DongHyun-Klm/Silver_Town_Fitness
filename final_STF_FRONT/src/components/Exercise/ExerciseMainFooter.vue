@@ -6,7 +6,7 @@
         <v-col cols="6">
           <v-data-table
             :headers="headers"
-            :items="reviews.filter((review) => review.teacher_index === 1)"
+            :items="reviews.filter((review) => review.teacher_index === reviews.exercise_index)"
             :dense="true"
             :footer-props="{
               showFirstLastPage: true,
@@ -34,7 +34,7 @@
         <v-col cols="6">
           <v-data-table
             :headers="headers"
-            :items="reviews.filter((review) => review.teacher_index === 2)"
+            :items="reviews.filter((review) => review.teacher_index === reviews.exercise_index)"
             :dense="true"
             :footer-props="{
               showFirstLastPage: true,

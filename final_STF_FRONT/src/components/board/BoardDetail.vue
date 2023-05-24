@@ -9,8 +9,11 @@
         <div v-html="post.board_content"></div>
       </v-card-text>
       <v-card-actions>
-        <v-btn v-if="AccessUpdate" color="primary" @click="editPost">수정하기</v-btn>
+        <v-btn v-if="AccessUpdate" color="primary" @click="editPost"
+          >수정하기</v-btn
+        >
         <v-btn color="error" @click="deletePost">삭제하기</v-btn>
+        <v-btn color="success" @click="backPost">뒤로가기</v-btn>
       </v-card-actions>
     </v-card>
   </v-container>
@@ -28,7 +31,6 @@ export default {
   },
   mounted() {
     this.fetchPost();
-    
   },
   watch: {
     post(newValue) {
@@ -36,6 +38,7 @@ export default {
       this.AccessUpdate = user_id === newValue.user_id;
     },
   },
+
   methods: {
     fetchPost() {
       const postId = this.$route.params.board_index;
@@ -55,6 +58,9 @@ export default {
           board_index: this.$route.params.board_index,
         },
       });
+    },
+    backPost() {
+      this.$router.go(-1);
     },
     deletePost() {
       const postId = this.$route.params.board_index;

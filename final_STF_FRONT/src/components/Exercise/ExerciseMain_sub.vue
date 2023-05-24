@@ -12,7 +12,7 @@
           >
             <v-card class="trainer-info" outlined>
               <v-avatar size="150" class="trainer-image" style="padding: 100px">
-                <img :src="getImagePath(img)" alt="강사 이미지" />
+                <!-- <img :src="getImagePath(img)" alt="강사 이미지" /> -->
               </v-avatar>
               <h2 class="trainer-name">{{ teacher.teacher_name }}</h2>
               <p class="trainer-description">{{ teacher.teacher_career }}</p>
