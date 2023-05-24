@@ -18,7 +18,8 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapGetters } from "vuex";
+
 export default {
   data: () => ({
     events: [
@@ -47,75 +48,73 @@ export default {
     ],
     Schedules: [],
   }),
+  computed: {
+    ...mapGetters(["getSchedules"]),
+  },
   methods: {
     // 스케줄 갱신
     makeScedule() {
       const usedColors = new Set();
-      axios({
-        headers: {
-          "access-token":
-            // 토큰 1
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImpheV9pZCIsImFnZSI6IjI1Iiwi64u07JWE67O07J6QIjoi7ZWc6riA64-E6rCA64qlPyIsInVzZXJfbmFtZSI6ImRvbmdoeXVuIn0.1jp8iMua6E1EvyUEKeZmc9p7V-Aq6PKZ6vg4Wc5GgYE",
-          // 토큰 2
-          // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InJhX2lkIiwiYWdlIjoiMjUiLCLri7TslYTrs7TsnpAiOiLtlZzquIDrj4TqsIDriqU_IiwidXNlcl9uYW1lIjoiZG9uZ2h5dW4ifQ.NtCnbyxayVDbbp1g7h0AGS36uLG81CsaQ_V8VCqlgTY",
-        },
-        method: "get",
-        url: "http://localhost:9999/api/reservation",
-      }).then((response) => {
-        this.Schedules = response.data;
-        console.log(this.Schedules);
-        this.Schedules.forEach((schedule) => {
-          const start1 = new Date(schedule.lecture_time1);
-          const end1 = new Date(start1.getTime() + 90 * 60 * 1000);
 
-          const start2 = new Date(schedule.lecture_time2);
-          const end2 = new Date(start2.getTime() + 90 * 60 * 1000);
+      // this.Schedules = response.data;
+      // console.log(this.Schedules);
+      this.Schedules.forEach((schedule) => {
+        const start1 = new Date(schedule.lecture_time1);
+        const end1 = new Date(start1.getTime() + 90 * 60 * 1000);
 
-          let color_index = Math.floor(Math.random() * this.colors.length);
-          let color = this.colors[color_index];
+        const start2 = new Date(schedule.lecture_time2);
+        const end2 = new Date(start2.getTime() + 90 * 60 * 1000);
 
-          while (usedColors.has(color)) {
-            // 이미 사용된 색상인 경우 다른 색상을 선택
-            color_index = Math.floor(Math.random() * this.colors.length);
-            color = this.colors[color_index];
-          }
-          usedColors.add(color);
-          const newEvent1 = {
-            name:
-              schedule.lecture_name +
-              " - " +
-              schedule.teacher_name +
-              "(" +
-              schedule.lecture_place +
-              ")",
-            place: schedule.lecture_place,
-            start: start1,
-            end: end1,
-            timed: true,
-            color: this.colors[color_index],
-          };
+        let color_index = Math.floor(Math.random() * this.colors.length);
+        let color = this.colors[color_index];
 
-          const newEvent2 = {
-            name:
-              schedule.lecture_name +
-              " - " +
-              schedule.teacher_name +
-              "(" +
-              schedule.lecture_place +
-              ")",
-            start: start2,
-            end: end2,
-            timed: true,
-            color: this.colors[color_index],
-          };
+        while (usedColors.has(color)) {
+          // 이미 사용된 색상인 경우 다른 색상을 선택
+          color_index = Math.floor(Math.random() * this.colors.length);
+          color = this.colors[color_index];
+        }
+        usedColors.add(color);
+        const newEvent1 = {
+          name:
+            schedule.lecture_name +
+            " - " +
+            schedule.teacher_name +
+            "(" +
+            schedule.lecture_place +
+            ")",
+          place: schedule.lecture_place,
+          start: start1,
+          end: end1,
+          timed: true,
+          color: this.colors[color_index],
+        };
 
-          this.events.push(newEvent1);
-          this.events.push(newEvent2);
-        });
+        const newEvent2 = {
+          name:
+            schedule.lecture_name +
+            " - " +
+            schedule.teacher_name +
+            "(" +
+            schedule.lecture_place +
+            ")",
+          start: start2,
+          end: end2,
+          timed: true,
+          color: this.colors[color_index],
+        };
+
+        this.events.push(newEvent1);
+        this.events.push(newEvent2);
       });
     },
+    fetchSchedules() {
+      const token = localStorage.getItem("access-token");
+      this.$store.dispatch("getSchedules", token);
+    },
   },
-  created() {},
+  created() {
+    this.fetchSchedules();
+  },
 };
 </script>
 
