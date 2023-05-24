@@ -29,6 +29,7 @@ import MypageSchedule from "../components/Mypage/MypageSchedule.vue";
 import MypageUpdate from "../components/Mypage/MypageUpdate.vue";
 import MypageWithdrawal from "../components/Mypage/MypageWithdrawal.vue";
 // Notice
+import NoticeBoard from "../components/Notice/NoticeBoard.vue";
 import NoticeMain from "../components/Notice/NoticeMain.vue";
 // Register
 import RegisterMain from "../components/Register/RegisterMain.vue";
@@ -151,6 +152,11 @@ const routes = [
         path: "",
         name: "NoticeMain",
         component: NoticeMain,
+      },
+      {
+        path: ":notice_id",
+        name: "NoticeBoard",
+        component: NoticeBoard,
       },
     ],
   },
