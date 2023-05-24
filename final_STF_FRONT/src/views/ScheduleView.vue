@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import axios from "axios";
 
 export default {
   data: () => ({
@@ -45,20 +45,21 @@ export default {
       "#2ecc71", // Emerald
       "#9b59b6", // Amethyst
       "#f39c12", // Orange
+      "#1abc9c", // Mint
+      "#3498db", // Dodger Blue
+      "#e74c3c", // Alizarin
+      "#2ecc71", // Emerald
     ],
-    Schedules: [],
   }),
-  computed: {
-    ...mapGetters(["getSchedules"]),
-  },
+
   methods: {
     // 스케줄 갱신
-    makeScedule() {
+    makeScedule(Schedules) {
       const usedColors = new Set();
 
       // this.Schedules = response.data;
       // console.log(this.Schedules);
-      this.Schedules.forEach((schedule) => {
+      Schedules.forEach((schedule) => {
         const start1 = new Date(schedule.lecture_time1);
         const end1 = new Date(start1.getTime() + 90 * 60 * 1000);
 
@@ -107,13 +108,22 @@ export default {
         this.events.push(newEvent2);
       });
     },
-    fetchSchedules() {
-      const token = localStorage.getItem("access-token");
-      this.$store.dispatch("getSchedules", token);
-    },
   },
   created() {
-    this.fetchSchedules();
+    const token = localStorage.getItem("access-token");
+    axios({
+      headers: {
+        "access-token": token,
+      },
+      method: "get",
+      url: "http://localhost:9999/api/reservation",
+    })
+      .then(({ data }) => {
+        this.makeScedule(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   },
 };
 </script>

@@ -26,16 +26,12 @@
                   v-if="isRegistrationPossible(item)"
                   color="green"
                   small
+                  @click="registerLecture(item.lecture_index)"
                 >
                   수강신청 가능
                 </v-btn>
-                <v-btn
-                  v-else
-                  color="red"
-                  small
-                >
-                  수강신청 불가
-                </v-btn>
+
+                <v-btn v-else color="red" small> 수강신청 불가 </v-btn>
               </td>
             </tr>
           </template>
@@ -46,7 +42,8 @@
 </template>
 
 <script>
-import axios from 'axios';
+import http from "@/util/http-common";
+import axios from "axios";
 
 export default {
   props: {
@@ -91,10 +88,27 @@ export default {
           console.error(error);
         });
     },
+    registerLecture(index) {
+      const token = localStorage.getItem("access-token");
+
+      const headers = {
+        "access-token": token,
+      };
+
+      http
+        .post(`/reservation/${index}`, null, { headers })
+        .then(() => {
+          alert("등록완료");
+          window.location.href = "http://localhost:8080/Register";
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+
     isRegistrationPossible(item) {
       const ratio = item.lecture_max_cnt / item.lecture_cnt;
-      console.log(ratio);
-      return ratio < 1; // 1 이상인 경우 수강신청 
+      return ratio < 1; // 1 이상인 경우 수강신청
     },
   },
 };

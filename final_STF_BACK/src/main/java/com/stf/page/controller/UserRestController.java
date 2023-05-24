@@ -128,7 +128,6 @@ public class UserRestController {
 	@GetMapping("/user/mypage")
 	public ResponseEntity<User> myPage(@RequestHeader("access-token") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException{
 		String user_id = (String) jwtUtil.parseToken(token).get("id");
-		System.out.println("왔어요");
 		return new ResponseEntity<User>(userService.selectOne(user_id), HttpStatus.OK);
 	}
 }

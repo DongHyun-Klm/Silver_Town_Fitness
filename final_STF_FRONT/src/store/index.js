@@ -16,6 +16,8 @@ export default new Vuex.Store({
   mutations: {
     setSchedules(state, payload) {
       state.Schedules = payload;
+      // console.log("저장됐니");
+      // console.log(state.Schedules);
     },
   },
   actions: {

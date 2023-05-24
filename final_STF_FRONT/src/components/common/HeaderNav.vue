@@ -81,7 +81,6 @@ export default {
           route: "/Mypage/MypageSchedule",
         },
         { title: "사랑방", icon: "mdi-heart", route: "/Board/" },
-
       ],
     };
   },
@@ -90,7 +89,6 @@ export default {
       this.$router.push("/");
     },
     getImagePath(image) {
-      console.log(image);
       return require(`@/assets/upload/${image}`);
     },
     logout() {
@@ -105,7 +103,6 @@ export default {
           headers: { "access-token": localStorage.getItem("access-token") },
         })
         .then(({ data }) => {
-          console.log(data);
           this.img = data.user_img;
           this.name = data.user_name;
           this.email = data.user_email;
