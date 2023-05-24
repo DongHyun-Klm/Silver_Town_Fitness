@@ -4,7 +4,9 @@
       <v-container>
         <h1 class="page-title">STF 공지사항</h1>
 
+        <!-- 검색 기능 -->
         <v-row align="end" justify="end">
+          <!-- 대분류 선택 -->
           <v-col cols="12" sm="4" md="3">
             <v-select
               v-model="searchCategory"
@@ -14,6 +16,7 @@
               dense
             ></v-select>
           </v-col>
+          <!-- 검색어 입력 -->
           <v-col cols="12" sm="6" md="5">
             <v-text-field
               v-model="searchKeyword"
@@ -23,6 +26,7 @@
               clearable
             ></v-text-field>
           </v-col>
+          <!-- 검색 버튼 -->
           <v-col cols="12" sm="2" md="1">
             <v-btn icon @click="search">
               <v-icon>mdi-magnify</v-icon>
@@ -30,33 +34,30 @@
           </v-col>
         </v-row>
 
+        <!-- 공지사항 목록 -->
         <template v-if="notices.length > 0 || filteredNotices.length > 0">
-  <v-data-table
-    :headers="headers"
-    :items="filteredNotices"
-    hide-default-footer
-    class="notice-table"
-  >
-    <template v-slot:item="{ item, index }">
-      <tr>
-        <td>{{ index + 1 }}</td>
-        <td>
-          <v-btn text color="primary">{{ item.notice_title }}</v-btn>
-        </td>
-        <td>{{ item.notice_content }}</td>
-        <td>{{ item.notice_date }}</td>
-        <td>{{ item.notice_manager }}</td>
-        <td>{{ item.notice_cnt }}</td>
-      </tr>
-    </template>
-  </v-data-table>
-</template>
-
-
-        <template v-if="notices.length === 0 && filteredNotices.length === 0">
-          <v-card class="notice-card">
-            <v-card-text class="no-notice-text">검색 결과가 없습니다.</v-card-text>
-          </v-card>
+          <v-data-table
+            :headers="headers"
+            :items="filteredNotices"
+            hide-default-footer
+            class="notice-table"
+          >
+            <template v-slot:item="{ item, index }">
+              <tr>
+                <td>{{ index + 1 }}</td>
+                <td>{{ item.notice_title }}</td>
+                <td>{{ item.notice_content }}</td>
+                <td>{{ item.notice_date }}</td>
+                <td>{{ item.notice_manager }}</td>
+                <td>{{ item.notice_cnt }}</td>
+                <td>
+                  <v-icon small @click="goToNoticeDetail(item)">
+                    mdi-magnify
+                  </v-icon>
+                </td>
+              </tr>
+            </template>
+          </v-data-table>
         </template>
       </v-container>
     </v-main>
@@ -82,12 +83,14 @@ export default {
         { text: "등록일", value: "notice_date" },
         { text: "작성자", value: "notice_manager" },
         { text: "조회수", value: "notice_cnt" },
+        { text: "자세히", value: "detail" },
       ],
     };
   },
   mounted() {
     this.fetchNotices();
   },
+
   methods: {
     fetchNotices() {
       axios
@@ -117,47 +120,11 @@ export default {
         this.filteredNotices = this.notices;
       }
     },
+    // "자세히" 버튼 클릭 시 상세 뷰 페이지로 이동
+    goToNoticeDetail(notice) {
+      console.log(notice)
+      this.$router.push({ name: "NoticeBoard", params: { notice_id: notice.notice_index } });
+    },
   },
 };
 </script>
-
-<style scoped>
-.page-title {
-  font-size: 30px;
-  font-weight: bold;
-  color: #333;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  background-color: #f0f0f0;
-  padding: 10px;
-  border-radius: 4px;
-  text-align: center;
-}
-
-.notice-table {
-  margin-top: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.no-notice-text {
-  text-align: center;
-  font-size: 18px;
-  color: #999;
-  margin-top: 20px;
-}
-
-.search-category-col {
-  text-align: right;
-}
-
-.search-button-col {
-  text-align: left;
-}
-
-.search-button {
-  margin-left: 8px;
-  margin-top: -4px;
-  width: 36px;
-  height: 36px;
-}
-</style>
