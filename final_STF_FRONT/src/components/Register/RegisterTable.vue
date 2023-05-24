@@ -12,19 +12,32 @@
           :pagination.sync="pagination"
           hide-default-footer
         >
-          <template v-slot:body="{ items }">
-            <tbody>
-              <tr v-for="item in items" :key="item.id">
-                <td>{{ item.exercise_index }}</td>
-                <td>{{ item.teacher_index }}</td>
-                <td>{{ item.lecture_month }}</td>
-                <td>{{ item.lecture_time1 }}</td>
-                <td>{{ item.lecture_place }}</td>
-                <!-- <td>{{ item.availability }}</td> -->
-                <td>{{ item.lecture_cnt }}</td>
-                <td>{{ item.lecture_max_cnt }}</td>
-              </tr>
-            </tbody>
+          <template v-slot:item="{ item }">
+            <tr>
+              <td>{{ item.exercise_index }}</td>
+              <td>{{ item.teacher_index }}</td>
+              <td>{{ item.lecture_month }}</td>
+              <td>{{ item.lecture_time1 }}</td>
+              <td>{{ item.lecture_place }}</td>
+              <td>{{ item.lecture_cnt }}</td>
+              <td>{{ item.lecture_max_cnt }}</td>
+              <td>
+                <v-btn
+                  v-if="isRegistrationPossible(item)"
+                  color="green"
+                  small
+                >
+                  수강신청 가능
+                </v-btn>
+                <v-btn
+                  v-else
+                  color="red"
+                  small
+                >
+                  수강신청 불가
+                </v-btn>
+              </td>
+            </tr>
           </template>
         </v-data-table>
       </v-col>
@@ -51,7 +64,8 @@ export default {
         { text: "교육 일시", value: "lecture_time1" },
         { text: "교육 장소", value: "lecture_place" },
         { text: "참석 인원", value: "lecture_cnt" },
-        { text: "신청 인원", value: "lecture_max_cnt" },
+        { text: "신청 가능 인원", value: "lecture_max_cnt" },
+        { text: "신청 가능 여부", value: "lecture_possible" }, // 새로운 컬럼 추가
       ],
       lectureData: [],
       search: "",
@@ -65,11 +79,9 @@ export default {
   },
   methods: {
     fetchLectureData() {
-      // RegisterMain.vue에서 전달한 categoryIndex 값을 사용하여 API 엔드포인트 주소 동적 생성
       const categoryIndex = this.categoryIndex;
-      const apiUrl = `http://localhost:9999/api/lecture/list/${categoryIndex}`; // API 엔드포인트 주소
+      const apiUrl = `http://localhost:9999/api/lecture/list/${categoryIndex}`;
 
-      // API 호출
       axios
         .get(apiUrl)
         .then((response) => {
@@ -79,10 +91,14 @@ export default {
           console.error(error);
         });
     },
+    isRegistrationPossible(item) {
+      const ratio = item.lecture_max_cnt / item.lecture_cnt;
+      console.log(ratio);
+      return ratio < 1; // 1 이상인 경우 수강신청 
+    },
   },
 };
 </script>
-
 
 <style scoped>
 .container {
