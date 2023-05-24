@@ -5,18 +5,30 @@
       <v-card-title class="trainer-card-title">강사 소개</v-card-title>
       <v-card-text>
         <v-row>
-          <v-col
-            cols="6"
-            v-for="teacher in teachers"
-            :key="teacher.teacher_index"
-          >
+          <v-col cols="6">
             <v-card class="trainer-info" outlined>
               <v-avatar size="150" class="trainer-image" style="padding: 100px">
-                <img :src="getImagePath(img)" alt="강사 이미지" />
+                <img :src="getImagePath(img1)" alt="강사 이미지" />
               </v-avatar>
-              <h2 class="trainer-name">{{ teacher.teacher_name }}</h2>
-              <p class="trainer-description">{{ teacher.teacher_career }}</p>
-              <v-btn @click="goToReviewPage(teacher.teacher_index)">
+              <h2 class="trainer-name">{{ teachers[0].teacher_name }}</h2>
+              <p class="trainer-description">
+                {{ teachers[0].teacher_career }}
+              </p>
+              <v-btn @click="goToReviewPage(teachers[0].teacher_index)">
+                강사 리뷰 작성하기
+              </v-btn>
+            </v-card>
+          </v-col>
+          <v-col cols="6">
+            <v-card class="trainer-info" outlined>
+              <v-avatar size="150" class="trainer-image" style="padding: 100px">
+                <img :src="getImagePath(img2)" alt="강사 이미지" />
+              </v-avatar>
+              <h2 class="trainer-name">{{ teachers[1].teacher_name }}</h2>
+              <p class="trainer-description">
+                {{ teachers[1].teacher_career }}
+              </p>
+              <v-btn @click="goToReviewPage(teachers[1].teacher_index)">
                 강사 리뷰 작성하기
               </v-btn>
             </v-card>
@@ -38,7 +50,8 @@ export default {
   },
   data() {
     return {
-      img: "",
+      img1: "",
+      img2: "",
       teachers: [],
     };
   },
@@ -52,7 +65,8 @@ export default {
         .get(`http://localhost:9999/api/instructor/${exercise_index}`)
         .then((response) => {
           this.teachers = response.data;
-          // this.img = response.data.exercise_img;
+          this.img1 = this.teachers[0].teacher_img;
+          this.img2 = this.teachers[1].teacher_img;
         })
         .catch((error) => {
           console.error(error);
@@ -64,9 +78,9 @@ export default {
         params: { teacher_index },
       });
     },
-  },
-  getImagePath(image) {
-    return require(`@/assets/${image}`);
+    getImagePath(image) {
+      return require(`@/assets/${image}`);
+    },
   },
 };
 </script>
