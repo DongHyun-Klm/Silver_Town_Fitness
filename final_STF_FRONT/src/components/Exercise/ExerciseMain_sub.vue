@@ -11,11 +11,8 @@
             :key="teacher.teacher_index"
           >
             <v-card class="trainer-info" outlined>
-              <v-avatar size="150" class="trainer-image" style="padding: 100px;">
-                <img
-                  :src="require('@/assets/1684829116446_말라무트.jpg')"
-                  alt="강사 이미지"
-                />
+              <v-avatar size="150" class="trainer-image" style="padding: 100px">
+                <img :src="getImagePath(img)" alt="강사 이미지" />
               </v-avatar>
               <h2 class="trainer-name">{{ teacher.teacher_name }}</h2>
               <p class="trainer-description">{{ teacher.teacher_career }}</p>
@@ -41,6 +38,7 @@ export default {
   },
   data() {
     return {
+      img: "",
       teachers: [],
     };
   },
@@ -54,6 +52,7 @@ export default {
         .get(`http://localhost:9999/api/instructor/${exercise_index}`)
         .then((response) => {
           this.teachers = response.data;
+          // this.img = response.data.exercise_img;
         })
         .catch((error) => {
           console.error(error);
@@ -65,6 +64,9 @@ export default {
         params: { teacher_index },
       });
     },
+  },
+  getImagePath(image) {
+    return require(`@/assets/${image}`);
   },
 };
 </script>

@@ -166,6 +166,7 @@ public class BoardRestController {
 	// 강사별 리뷰 작성 /review
 	@PostMapping("/review")	
 	public ResponseEntity<Teacher_review> teacher_reviewCreate(@RequestHeader("access-token") String token, @RequestBody Teacher_review review) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException {
+		System.out.println(review);
 		// token에서 유저 id 가져오기
 		String user_id = (String) jwtUtil.parseToken(token).get("id");
 		review.setUser_id(user_id);	

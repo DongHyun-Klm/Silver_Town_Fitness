@@ -9,16 +9,7 @@
           size="10"
           style="padding: 10px"
         >
-          <v-img
-            :src="require('@/assets/요가_이미지2.jpg')"
-            alt="강사 이미지"
-            max-height="300"
-          />
-          <!-- <v-img
-            :src="require(exerciseDetails.exercise_img)"
-            :alt="exerciseDetails.exercise_name"
-            class="exercise-image"
-          ></v-img> -->
+          <v-img :src="getImagePath(img)" alt="강사 이미지" max-height="300" />
         </v-card>
       </v-col>
 
@@ -61,6 +52,7 @@ export default {
   },
   data() {
     return {
+      img: "요가.jpg",
       exerciseDetails: {},
     };
   },
@@ -73,12 +65,15 @@ export default {
       axios
         .get(`http://localhost:9999/api/lecture/${exercise_index}`)
         .then((response) => {
-          console.log(response.data);
           this.exerciseDetails = response.data;
+          this.img = response.data.exercise_img;
         })
         .catch((error) => {
           console.error(error);
         });
+    },
+    getImagePath(image) {
+      return require(`@/assets/${image}`);
     },
   },
 };
