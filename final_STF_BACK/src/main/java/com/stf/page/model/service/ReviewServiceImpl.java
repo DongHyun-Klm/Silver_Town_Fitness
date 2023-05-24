@@ -14,9 +14,9 @@ public class ReviewServiceImpl implements ReviewService{
 	@Autowired
 	private ReviewDao reviewDao;
 	
-	// 강사 리뷰 전체 조회
-	public List<Teacher_review> selectList(){
-		return reviewDao.selectList();
+	
+	public List<Teacher_review> selectList(int excercise_index){
+		return reviewDao.selectList(excercise_index);
 	}
 	
 	// 강사 리뷰 작성

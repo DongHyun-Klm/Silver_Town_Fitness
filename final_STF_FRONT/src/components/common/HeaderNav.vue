@@ -81,6 +81,7 @@ export default {
           route: "/Mypage/MypageSchedule",
         },
         { title: "사랑방", icon: "mdi-heart", route: "/Board/" },
+
       ],
     };
   },

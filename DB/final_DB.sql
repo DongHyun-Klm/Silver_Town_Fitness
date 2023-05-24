@@ -94,6 +94,7 @@ CREATE TABLE Program
     `teacher_index`    INT            NOT NULL    COMMENT '강사 인덱스', 
      PRIMARY KEY (lecture_index)
 );
+SELECT * from Program;
 
 -- 테이블 Comment 설정 SQL - Program
 ALTER TABLE Program COMMENT '프로그램 테이블';
@@ -326,9 +327,9 @@ SELECT * from Notice;
 -- 회원 정보 테이블
 DELETE FROM User;
 INSERT INTO User(user_index, user_name, user_img, user_birth, user_sex, user_id, user_password, user_nick, user_number, user_email , user_lecture_cnt)
-VALUES ( '0', '김재이', '재이 사진 url','19970901','남', 'jay_id', 'ssafy', '재이다', '010-1111-1111','jay@naver.com',0),
- ( '0', '김라현',  '라현 사진 url','19980723','여', 'ra_id', 'ssafy', '라현이다', '010-2222-2222','dong@naver.com',0),
- ( '0', '김소연', '소연 사진 url','19981010', '여','so_id', 'ssafy','소연이다','010-3333-3333','so@gmail.com',0 );
+VALUES ( '0', '김재이', 'ssafy.png','19970901','남', 'jay_id', 'ssafy', '재이다', '010-1111-1111','jay@naver.com',0),
+ ( '0', '김라현',  'ssafy.png','19980723','여', 'ra_id', 'ssafy', '라현이다', '010-2222-2222','dong@naver.com',0),
+ ( '0', '김소연', 'ssafy.png','19981010', '여','so_id', 'ssafy','소연이다','010-3333-3333','so@gmail.com',0 );
 SELECT * from User;
 
 -- 프로그램 정보 테이블
@@ -404,4 +405,13 @@ VALUES
 
 SELECT * FROM Reservation;   
 
+	SELECT *FROM Teacher_review WHERE teacher_index = 1;
+    
+    SELECT T.teacher_index from Teacher as T
+		WHERE exercise_index = 1;
+        
+SELECT TR.*
+FROM Teacher_review AS TR
+JOIN Teacher AS T ON TR.teacher_index = T.teacher_index
+WHERE T.exercise_index = 1;
 

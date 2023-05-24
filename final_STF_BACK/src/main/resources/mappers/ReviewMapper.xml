@@ -7,10 +7,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<!-- 강사별 리뷰 조회 /review -->
-	<select id="selectList" resultType="Teacher_review">
-		SELECT *
-		FROM Teacher_review
+	<select id="selectList" resultType="Teacher_review" parameterType="int">
+		SELECT TR.*
+		FROM Teacher_review AS TR
+		JOIN Teacher AS T ON TR.teacher_index = T.teacher_index
+		WHERE T.exercise_index = ${exercise_index};
 	</select>
+	
+	
 
 	<!-- 강사별 리뷰 작성 /review -->
 	<insert id="insertBoard" parameterType="Teacher_review" keyProperty="teacher_index">

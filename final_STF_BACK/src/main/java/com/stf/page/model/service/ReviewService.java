@@ -7,7 +7,7 @@ import com.stf.page.model.dto.Teacher_review;
 public interface ReviewService {
 
 	// 강사 리뷰 전체 조회
-	List<Teacher_review> selectList();
+	List<Teacher_review> selectList(int excercise_index);
 
 	// 강사 리뷰 작성
 	void insertBoard(Teacher_review review);

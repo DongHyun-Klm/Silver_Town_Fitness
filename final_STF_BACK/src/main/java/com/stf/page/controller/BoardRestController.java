@@ -48,7 +48,7 @@ public class BoardRestController {
 	private BoardService boardService;
 	
 	//파일 저장할 경로
-	final private String filedir = "C:/Users/SSAFY/Dropbox/STF/BSG_Silver_Town_Fitness/final_STF_FRONT/src/assets/upload/";
+	final private String filedir =  "C:/Users/SSAFY/Dropbox/Seong/Final/BSG_Silver_Town_Fitness/final_STF_FRONT/src/assets/upload/";
 
 	// 사랑방 글 전체 조회 
 	@GetMapping("/board")
@@ -153,10 +153,10 @@ public class BoardRestController {
 	@Autowired
 	private ReviewService reviewService;
 	
-	// 강사별 리뷰 조회 /review
-	@GetMapping("/review")
-	public ResponseEntity<List<Teacher_review>> teacher_reviewList(){
-		List<Teacher_review> list = reviewService.selectList(); // 단순히 전제 조회
+	// 종목별 강사 리뷰 조회 /review/{index}
+	@GetMapping("/review/{excercise_index}")
+	public ResponseEntity<List<Teacher_review>> teacher_reviewList(@PathVariable int excercise_index){
+		List<Teacher_review> list = reviewService.selectList(excercise_index); // 단순히 전제 조회
 		if (list == null || list.size() == 0) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
@@ -164,11 +164,11 @@ public class BoardRestController {
 	}
 	
 	// 강사별 리뷰 작성 /review
-	@PostMapping("/review")
-	public ResponseEntity<Teacher_review> teacher_reviewCreate(@RequestHeader("access-token") String token, Teacher_review review) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException {
+	@PostMapping("/review")	
+	public ResponseEntity<Teacher_review> teacher_reviewCreate(@RequestHeader("access-token") String token, @RequestBody Teacher_review review) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException {
 		// token에서 유저 id 가져오기
 		String user_id = (String) jwtUtil.parseToken(token).get("id");
-		review.setUser_id(user_id);
+		review.setUser_id(user_id);	
 		reviewService.insertBoard(review);
 		return new ResponseEntity<>(review, HttpStatus.OK);
 	}
