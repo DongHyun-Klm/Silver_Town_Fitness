@@ -35,9 +35,7 @@ import RegisterMain from "../components/Register/RegisterMain.vue";
 // Review
 
 // Test
-import test from "../views/Test/test.vue";
-import testSc from "../views/Test/testSc.vue";
-// import test3 from "../views/test/test3.vue";
+import ScheduleView from "../views/ScheduleView.vue";
 const routes = [
   // Home
   {
@@ -45,16 +43,11 @@ const routes = [
     name: "Home",
     component: HomeView,
   },
-  // test
+  // Schedule
   {
-    path: "/test",
-    name: "test",
-    component: test,
-  },
-  {
-    path: "/test2",
-    name: "testSc",
-    component: testSc,
+    path: "/Schedule",
+    name: "Schedule",
+    component: ScheduleView,
   },
   {
     path: "/Board",

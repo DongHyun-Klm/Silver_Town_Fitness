@@ -94,6 +94,7 @@ export default {
         .get(`http://localhost:9999/api/review/${exercise_index}`)
         .then((response) => {
           this.reviews = response.data;
+          console.log(this.exercise_index);
         })
         .catch((error) => {
           console.error(error);

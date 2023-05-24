@@ -27,6 +27,7 @@
               <v-btn text color="primary" @click="goToDetail(index)"
                 >더보기</v-btn
               >
+              >
             </v-col>
           </v-row>
         </v-container>
@@ -64,7 +65,7 @@
             <v-container fluid class="container-with-border">
               <v-row>
                 <v-col cols="12">
-                  <test-sc />
+                  <schedule-view />
                 </v-col>
               </v-row>
             </v-container>
@@ -89,12 +90,12 @@
 
 <script>
 import BoardList from "@/components/Board/BoardList.vue";
-import TestSc from "./Test/testSc.vue";
+import ScheduleView from "@/views/ScheduleView.vue";
 
 export default {
   components: {
     BoardList,
-    TestSc,
+    ScheduleView,
   },
   data() {
     return {
