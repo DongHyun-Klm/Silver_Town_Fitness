@@ -86,7 +86,7 @@
             v-model="sex"
             name="sex"
             class="form-control form-control-sex"
-            placeholder="성별 입력(남/여)"
+            placeholder="성별 입력(남성/여성)"
             required
           />
           <input

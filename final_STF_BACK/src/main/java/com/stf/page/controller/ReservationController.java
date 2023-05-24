@@ -46,9 +46,7 @@ public class ReservationController {
 	// 이수중목록 조회
 	@GetMapping("/reservation")
 	public ResponseEntity<List<Reservation>> selectList(@RequestHeader("access-token") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException{
-		System.out.println("------------------------------------");
 		String user_id = (String) jwtUtil.parseToken(token).get("id");
-		System.out.println(user_id);
 		List<Reservation> list = Rservice.selectList(user_id);
 		return new ResponseEntity<List<Reservation>>(list, HttpStatus.OK);
 	}

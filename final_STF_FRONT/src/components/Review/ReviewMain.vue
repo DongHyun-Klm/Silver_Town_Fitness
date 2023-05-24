@@ -63,6 +63,12 @@
 import axios from "axios";
 
 export default {
+  props: {
+    teacher_index: {
+      type: Number,
+      required: true,
+    },
+  },
   data() {
     return {
       review_grade: 0,
@@ -74,30 +80,33 @@ export default {
     submitReview() {
       // 리뷰 데이터 구성
       const reviewData = {
+        teacher_index: this.teacher_index, // 강사 인덱스
         review_grade: this.review_grade, // 별표의 개수
         review_title: this.reviewTitle, // 리뷰 제목
         review_content: this.review, // 리뷰 작성
-        user_id: "ra_id", // 현재 로그인된 사용자의 ID를 여기에 추가하시면 됩니다.
       };
-      const token = localStorage.getItem("access-token");
       console.log(reviewData);
-      // Spring 백엔드로 데이터 전송
-      axios
-        .post("http://localhost:9999/api/review", reviewData, {
-                  headers: {
-            "Content-type": "multipart/form-data",
-            "access-token": token,
-          },
-        })
-        
-        .then((response) => {
-          console.log(response); // 응답 데이터 확인
-          alert("리뷰가 작성되었습니다.");
-          // 추가적인 작업 수행
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      const token = localStorage.getItem("access-token");
+        // Spring 백엔드로 데이터 전송
+        axios
+          .post(
+            `http://localhost:9999/api/review`,
+            reviewData,
+            {
+              headers: {
+                "access-token": token,
+              },
+            }
+          )
+          .then((response) => {
+            console.log(response); // 응답 데이터 확인
+            alert("리뷰가 작성되었습니다.");
+            this.$router.go(-1)
+            // 추가적인 작업 수행
+          })
+          .catch((error) => {
+            console.error(error);
+          });
     },
   },
 };

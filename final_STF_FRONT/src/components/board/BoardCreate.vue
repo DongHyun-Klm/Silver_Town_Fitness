@@ -33,6 +33,9 @@
 import axios from "axios";
 
 export default {
+  created() {
+    this.$checkLogin();
+  },
   data() {
     return {
       form: {

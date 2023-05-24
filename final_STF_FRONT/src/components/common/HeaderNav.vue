@@ -4,7 +4,7 @@
       <v-list dense>
         <v-list-item>
           <v-list-item-avatar>
-            <v-img :src="image"></v-img>
+            <v-img :src="getImagePath(img)"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -65,10 +65,10 @@ export default {
   data() {
     return {
       drawer: false,
-      image: require("@/assets/upload/다운로드.jpg"),
+      img: "ssafy.png",
       temp: "",
       name: "",
-      email: "",
+      email: "로그인 해주세요",
       hasAccessToken: false,
       menuItems: [
         { title: "메인페이지", icon: "mdi-home", route: "/" },
@@ -88,6 +88,10 @@ export default {
     navigateToHome() {
       this.$router.push("/");
     },
+    getImagePath(image) {
+      console.log(image);
+      return require(`@/assets/upload/${image}`);
+    },
     logout() {
       localStorage.removeItem("access-token");
       localStorage.removeItem("id");
@@ -100,8 +104,7 @@ export default {
           headers: { "access-token": localStorage.getItem("access-token") },
         })
         .then(({ data }) => {
-          console.log(data);
-          // this.img = data.user_img;
+          this.img = data.user_img;
           this.name = data.user_name;
           this.email = data.user_email;
         });
@@ -116,6 +119,7 @@ export default {
       if (newValue) {
         this.fetchUserData();
       } else {
+        this.img = "ssafy.png";
         this.name = "";
         this.email = "";
       }

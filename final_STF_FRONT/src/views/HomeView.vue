@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="home-container">
-    <v-container style= "margin-bottom: 100px">
+    <v-container style="margin-bottom: 100px">
       <!-- 카드 -->
       <div class="card-container">
         <v-container class="card-group" fluid>

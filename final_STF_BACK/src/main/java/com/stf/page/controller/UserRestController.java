@@ -43,7 +43,7 @@ public class UserRestController {
 	private UserService userService;
 
 	//파일 저장할 경로
-	final private String filedir = Paths.get("").toAbsolutePath().toString().replace("\\", "/") + "/src/main/resources/static/";
+	final private String filedir = "C:/Users/SSAFY/Dropbox/STF/BSG_Silver_Town_Fitness/final_STF_FRONT/src/assets/upload/";
 	
 	//로그인
 	@PostMapping("/user/login")
@@ -82,9 +82,10 @@ public class UserRestController {
 	public ResponseEntity<?> signup(User user, @RequestParam(value = "profileImage", required = false) MultipartFile file) throws IllegalStateException, IOException{
 		if(file != null) {
 			String fullpath = "";
-			fullpath = filedir + System.currentTimeMillis() + "_" + file.getOriginalFilename();
+			String oimg = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+			fullpath = filedir + oimg;
 			file.transferTo(new File(fullpath));
-			user.setUser_img(fullpath);
+			user.setUser_img(oimg);
 		}
 		userService.signup(user);
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -104,9 +105,10 @@ public class UserRestController {
 	public ResponseEntity<?> update(User user, @RequestParam(value = "profileImage", required = false) MultipartFile file) throws IllegalStateException, IOException{
 		if(file != null) {
 			String fullpath = "";
-			fullpath = filedir + System.currentTimeMillis() + "_" + file.getOriginalFilename();
+			String oimg = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+			fullpath = filedir + oimg;
 			file.transferTo(new File(fullpath));
-			user.setUser_img(fullpath);
+			user.setUser_img(oimg);
 		}
 		user.setUser_index(userService.selectOne(user.getUser_id()).getUser_index());
 		userService.updateUser(user);
@@ -118,7 +120,6 @@ public class UserRestController {
 	public ResponseEntity<?> delete(@RequestHeader("access-token") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException{
 		String user_id = (String) jwtUtil.parseToken(token).get("id");
 		userService.deleteUser(user_id); 
-		System.out.println(user_id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
@@ -126,6 +127,7 @@ public class UserRestController {
 	@GetMapping("/user/mypage")
 	public ResponseEntity<User> myPage(@RequestHeader("access-token") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException{
 		String user_id = (String) jwtUtil.parseToken(token).get("id");
+		System.out.println("왔어요");
 		return new ResponseEntity<User>(userService.selectOne(user_id), HttpStatus.OK);
 	}
 }
