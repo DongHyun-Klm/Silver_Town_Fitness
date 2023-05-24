@@ -5,10 +5,23 @@
       <v-card-title class="trainer-card-title">강사 소개</v-card-title>
       <v-card-text>
         <v-row>
-          <v-col cols="6" v-for="teacher in teachers" :key="teacher.teacher_index">
+          <v-col
+            cols="6"
+            v-for="teacher in teachers"
+            :key="teacher.teacher_index"
+          >
             <v-card class="trainer-info" outlined>
+              <v-avatar size="150" class="trainer-image" style="padding: 100px;">
+                <img
+                  :src="require('@/assets/1684829116446_말라무트.jpg')"
+                  alt="강사 이미지"
+                />
+              </v-avatar>
               <h2 class="trainer-name">{{ teacher.teacher_name }}</h2>
               <p class="trainer-description">{{ teacher.teacher_career }}</p>
+              <v-btn @click="goToReviewPage(teacher.teacher_index)">
+                강사 리뷰 작성하기
+              </v-btn>
             </v-card>
           </v-col>
         </v-row>
@@ -46,6 +59,12 @@ export default {
           console.error(error);
         });
     },
+    goToReviewPage(teacher_index) {
+      this.$router.push({
+        name: "Review",
+        params: { teacher_index },
+      });
+    },
   },
 };
 </script>
@@ -68,6 +87,14 @@ export default {
 .trainer-info {
   margin-bottom: 20px;
   padding: 16px;
+  text-align: center;
+}
+
+.trainer-image img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
 }
 
 .trainer-name {
