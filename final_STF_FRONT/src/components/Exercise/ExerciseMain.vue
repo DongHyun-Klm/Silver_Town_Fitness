@@ -2,14 +2,21 @@
   <v-container class="container" fluid>
     <!-- 첫 번째 행 -->
     <v-row class="row">
-      <!-- 1열 - 운동 사진xxxxx문제문제-->
-    <!-- <v-col cols="6">
-        <v-img
-          :src="require(exerciseDetails.exercise_img)"
-          :alt="exerciseDetails.exercise_name"
-          class="exercise-image"
-        ></v-img>
-      </v-col> -->
+      <!-- 1열 - 운동 사진 -->
+      <v-col cols="6">
+        <v-card class="exercise-image-container" size="10" style="padding: 10px;">
+          <v-img
+            :src="require('@/assets/요가_이미지2.jpg')"
+            alt="강사 이미지"
+             max-height="300"
+          />
+          <!-- <v-img
+            :src="require(exerciseDetails.exercise_img)"
+            :alt="exerciseDetails.exercise_name"
+            class="exercise-image"
+          ></v-img> -->
+        </v-card>
+      </v-col>
 
       <!-- 2열 - 운동 소개 컨테이너 -->
       <v-col cols="6">
@@ -79,6 +86,11 @@ export default {
 
 .row {
   margin-bottom: 20px;
+}
+
+.exercise-image-container {
+  height: 100%;
+  border-radius: 5px;
 }
 
 .exercise-image {

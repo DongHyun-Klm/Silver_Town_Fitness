@@ -20,6 +20,7 @@ import BoardUpdate from "../components/Board/BoardUpdate.vue";
 // Exercise
 import ExerciseMain from "../components/Exercise/ExerciseMain.vue";
 import ExerciseMain_sub from "../components/Exercise/ExerciseMain_sub.vue";
+import ExerciseMainFooter from "../components/Exercise/ExerciseMainFooter.vue";
 // Login
 import LoginMain from "../components/Login/LoginMain.vue";
 // Mypage
@@ -32,7 +33,7 @@ import NoticeMain from "../components/Notice/NoticeMain.vue";
 // Register
 import RegisterMain from "../components/Register/RegisterMain.vue";
 // Review
-import ReviewMain from "../components/Review/ReviewMain.vue";
+
 // Test
 import test from "../views/Test/test.vue";
 import testSc from "../views/Test/testSc.vue";
@@ -98,6 +99,11 @@ const routes = [
         path: "ExerciseMain_sub/:exercise_index",
         name: "ExerciseMain_sub",
         component: ExerciseMain_sub,
+      },
+      {
+        path: "ExerciseMainFooter/:exercise_index",
+        name: "ExerciseMainFooter",
+        component: ExerciseMainFooter,
       },
     ],
   },
@@ -170,17 +176,15 @@ const routes = [
   },
   // Review
   {
-    path: "/Review",
+    path: "/Review/:teacher_index",
     name: "Review",
     component: ReviewView,
-    children: [
-      {
-        path: "",
-        name: "ReviewMain",
-        component: ReviewMain,
-      },
-    ],
   },
+  // {
+  //   path: "Review/:teacher_index",
+  //   name: "ReviewMain",
+  //   component: ReviewMain,
+  // },
 ];
 
 const router = new VueRouter({
