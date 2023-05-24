@@ -1,64 +1,56 @@
 <template>
   <v-container class="container" fluid>
     <!-- 프로그램 분류 버튼 -->
-    <v-row justify="center" class="category-buttons">
-      <v-col
-        cols="12"
-        sm="6"
-        md="4"
-        lg="3"
-        v-for="category in categories"
-        :key="category.id"
-      >
-        <v-btn
-          outlined
-          color="primary"
-          class="ma-2"
-          @click="selectCategory(category.id)"
-          block
-        >
-          {{ category.name }}
-        </v-btn>
-      </v-col>
-    </v-row>
-
-    <!-- 선택한 프로그램 내용 -->
-    <v-row v-if="selectedCategory" class="program-details">
-      <!-- 강사 정보 -->
-      <v-row justify="center">
+    <v-container>
+      <v-row justify="center" class="category-buttons">
         <v-col
           cols="12"
           sm="6"
           md="4"
           lg="3"
-          v-for="teacher in selectedCategory.teachers"
-          :key="teacher.id"
+          v-for="category in categories"
+          :key="category.id"
         >
-          <v-card class="teacher-card" outlined>
-            <v-card-text>
-              <h2 class="teacher-name">{{ teacher.name }}</h2>
-              <p class="teacher-description">{{ teacher.career }}</p>
-              <v-btn color="primary" dark @click="goToReviewPage(teacher.id)">
-                강사 리뷰 작성하기
-              </v-btn>
-            </v-card-text>
-          </v-card>
+          <v-btn
+            outlined
+            color="primary"
+            class="ma-2"
+            @click="selectCategory(category.id)"
+            block
+          >
+            {{ category.name }}
+          </v-btn>
         </v-col>
       </v-row>
 
-      <!-- 예약한 강의 목록 -->
-      <v-row class="reservation-table">
-        <v-col cols="12">
-          <!-- RegisterTable 컴포넌트에 동적으로 categoryIndex를 전달 -->
-          <RegisterTable :categoryIndex="selectedCategory.id" :key="selectedCategory.id" />
-        </v-col>
+      <v-container fluid class="container-with-border" >
+        <v-row>
+          <v-col cols="12">
+            <test-sc />
+          </v-col>
+        </v-row>
+      </v-container>
+
+      <!-- 선택한 프로그램 내용 -->
+      <v-row v-if="selectedCategory" class="program-details">
+        <!-- 예약한 강의 목록 -->
+        <v-row class="reservation-table">
+          <v-col cols="12">
+            <!-- RegisterTable 컴포넌트에 동적으로 categoryIndex를 전달 -->
+            <RegisterTable
+              :categoryIndex="selectedCategory.id"
+              :key="selectedCategory.id"
+            />
+          </v-col>
+        </v-row>
       </v-row>
-    </v-row>
+    </v-container>
   </v-container>
 </template>
 
 <script>
-import axios from 'axios';
+import TestSc from "@/views/Test/testSc.vue";
+import axios from "axios";
 import RegisterTable from "@/components/Register/RegisterTable.vue";
 
 export default {
@@ -69,6 +61,7 @@ export default {
     },
   },
   components: {
+    TestSc,
     RegisterTable,
   },
   data() {
@@ -139,4 +132,13 @@ export default {
 .reservation-table {
   margin-top: 20px;
 }
+
+.teacher-col {
+  max-width: 100%;
+  flex-basis: 20%;
+}
+
+/* .program-details {
+  margin-top: 20px;
+} */
 </style>
