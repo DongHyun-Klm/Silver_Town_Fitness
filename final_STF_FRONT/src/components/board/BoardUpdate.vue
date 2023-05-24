@@ -23,7 +23,10 @@
             required
             :placeholder="form.board_content"
           ></v-textarea>
-          <v-btn type="submit" class="form-button" color="primary"
+          <v-btn
+            type="submit"
+            class="form-button"
+            color="primary"
             >수정 완료</v-btn
           >
         </v-form>
@@ -69,6 +72,9 @@ export default {
         .put(`http://localhost:9999/api/board`, this.form)
         .then(() => {
           alert("게시글이 수정되었습니다.");
+
+          this.$router.go(-1);
+
           // 추가적인 작업 수행
         })
         .catch((error) => {
