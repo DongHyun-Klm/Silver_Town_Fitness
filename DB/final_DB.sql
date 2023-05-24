@@ -404,4 +404,13 @@ VALUES
 
 SELECT * FROM Reservation;   
 
+	SELECT *FROM Teacher_review WHERE teacher_index = 1;
+    
+    SELECT T.teacher_index from Teacher as T
+		WHERE exercise_index = 1;
+        
+SELECT TR.*
+FROM Teacher_review AS TR
+JOIN Teacher AS T ON TR.teacher_index = T.teacher_index
+WHERE T.exercise_index = 1;
 
