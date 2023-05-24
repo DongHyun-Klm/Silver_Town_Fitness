@@ -8,12 +8,8 @@ Vue.use(Vuex);
 // const REST_API = `http://localhost:9999/api`;
 
 export default new Vuex.Store({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {  
-  },
+  state: {},
+  getters: {},
+  mutations: {},
+  actions: {},
 });

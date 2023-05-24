@@ -5,7 +5,7 @@
         <v-row>
           <v-col cols="4">
             <div class="avatar">
-              <v-img class="avatar-image" :src="img"></v-img>
+              <v-img class="avatar-image" :src="getImagePath(img)"></v-img>
             </div>
           </v-col>
 
@@ -100,8 +100,7 @@ export default {
   name: "MyPageMain",
   data() {
     return {
-      img: require("@/assets/upload/말라무트2.gif"), // 임시
-      // img: "",
+      img: "",
       id: "",
       nick: "",
       name: "",
@@ -110,6 +109,9 @@ export default {
       email: "",
       number: "",
     };
+  },
+  created() {
+    this.$checkLogin();
   },
   mounted() {
     this.fetchData(); // 컴포넌트가 마운트되면 데이터를 불러오는 메소드 호출
@@ -128,10 +130,14 @@ export default {
           this.sex = response.data.user_sex;
           this.email = response.data.user_email;
           this.number = response.data.user_number;
+          this.img = response.data.user_img;
         })
         .catch((error) => {
           console.error("Error fetching personal info:", error);
         });
+    },
+    getImagePath(image) {
+      return require(`@/assets/upload/${image}`);
     },
   },
 };

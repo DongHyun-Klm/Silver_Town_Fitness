@@ -5,7 +5,7 @@
         <v-row>
           <v-col cols="4">
             <div class="avatar">
-              <v-img class="avatar-image" :src="img"></v-img>
+              <v-img class="avatar-image" :src="getImagePath(img)"></v-img>
               <input type="file" @change="handleImageChange" />
             </div>
             <br />
@@ -94,8 +94,7 @@ export default {
   data() {
     return {
       id: "",
-      img: require("@/assets/upload/말라무트1.jpg"), // 임시
-      // img: "",
+      img: "",
       nick: "",
       name: "",
       birth: "",
@@ -106,6 +105,9 @@ export default {
   },
   mounted() {
     this.fetchData(); // 컴포넌트가 마운트되면 데이터를 불러오는 메소드 호출
+  },
+  created() {
+    this.$checkLogin();
   },
   methods: {
     fetchData() {
@@ -155,6 +157,7 @@ export default {
       formData.append("user_number", this.number);
       formData.append("user_email", this.email);
       formData.append("user_id", this.id);
+      formData.append("profileImage", this.image);
       axios
         .put("http://localhost:9999/api/user", formData, {
           "Content-type": "multipart/form-data",
@@ -166,6 +169,9 @@ export default {
         .catch((error) => {
           console.error(error);
         });
+    },
+    getImagePath(image) {
+      return require(`@/assets/upload/${image}`);
     },
   },
 };

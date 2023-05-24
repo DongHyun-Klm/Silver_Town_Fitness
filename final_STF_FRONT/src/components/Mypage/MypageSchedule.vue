@@ -8,6 +8,9 @@
 <script>
 import testSc from "@/views/Test/testSc.vue";
 export default {
+  created() {
+    this.$checkLogin();
+  },
   components: { testSc },
   name: "MypageSchedule",
 };

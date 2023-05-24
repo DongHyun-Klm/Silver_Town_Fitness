@@ -58,9 +58,9 @@ export default {
       headers: {
         "access-token":
           // 토큰 1
-          // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImpheV9pZCIsImFnZSI6IjI1Iiwi64u07JWE67O07J6QIjoi7ZWc6riA64-E6rCA64qlPyIsInVzZXJfbmFtZSI6ImRvbmdoeXVuIn0.1jp8iMua6E1EvyUEKeZmc9p7V-Aq6PKZ6vg4Wc5GgYE",
-          // 토큰 2
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InJhX2lkIiwiYWdlIjoiMjUiLCLri7TslYTrs7TsnpAiOiLtlZzquIDrj4TqsIDriqU_IiwidXNlcl9uYW1lIjoiZG9uZ2h5dW4ifQ.NtCnbyxayVDbbp1g7h0AGS36uLG81CsaQ_V8VCqlgTY",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImpheV9pZCIsImFnZSI6IjI1Iiwi64u07JWE67O07J6QIjoi7ZWc6riA64-E6rCA64qlPyIsInVzZXJfbmFtZSI6ImRvbmdoeXVuIn0.1jp8iMua6E1EvyUEKeZmc9p7V-Aq6PKZ6vg4Wc5GgYE",
+        // 토큰 2
+        // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InJhX2lkIiwiYWdlIjoiMjUiLCLri7TslYTrs7TsnpAiOiLtlZzquIDrj4TqsIDriqU_IiwidXNlcl9uYW1lIjoiZG9uZ2h5dW4ifQ.NtCnbyxayVDbbp1g7h0AGS36uLG81CsaQ_V8VCqlgTY",
       },
       method: "get",
       url: "http://localhost:9999/api/reservation",

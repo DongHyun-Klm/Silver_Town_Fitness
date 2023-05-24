@@ -25,6 +25,9 @@ import axios from "axios";
 
 export default {
   name: "WithdrawalPage",
+  created() {
+    this.$checkLogin();
+  },
   methods: {
     confirmDelete() {
       axios
