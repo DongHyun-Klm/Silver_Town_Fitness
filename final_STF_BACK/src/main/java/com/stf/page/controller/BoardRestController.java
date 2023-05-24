@@ -85,9 +85,10 @@ public class BoardRestController {
 		// 파일 업로드
 		if(file!=null) {
 			String fullpath = "";
-			fullpath = filedir + System.currentTimeMillis() + "_" + file.getOriginalFilename();
+			String oimg = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+			fullpath = filedir + oimg;
 			file.transferTo(new File(fullpath));
-			board.setBoard_img(fullpath);
+			board.setBoard_img(oimg);
 		}
 		boardService.updateBoard(board);
 

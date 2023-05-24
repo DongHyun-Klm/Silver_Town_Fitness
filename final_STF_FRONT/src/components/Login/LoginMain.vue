@@ -114,6 +114,7 @@
               </label>
             </v-btn>
           </div>
+          <div v-if="showUploadSuccess">사진이 업로드되었습니다!</div>
           <div class="mg-1">
             <button type="submit" class="btn">회원가입</button>
           </div>
@@ -152,6 +153,7 @@ export default {
       sex: "",
       email: "",
       image: null,
+      showUploadSuccess: false,
     };
   },
   methods: {
@@ -178,6 +180,7 @@ export default {
     },
     register() {
       // Create a FormData object
+      this.showUploadSuccess = false;
       const formData = new FormData();
       formData.append("user_id", this.id);
       formData.append("user_password", this.password);
@@ -205,6 +208,7 @@ export default {
     handleImageUpload(event) {
       const file = event.target.files[0];
       this.image = file;
+      this.showUploadSuccess = true;
     },
   },
 };

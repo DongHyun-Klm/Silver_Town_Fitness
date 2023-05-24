@@ -104,6 +104,7 @@ export default {
           headers: { "access-token": localStorage.getItem("access-token") },
         })
         .then(({ data }) => {
+          console.log(data);
           this.img = data.user_img;
           this.name = data.user_name;
           this.email = data.user_email;

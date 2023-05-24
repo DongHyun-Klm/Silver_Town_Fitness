@@ -95,6 +95,7 @@ export default {
     return {
       id: "",
       img: "",
+      image: null,
       nick: "",
       name: "",
       birth: "",
@@ -135,21 +136,7 @@ export default {
     },
     handleImageChange(event) {
       const file = event.target.files[0];
-      if (file) {
-        const formData = new FormData();
-        formData.append("image", file);
-
-        axios
-          .post("/api/upload-image", formData) // 실제 엔드포인트를 사용해야 합니다.
-          .then((response) => {
-            this.img = response.data.imageUrl; // 업로드한 이미지의 URL을 받아와서 이미지를 업데이트합니다.
-          })
-          .catch((error) => {
-            console.error("Error uploading image:", error);
-          });
-      }
-    },
-    save() {
+      this.image = file;
       const formData = new FormData(); // FormData 객체 생성
       formData.append("user_birth", this.birth);
       formData.append("user_sex", this.sex);
@@ -160,7 +147,28 @@ export default {
       formData.append("profileImage", this.image);
       axios
         .put("http://localhost:9999/api/user", formData, {
-          "Content-type": "multipart/form-data",
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then(({ data }) => {
+          this.img = data.user_img;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    save() {
+      const formData = new FormData(); // FormData 객체 생성
+      console.log(this.img);
+      formData.append("user_birth", this.birth);
+      formData.append("user_sex", this.sex);
+      formData.append("user_nick", this.nick);
+      formData.append("user_number", this.number);
+      formData.append("user_email", this.email);
+      formData.append("user_id", this.id);
+      formData.append("user_img", this.img);
+      axios
+        .put("http://localhost:9999/api/user", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
         })
         .then(() => {
           alert("저장완료");

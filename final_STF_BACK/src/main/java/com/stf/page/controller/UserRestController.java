@@ -102,7 +102,7 @@ public class UserRestController {
 	
 	//회원 정보수정
 	@PutMapping("/user")
-	public ResponseEntity<?> update(User user, @RequestParam(value = "profileImage", required = false) MultipartFile file) throws IllegalStateException, IOException{
+	public ResponseEntity<User> update(User user, @RequestParam(value = "profileImage", required = false) MultipartFile file) throws IllegalStateException, IOException{
 		if(file != null) {
 			String fullpath = "";
 			String oimg = System.currentTimeMillis() + "_" + file.getOriginalFilename();
@@ -112,7 +112,7 @@ public class UserRestController {
 		}
 		user.setUser_index(userService.selectOne(user.getUser_id()).getUser_index());
 		userService.updateUser(user);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 	
 	//회원 삭제

@@ -4,11 +4,15 @@
     <v-row class="row">
       <!-- 1열 - 운동 사진 -->
       <v-col cols="6">
-        <v-card class="exercise-image-container" size="10" style="padding: 10px;">
+        <v-card
+          class="exercise-image-container"
+          size="10"
+          style="padding: 10px"
+        >
           <v-img
             :src="require('@/assets/요가_이미지2.jpg')"
             alt="강사 이미지"
-             max-height="300"
+            max-height="300"
           />
           <!-- <v-img
             :src="require(exerciseDetails.exercise_img)"
@@ -69,6 +73,7 @@ export default {
       axios
         .get(`http://localhost:9999/api/lecture/${exercise_index}`)
         .then((response) => {
+          console.log(response.data);
           this.exerciseDetails = response.data;
         })
         .catch((error) => {

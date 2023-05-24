@@ -6,7 +6,7 @@
         <v-col cols="6">
           <v-data-table
             :headers="headers"
-            :items="reviews.filter(review => review.teacher_index === 1)"
+            :items="reviews.filter((review) => review.teacher_index === 1)"
             :dense="true"
             :footer-props="{
               showFirstLastPage: true,
@@ -18,7 +18,12 @@
                 <td>{{ item.review_title }}</td>
                 <td>{{ item.review_content }}</td>
                 <td>
-                  <v-icon v-for="n in item.review_grade" :key="n" class="mdi" color="yellow">
+                  <v-icon
+                    v-for="n in item.review_grade"
+                    :key="n"
+                    class="mdi"
+                    color="yellow"
+                  >
                     mdi-star-outline
                   </v-icon>
                 </td>
@@ -29,7 +34,7 @@
         <v-col cols="6">
           <v-data-table
             :headers="headers"
-            :items="reviews.filter(review => review.teacher_index === 2)"
+            :items="reviews.filter((review) => review.teacher_index === 2)"
             :dense="true"
             :footer-props="{
               showFirstLastPage: true,
@@ -41,7 +46,12 @@
                 <td>{{ item.review_title }}</td>
                 <td>{{ item.review_content }}</td>
                 <td>
-                  <v-icon v-for="n in item.review_grade" :key="n" class="mdi" color="yellow">
+                  <v-icon
+                    v-for="n in item.review_grade"
+                    :key="n"
+                    class="mdi"
+                    color="yellow"
+                  >
                     mdi-star-outline
                   </v-icon>
                 </td>
@@ -55,8 +65,6 @@
 </template>
 
 <script>
-
-import '@mdi/font/css/materialdesignicons.css'
 import axios from "axios";
 
 export default {

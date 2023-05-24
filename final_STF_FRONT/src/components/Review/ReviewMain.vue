@@ -63,6 +63,9 @@
 import axios from "axios";
 
 export default {
+  created() {
+    this.$checkLogin();
+  },
   props: {
     teacher_index: {
       type: Number,
@@ -87,26 +90,22 @@ export default {
       };
       console.log(reviewData);
       const token = localStorage.getItem("access-token");
-        // Spring 백엔드로 데이터 전송
-        axios
-          .post(
-            `http://localhost:9999/api/review`,
-            reviewData,
-            {
-              headers: {
-                "access-token": token,
-              },
-            }
-          )
-          .then((response) => {
-            console.log(response); // 응답 데이터 확인
-            alert("리뷰가 작성되었습니다.");
-            this.$router.go(-1)
-            // 추가적인 작업 수행
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+      // Spring 백엔드로 데이터 전송
+      axios
+        .post(`http://localhost:9999/api/review`, reviewData, {
+          headers: {
+            "access-token": token,
+          },
+        })
+        .then((response) => {
+          console.log(response); // 응답 데이터 확인
+          alert("리뷰가 작성되었습니다.");
+          this.$router.go(-1);
+          // 추가적인 작업 수행
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
   },
 };
