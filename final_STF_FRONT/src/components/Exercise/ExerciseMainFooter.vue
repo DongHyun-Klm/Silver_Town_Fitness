@@ -6,7 +6,11 @@
         <v-col cols="6">
           <v-data-table
             :headers="headers"
-            :items="reviews.filter((review) => review.teacher_index === reviews.exercise_index)"
+            :items="
+              reviews.filter(
+                (review) => review.teacher_index === 2 * this.exercise_index - 1
+              )
+            "
             :dense="true"
             :footer-props="{
               showFirstLastPage: true,
@@ -34,7 +38,11 @@
         <v-col cols="6">
           <v-data-table
             :headers="headers"
-            :items="reviews.filter((review) => review.teacher_index === reviews.exercise_index)"
+            :items="
+              reviews.filter(
+                (review) => review.teacher_index === 2 * this.exercise_index
+              )
+            "
             :dense="true"
             :footer-props="{
               showFirstLastPage: true,
@@ -94,6 +102,7 @@ export default {
         .get(`http://localhost:9999/api/review/${exercise_index}`)
         .then((response) => {
           this.reviews = response.data;
+          console.log(this.exercise_index);
         })
         .catch((error) => {
           console.error(error);

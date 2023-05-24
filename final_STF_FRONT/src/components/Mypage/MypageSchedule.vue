@@ -1,17 +1,17 @@
 <template>
   <div>
     <h2>마이페이지 스케줄 페이지</h2>
-    <test-sc />
+    <schedule-view />
   </div>
 </template>
 
 <script>
-import testSc from "@/views/Test/testSc.vue";
+import ScheduleView from "@/views/ScheduleView.vue";
 export default {
   created() {
     this.$checkLogin();
   },
-  components: { testSc },
+  components: { ScheduleView },
   name: "MypageSchedule",
 };
 </script>

@@ -46,9 +46,8 @@ public class BoardRestController {
 	
 	@Autowired
 	private BoardService boardService;
-	
 	//파일 저장할 경로
-	final private String filedir =  "C:/Users/SSAFY/Dropbox/Seong/Final/BSG_Silver_Town_Fitness/final_STF_FRONT/src/assets/upload/";
+	final private String filedir =  "C:/Users/김동현/Dropbox/STF/BSG_Silver_Town_Fitness/final_STF_FRONT/src/assets/upload/";
 
 	// 사랑방 글 전체 조회 
 	@GetMapping("/board")

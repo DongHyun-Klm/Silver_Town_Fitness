@@ -43,7 +43,7 @@ public class UserRestController {
 	private UserService userService;
 
 	//파일 저장할 경로
-	final private String filedir = "C:/Users/SSAFY/Dropbox/Seong/Final/BSG_Silver_Town_Fitness/final_STF_FRONT/src/assets/upload/";
+	final private String filedir =  "C:/Users/김동현/Dropbox/STF/BSG_Silver_Town_Fitness/final_STF_FRONT/src/assets/upload/";
 	
 	//로그인
 	@PostMapping("/user/login")

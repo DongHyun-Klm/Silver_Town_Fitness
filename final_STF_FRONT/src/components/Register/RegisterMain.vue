@@ -23,10 +23,10 @@
         </v-col>
       </v-row>
 
-      <v-container fluid class="container-with-border" >
+      <v-container fluid class="container-with-border">
         <v-row>
           <v-col cols="12">
-            <test-sc />
+            <ScheduleView />
           </v-col>
         </v-row>
       </v-container>
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import TestSc from "@/views/Test/testSc.vue";
+import ScheduleView from "@/views/ScheduleView.vue";
 import axios from "axios";
 import RegisterTable from "@/components/Register/RegisterTable.vue";
 
@@ -61,7 +61,7 @@ export default {
     },
   },
   components: {
-    TestSc,
+    ScheduleView,
     RegisterTable,
   },
   data() {

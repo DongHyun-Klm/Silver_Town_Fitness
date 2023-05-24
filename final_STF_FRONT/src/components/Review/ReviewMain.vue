@@ -5,7 +5,7 @@
         <!-- 별점 버튼 -->
         <v-row justify="center">
           <v-rating
-            v-model="rating"
+            v-model="review_grade"
             background-color="#f0f0f0"
             color="yellow darken-3"
             dense
