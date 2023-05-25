@@ -92,8 +92,8 @@ export default {
         }
         usedColors.add(color);
         const newEvent1 = {
-          name: `${schedule.lecture_name} - ${schedule.teacher_name}<br>(${schedule.lecture_place})`,
 
+          name: `${schedule.lecture_name} - ${schedule.teacher_name}<br>(${schedule.lecture_place})`,
           place: schedule.lecture_place,
           start: start1,
           end: end1,
