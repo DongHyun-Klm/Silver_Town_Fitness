@@ -9,7 +9,7 @@
               <input type="file" @change="handleImageChange" />
             </div>
             <br />
-            <h2>새로운 이미지를 원한다면 사진을 누르세요!</h2>
+            <h3>이미지를 변경하려면 사진을 누르세요!</h3 >
           </v-col>
 
           <v-col cols="8">

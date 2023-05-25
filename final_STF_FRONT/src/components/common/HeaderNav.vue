@@ -3,12 +3,11 @@
     <v-navigation-drawer v-model="drawer" app class="sidebar">
       <v-list dense>
         <v-list-item>
-          <v-list-item-avatar>
+          <v-list-item-avatar style="width:70px; height: 70px">
             <v-img :src="getImagePath(img)"></v-img>
           </v-list-item-avatar>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ name }}</v-list-item-title>
+          <v-list-item-content >
+            <v-list-item-title >{{ name }}</v-list-item-title>
             <v-list-item-subtitle>{{ email }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -32,7 +31,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app class="bar" dark height="80" >
+    <v-app-bar app class="bar" dark height="80">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <router-link to="/">
@@ -52,7 +51,6 @@
       <v-btn text to="/Mypage/MypageSchedule">내 일정 관리</v-btn>
       <v-btn v-if="!hasAccessToken" text to="/Login">로그인</v-btn>
       <v-btn v-else text @click="logout" to="/">로그아웃</v-btn>
-    
     </v-app-bar>
 
     <v-main> </v-main>
@@ -130,7 +128,6 @@ export default {
 </script>
 
 <style scoped>
-
 .bar {
   color: black; /* 글자 색상을 검은색으로 설정 */
   font-weight: bold; /* 글자를 굵게 설정 */
@@ -141,7 +138,7 @@ export default {
 }
 
 .sidebar {
-  background-image: url('@/assets/barImg.jpeg');
+  background-image: url("@/assets/barImg.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
   background-color: rgba(81, 50, 50, 0.5); /* 배경 색상 및 투명도 조절 */
@@ -150,7 +147,7 @@ export default {
 }
 
 .bar {
-  background-image: url('@/assets/barImg.jpeg');
+  background-image: url("@/assets/barImg.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
   background-color: rgba(81, 50, 50, 0.5); /* 배경 색상 및 투명도 조절 */
@@ -170,4 +167,7 @@ export default {
   height: auto;
   margin-left: 16px;
 }
+
+
+
 </style>

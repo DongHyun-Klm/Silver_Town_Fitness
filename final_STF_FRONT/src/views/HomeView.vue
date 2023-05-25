@@ -42,12 +42,12 @@
             </v-carousel>
           </v-col>
           <v-col cols="6">
-            <v-container class="text text-center" style="max-width: 800px">
-              <div class="image-container" style="padding: 0 20px">
+            <v-container class="text">
+              <div class="image-container">
                 <v-img
-                  src="../assets/시설.jpg"
+                  src="../assets/sideImg.jpg"
+                
                   height="300px"
-                  class="image-frame"
                 ></v-img>
               </div>
               <br />
@@ -171,7 +171,7 @@ export default {
           instructor: "그루브교, 댄싱용",
         },
         {
-          image: require("@/assets/스쿼시_이미지2.jpg"),
+          image: require("@/assets/스쿼시_이미지.jpg"),
           title: "스쿼시",
           description:
             "스쿼시는 나이에 관계없이 즐길 수 있는 운동이며, 노인들에게도 많은 이점을 제공합니다. 스쿼시는 다른 운동과는 달리 부상의 위험이 적은 편이며, 관절을 부드럽게 움직일 수 있는 유연성과 근력을 향상시키는 데 도움이 됩니다.",
@@ -202,10 +202,6 @@ export default {
 </script>
 
 <style>
-.image-frame {
-  border: 10px solid #ccc;
-  padding: 10px;
-}
 .custom-button {
   border-radius: 20px; /* 버튼의 모서리를 둥글게 만듦 */
   padding: 10px 20px; /* 버튼 내부의 여백 조정 */

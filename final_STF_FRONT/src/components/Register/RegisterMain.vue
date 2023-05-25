@@ -2,7 +2,10 @@
   <v-container class="container home-container" fluid>
     <!-- 프로그램 분류 버튼 -->
     <v-container>
+
       <v-row justify="center" class="category-buttons">
+
+
         <v-col
           cols="12"
           sm="6"

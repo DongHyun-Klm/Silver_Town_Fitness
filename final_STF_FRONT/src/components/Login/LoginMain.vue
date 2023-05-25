@@ -1,11 +1,11 @@
 <template>
-  <div class="login-page">
-    <v-container class="background">
+  <div class="login-page ">
+    <v-container >
     <router-view />
-    <div class="login-content login-content-signin" v-show="!showSignIn">
+    <div class="login-content login-content-signin " v-show="!showSignIn">
       <div>
         <h2>로그인</h2>
-        <form class="wrapper-box" @submit.prevent="login">
+        <form class="wrapper-box " @submit.prevent="login">
           <input
             type="id"
             v-model="id_login"
@@ -688,5 +688,21 @@ h3 {
 
 .background{
  background-image: url('@/assets/background-image.jpg');
+}
+
+.ps_S {
+  font-size: small;
+}
+.ps_M {
+  font-size: medium;
+}
+.ps_L {
+  font-size: large;
+}
+.ps_XL {
+  font-size: x-large;
+}
+.ps_XXL {
+  font-size: xx-large;
 }
 </style>
