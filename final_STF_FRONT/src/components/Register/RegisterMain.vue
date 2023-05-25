@@ -2,7 +2,6 @@
   <v-container class="container" fluid>
     <!-- 프로그램 분류 버튼 -->
     <v-container>
-      
       <v-row justify="center" class="category-buttons">
         <v-col
           cols="12"
@@ -23,7 +22,6 @@
           </v-btn>
         </v-col>
       </v-row>
-
     </v-container>
 
     <v-container fluid class="container-with-border" v-if="selectedCategory">
