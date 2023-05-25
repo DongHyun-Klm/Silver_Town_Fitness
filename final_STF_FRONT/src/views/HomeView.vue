@@ -1,49 +1,76 @@
 <template>
   <div id="app" class="home-container">
     <v-container style="margin-bottom: 100px; margin-top: 20px">
-      <v-container style="margin-bottom: 10px">
-        <v-carousel hide-delimiters>
-          <v-carousel-item v-for="(card, index) in cards" :key="index">
-            <v-row justify="center">
-              <v-col cols="12" md="6" lg="4" style="margin-bottom: 10px">
-                <!-- <v-container> -->
-                <v-card max-width="400px" class="custom-card" height="00px">
-                  <v-img
-                    :src="card.image"
-                    alt="card image"
-                    height="300px"
-                  ></v-img>
-                  <v-card-text>
-                    <h5 class="card-title">{{ card.title }}</h5>
-                    <p class="card-description">{{ card.description }}</p>
-                  </v-card-text>
-                  <v-card-text class="card-text">
-                    <small class="text-muted"
-                      >강사: {{ card.instructor }}</small
-                    >
-                  </v-card-text>
-                  <v-row justify="center">
-                    <v-btn
-                      text
-                      color="primary"
-                      class="custom-button"
-                      @click="goToDetail(index)"
-                    >
-                      <v-icon left>mdi-magnify</v-icon>
-                      <!-- 왼쪽에 아이콘 추가 -->
-                      더보기
-                    </v-btn>
-                  </v-row>
-                </v-card>
-                <!-- </v-container> -->
-              </v-col>
-            </v-row>
-          </v-carousel-item>
-        </v-carousel>
+      <v-container>
+        <!-- 1 -->
+        <v-row>
+          <v-col cols="6">
+            <v-carousel hide-delimiters>
+              <v-carousel-item v-for="(card, index) in cards" :key="index">
+                <v-row justify="center">
+                  <v-col cols="12" md="6" lg="4" style="margin-bottom: 10px">
+                    <v-card max-width="400px" class="custom-card" height="00px">
+                      <v-img
+                        :src="card.image"
+                        alt="card image"
+                        height="300px"
+                      ></v-img>
+                      <v-card-text>
+                        <h5 class="card-title">{{ card.title }}</h5>
+                        <p class="card-description">{{ card.description }}</p>
+                      </v-card-text>
+                      <v-card-text class="card-text">
+                        <small class="text-muted"
+                          >강사: {{ card.instructor }}</small
+                        >
+                      </v-card-text>
+                      <v-row justify="center">
+                        <v-btn
+                          text
+                          color="primary"
+                          class="custom-button"
+                          @click="goToDetail(index)"
+                        >
+                          <v-icon left>mdi-magnify</v-icon>
+                          더보기
+                        </v-btn>
+                      </v-row>
+                    </v-card>
+                  </v-col>
+                </v-row>
+              </v-carousel-item>
+            </v-carousel>
+          </v-col>
+          <v-col cols="6">
+            <v-container class="text">
+              <div class="image-container">
+                <v-img
+                  src="../assets/sideImg.jpg"
+                
+                  height="300px"
+                ></v-img>
+              </div>
+              <v-text class="PS_XXL title">
+                STF, 어르신들을 위한 특별한 운동 공간입니다. 나이에 구애받지
+                말고, 우리 함께 동작해요!
+              </v-text>
+              <br />
+              STF는 안전과 편안함을 최우선으로 생각합니다. 우리는 첨단 시설과
+              장비를 갖춘 운동공간을 제공하며, 트레이너들은 항상 도움이 필요한
+              어르신들을 돌보기 위해 함께 운동합니다.
+              <br />
+              STF는 당신의 건강과 웃음을 선사합니다. 우리와 함께라면, 나이에
+              구애받지 않고 활력 넘치는 삶을 즐기고, 새로운 친구들을 사귈 수
+              있습니다. 지금 STF와 함께하고 건강한 노후를 위한 새로운 여정을
+              시작해 보세요!
+            </v-container>
+          </v-col>
+        </v-row>
       </v-container>
 
       <!--바디 -->
       <v-container fluid>
+        <!-- 2 -->
         <v-row>
           <v-col cols="6">
             <div class="container-with-icon">
@@ -84,13 +111,16 @@
     </v-container>
 
     <!-- 푸터 -->
-    <v-footer class="footer">
+    <v-footer class="footer" style="height: 100px">
       <v-container fluid fill-height>
         <v-row align="center" justify="center">
           <v-col cols="12" class="text-center">
-            <span class="text"
-              >&copy; 2023 김동현이은성의 피와살 페이지..</span
-            >
+            <span class="text">
+              고객센터 010-0000-1004 | 평일 상담시간 09:00 ~ 09:01 <br />
+              본 사이트의 콘텐츠는 저작권법의 보호를 받는 바 무단 전재, 복사,
+              배포 등을 금합니다. <br />
+              Copyright © 동은현성 All Rights Reserved.
+            </span>
           </v-col>
         </v-row>
       </v-container>
@@ -184,7 +214,7 @@ export default {
 }
 
 .home-container {
-  /* background-color: #e0f2f1; 푸른색 배경으로 변경 */
+  background-color: #eef3ed;
   padding: 20px; /* 적절한 여백 추가 */
   /* background-image: url('@/assets/barImg.jpeg'); */
   background-size: cover; /* 이미지를 화면에 꽉 차게 설정 */
@@ -215,11 +245,11 @@ export default {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 8px;
-  color: #0307f9;
+  color: #0b07d2;
 }
 
 .card-description {
-  font-size: 14px;
+  font-size: px;
   color: #000000;
 }
 
@@ -255,8 +285,8 @@ export default {
   margin-left: 8px;
 }
 
-.text{
-   font-weight: bold;
+.text {
+  font-weight: bold;
   color: #000000;
 }
 .footer {
@@ -294,5 +324,21 @@ export default {
   border-radius: 4px;
   padding: 16px;
   margin-top: 16px;
+}
+
+.ps_S {
+  font-size: small;
+}
+.ps_M {
+  font-size: medium;
+}
+.ps_L {
+  font-size: large;
+}
+.ps_XL {
+  font-size: x-large;
+}
+.ps_XXL {
+  font-size: xx-large;
 }
 </style>
