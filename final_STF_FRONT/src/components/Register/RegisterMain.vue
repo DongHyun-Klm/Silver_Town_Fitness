@@ -1,8 +1,10 @@
 <template>
-  <v-container class="container" fluid>
+  <v-container class="container home-container" fluid>
     <!-- 프로그램 분류 버튼 -->
     <v-container>
-      <v-row justify="center" class="category-buttons">
+      
+      <v-row justify="center" class="category-buttons home-container">
+
         <v-col
           cols="12"
           sm="6"
@@ -111,7 +113,7 @@ export default {
 
 <style scoped>
 .container {
-  margin-top: 100px;
+  margin-top: 20px;
   background-color: rgba(255, 255, 255, 0.7);
   padding: 20px;
   border-radius: 5px;
@@ -128,4 +130,13 @@ export default {
 .container-with-border {
   margin-top: 20px;
 }
+
+.home-container {
+  background-color: #eef3ed;
+  padding: 20px; /* 적절한 여백 추가 */
+  /* background-image: url('@/assets/barImg.jpeg'); */
+  background-size: cover; /* 이미지를 화면에 꽉 차게 설정 */
+  background-position: center; /* 이미지를 가운데 정렬 */
+}
 </style>
+

@@ -1,15 +1,16 @@
 <template>
   <v-container class="container">
-    <v-card>
+    <v-card style="padding: 50px;">
       <div class="card-content">
         <div class="info-container">
           <div>
-            <v-card-title class="board-title">{{
+            <v-card-title class="board-title ps_XXL">{{
               post.board_title
             }}</v-card-title>
-            <v-card-subtitle>작성자: {{ post.user_id }}</v-card-subtitle>
-            <v-card-subtitle>작성일: {{ post.board_date }}</v-card-subtitle>
-            <v-card-subtitle>조회수: {{ post.board_cnt }}</v-card-subtitle>
+            <br>
+            <v-card-subtitle class="ps_L">작성자: {{ post.user_id }}</v-card-subtitle>
+            <v-card-subtitle  class="ps_L">작성일: {{ post.board_date }}</v-card-subtitle>
+            <v-card-subtitle  class="ps_M">조회수: {{ post.board_cnt }}</v-card-subtitle>
           </div>
           <v-img
             :src="getImagePath(img)"
@@ -19,9 +20,11 @@
             class="image-container"
           ></v-img>
         </div>
-        <v-card-text>
+        <br>
+        <v-card-text class="ps_XL">
           <div v-html="post.board_content"></div>
         </v-card-text>
+           <br>
         <v-card-actions>
           <v-btn v-if="AccessUpdate" color="primary" @click="editPost"
             >수정하기</v-btn
@@ -161,5 +164,21 @@ export default {
 
 .image-container {
   width: 50%;
+}
+
+.ps_S {
+  font-size: small
+}
+.ps_M {
+  font-size: medium
+}
+.ps_L {
+  font-size: large
+}
+.ps_XL {
+  font-size: x-large
+}
+.ps_XXL {
+  font-size: xx-large
 }
 </style>
