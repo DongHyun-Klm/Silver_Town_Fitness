@@ -286,6 +286,7 @@ export default {
 }
 
 .text {
+  font-family: 'Open Sans', sans-serif;
   font-weight: bold;
   color: #000000;
 }
