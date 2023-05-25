@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.stf.page.model.dto.Regist;
 import com.stf.page.model.dto.Reservation;
+import com.stf.page.model.service.LectureService;
 import com.stf.page.model.service.ReservationService;
 import com.stf.page.util.JwtUtil;
 
@@ -37,6 +38,9 @@ public class ReservationController {
 
 	@Autowired
 	private ReservationService Rservice;
+	
+	@Autowired
+	private LectureService Lservice;
 
 	// 예약목록 조회
 	@GetMapping("/reservation/regist")
@@ -67,7 +71,7 @@ public class ReservationController {
 	public ResponseEntity<Void> insertReservation(@RequestHeader("access-token") String token, @PathVariable int lecture_index) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException{
 		String user_id = (String) jwtUtil.parseToken(token).get("id");
 		Regist temp = new Regist(0, user_id, lecture_index);
-		System.out.println(temp);
+		Lservice.update_cnt(lecture_index);
 		Rservice.insertReservation(temp);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

@@ -17,4 +17,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND month(current_date()) = lecture_month;
 	</select>
 	
+	<update id="update_cnt" parameterType="int">
+		UPDATE program 
+		SET lecture_cnt = lecture_cnt + 1 
+		WHERE lecture_index = #{lecture_index}
+	</update>
+	
 </mapper>

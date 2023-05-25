@@ -25,5 +25,10 @@ public class LectureServiceImpl implements LectureService{
 		return lectureDao.exerciseList(exercise_index);
 	}
 	
+	// 강의 참가인원 1 증가
+	@Override
+	public void update_cnt(int lecture_index) {
+		lectureDao.update_cnt(lecture_index);
+	}
 
 }

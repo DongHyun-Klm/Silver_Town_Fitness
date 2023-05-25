@@ -107,7 +107,7 @@ export default {
     },
 
     isRegistrationPossible(item) {
-      const ratio = item.lecture_max_cnt / item.lecture_cnt;
+      const ratio = item.lecture_cnt / item.lecture_max_cnt;
       return ratio < 1; // 1 이상인 경우 수강신청
     },
   },

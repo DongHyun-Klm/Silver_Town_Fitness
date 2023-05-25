@@ -14,6 +14,7 @@ public interface LectureDao {
 	// 종목별 강의목록 조회
 	List<Program> exerciseList(int exercise_index);
 		
-	
+	// 강의 참가인원 1 증가
+	void update_cnt(int lecture_index);
 }
 
