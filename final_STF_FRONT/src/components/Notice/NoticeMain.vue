@@ -81,7 +81,7 @@ export default {
         { text: "내용", value: "notice_content" },
         { text: "등록일", value: "notice_date" },
         { text: "작성자", value: "notice_manager" },
-        { text: "조회수", value: "notice_cnt" },
+        { text: "자세히", value: "notice_cnt" },
       ],
     };
   },
