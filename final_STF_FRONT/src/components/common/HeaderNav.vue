@@ -32,7 +32,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app color="success" dark height="80">
+    <v-app-bar app class="bar" dark height="80" >
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <router-link to="/">
@@ -52,6 +52,7 @@
       <v-btn text to="/Mypage/MypageSchedule">내 일정 관리</v-btn>
       <v-btn v-if="!hasAccessToken" text to="/Login">로그인</v-btn>
       <v-btn v-else text @click="logout" to="/">로그아웃</v-btn>
+    
     </v-app-bar>
 
     <v-main> </v-main>
@@ -75,11 +76,11 @@ export default {
         { title: "마이페이지", icon: "mdi-account", route: "/Mypage" },
         { title: "수강신청", icon: "mdi-calendar-check", route: "/Register" },
         { title: "공지사항", icon: "mdi-bell", route: "/Notice" },
-        {
-          title: "내 일정관리",
-          icon: "mdi-calendar-week",
-          route: "/Mypage/MypageSchedule",
-        },
+        // {
+        //   title: "내 일정관리",
+        //   icon: "mdi-calendar-week",
+        //   route: "/Mypage/MypageSchedule",
+        // },
         { title: "사랑방", icon: "mdi-heart", route: "/Board/" },
       ],
     };
@@ -95,6 +96,7 @@ export default {
       localStorage.removeItem("access-token");
       localStorage.removeItem("id");
       this.hasAccessToken = false;
+      alert("로그아웃 되었습니다!");
       window.location.href = "http://localhost:8080/";
     },
     fetchUserData() {
@@ -128,8 +130,31 @@ export default {
 </script>
 
 <style scoped>
+
+.bar {
+  color: black; /* 글자 색상을 검은색으로 설정 */
+  font-weight: bold; /* 글자를 굵게 설정 */
+}
+.bar .v-btn {
+  color: black; /* 글자 색상을 검은색으로 설정 */
+  font-weight: bold; /* 글자를 굵게 설정 */
+}
+
 .sidebar {
-  background-color: #f5f5f5;
+  background-image: url('@/assets/barImg.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgba(81, 50, 50, 0.5); /* 배경 색상 및 투명도 조절 */
+  border-left: 2px solid #fff; /* 사이드바 오른쪽 테두리 스타일 설정 */
+  border-radius: 0 8px 8px 0; /* 사이드바 오른쪽 꼭지점을 둥글게 설정 */
+}
+
+.bar {
+  background-image: url('@/assets/barImg.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgba(81, 50, 50, 0.5); /* 배경 색상 및 투명도 조절 */
+  border-bottom: 2px solid #fff;
 }
 
 .sidebar .v-list-item {

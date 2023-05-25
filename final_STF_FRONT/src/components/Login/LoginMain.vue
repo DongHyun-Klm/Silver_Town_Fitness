@@ -1,5 +1,6 @@
 <template>
   <div class="login-page">
+    <v-container class="background">
     <router-view />
     <div class="login-content login-content-signin" v-show="!showSignIn">
       <div>
@@ -144,7 +145,10 @@
         <h3>.. 아직 가입하지 않으셨나요~?</h3>
         <button @click="showSignIn = true" class="custom-btn">회원가입</button>
       </div>
-    </div>
+
+
+    </div> 
+    </v-container>
   </div>
 </template>
 
@@ -675,9 +679,14 @@ h3 {
   top: 0;
   left: 0;
   background: #fff;
+ 
 }
 
 .login-content[data-v-0a49c508] {
   height: 700px;
+}
+
+.background{
+ background-image: url('@/assets/background-image.jpg');
 }
 </style>

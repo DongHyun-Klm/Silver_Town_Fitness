@@ -1,27 +1,31 @@
 <template>
   <div id="app" class="home-container">
-    <v-container style="margin-bottom: 100px">
-      <v-carousel>
+    <v-container style="margin-bottom: 10px;" >
+      <v-carousel hide-delimiters >
         <v-carousel-item v-for="(card, index) in cards" :key="index">
-          <v-container fluid class="card-container">
-            <v-row justify="center">
-              <v-col cols="12" md="6" lg="4">
-                <v-card max-width="600px" class="custom-card" height="800px">
-                  <v-img :src="card.image" alt="card image" height="150px" ></v-img>
-                  <v-card-text>
-                    <h5 class="card-title">{{ card.title }}</h5>
-                    <p class="card-description">{{ card.description }}</p>
-                  </v-card-text>
-                  <v-card-text class="card-text">
-                    <small class="text-muted">강사: {{ card.instructor }}</small>
-                  </v-card-text>
-                  <v-btn text color="primary" @click="goToDetail(index)">더보기</v-btn>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-container>
+          <v-row justify="center">
+            <v-col cols="12" md="6" lg="4" style="margin-bottom: 10px">
+           
+                <!-- <v-container> -->
+              <v-card max-width="400px" class="custom-card" height="00px">
+                <v-img :src="card.image" alt="card image" height="300px" ></v-img>
+                <v-card-text>
+                  <h5 class="card-title">{{ card.title }}</h5>
+                  <p class="card-description">{{ card.description }}</p>
+                </v-card-text>
+                <v-card-text class="card-text">
+                  <small class="text-muted">강사: {{ card.instructor }}</small>
+        
+                </v-card-text>
+                <v-btn text color="primary" @click="goToDetail(index)">더보기</v-btn>
+
+              </v-card>
+                <!-- </v-container> -->
+            </v-col>
+          </v-row>
         </v-carousel-item>
       </v-carousel>
+    </v-container>
 
       <!--바디 -->
       <v-container fluid>
@@ -62,11 +66,11 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-container>
+   
 
     
     <!-- 푸터 -->
-    <v-footer class="footer" color="success" dark>
+    <v-footer class="footer" >
       <v-container fluid fill-height>
         <v-row align="center" justify="center">
           <v-col cols="12" class="text-center">
@@ -93,21 +97,21 @@ export default {
     return {
       cards: [
         {
-          image: require("@/assets/수영_이미지.jpg"),
+          image: require("@/assets/수영_이미지2.jpg"),
           title: "수영",
           description:
             "수영은 물 속에서 몸을 움직이는 운동으로 인간이 수행하는 가장 오래된 운동 중 하나입니다. 수영은 재미있고 즐겁게 즐길 수 있는 스포츠이면서 동시에 전신 운동으로 알려져 있습니다 ",
           instructor: "웨이브익, 해파리현",
         },
         {
-          image: require("@/assets/요가_이미지.jpg"),
+          image: require("@/assets/요가_이미지2.jpg"),
           title: "요가",
           description:
             "요가는 신체와 마음을 조화롭게 발전시키는 종합적인 운동입니다. 노인에게 요가는 건강과 품질 좋은 노후 생활을 위한 많은 이점을 제공합니다.",
           instructor: "플라잉식, 커브현",
         },
         {
-          image: require("@/assets/게이트볼_이미지.jpg"),
+          image: require("@/assets/게이트볼_이미지2.jpg"),
           title: "게이트볼",
           description:
             "게이트볼은 노인들에게 매우 적합한 운동으로 알려져 있습니다. 게이트볼은 공을 사용하는 팀 운동으로, 주로 중장년층과 노인들이 즐기는 스포츠입니다. 이 게임은 실내나 실외에서 플레이할 수 있으며, 작은 공과 목표물인 게이트를 사용합니다.",
@@ -152,17 +156,21 @@ export default {
 </script>
 
 <style>
+
 .card-container {
   display: flex;
   justify-content: center;
-  max-width: 1200px;
   margin: 0 auto;
   position: relative;
 }
 
+
 .home-container {
-  background-color: #e0f2f1; /* 푸른색 배경으로 변경 */
+  /* background-color: #e0f2f1; 푸른색 배경으로 변경 */
   padding: 20px; /* 적절한 여백 추가 */
+  /* background-image: url('@/assets/barImg.jpeg'); */
+  background-size: cover; /* 이미지를 화면에 꽉 차게 설정 */
+  background-position: center; /* 이미지를 가운데 정렬 */
 }
 
 .card-group {
@@ -176,6 +184,9 @@ export default {
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s ease-in-out;
+  width: 100%;
+  max-width: 400px; /* 원하는 너비로 조정하세요 */
+  margin: 0 16px; /* 좌우 여백을 조정하세요 */
 }
 
 .custom-card:hover {
@@ -204,7 +215,7 @@ export default {
 
 .text-muted {
   font-weight: bold;
-  font-size: 14px;
+  font-size: 15px;
   color: #999999;
 }
 
@@ -236,8 +247,16 @@ export default {
   align-items: center;
   justify-content: center;
   background-color: #00a98f;
+  
+
   color: #ffffff;
   font-weight: bold;
+
+  background-image: url('@/assets/barImg.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgba(81, 50, 50, 0.5); /* 배경 색상 및 투명도 조절 */
+  border-top: 2px solid #fff;
 }
 
 .v-application--wrap {
@@ -256,9 +275,5 @@ export default {
   margin-top: 16px;
 }
 
-@media (max-width: 1279px) {
-  .container-with-icon {
-    display: none;
-  }
-}
+
 </style>
