@@ -88,7 +88,7 @@
       <v-container fluid fill-height>
         <v-row align="center" justify="center">
           <v-col cols="12" class="text-center">
-            <span class="white--text"
+            <span class="text"
               >&copy; 2023 김동현이은성의 피와살 페이지..</span
             >
           </v-col>
@@ -255,6 +255,10 @@ export default {
   margin-left: 8px;
 }
 
+.text{
+   font-weight: bold;
+  color: #000000;
+}
 .footer {
   position: fixed;
   left: 0;
@@ -266,7 +270,7 @@ export default {
   justify-content: center;
   background-color: #00a98f;
 
-  color: #ffffff;
+  color: #000000;
   font-weight: bold;
 
   background-image: url("@/assets/barImg.jpeg");
