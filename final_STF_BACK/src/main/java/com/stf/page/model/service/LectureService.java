@@ -15,4 +15,7 @@ public interface LectureService {
 	
 	// 강의 참가인원 1 증가
 	void update_cnt(int lecture_index);
+	
+	// 강의 참가인원 1 감소
+	void update_cnt2(int lecture_index);
 }

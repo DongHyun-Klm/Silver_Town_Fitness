@@ -23,16 +23,17 @@
             required
             :placeholder="form.board_content"
           ></v-textarea>
-          <v-btn
-            type="submit"
-            class="form-button"
-            color="primary"
+          <v-btn type="submit" class="form-button" color="primary"
             >수정 완료</v-btn
           >
         </v-form>
         <v-dialog v-model="dialog" max-width="400px">
           <v-card>
-            <v-card-title class="headline" style="background-color: #2196f3; color: white;">알림</v-card-title>
+            <v-card-title
+              class="headline"
+              style="background-color: #2196f3; color: white"
+              >알림</v-card-title
+            >
             <v-card-text>게시글이 수정되었습니다.</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>

@@ -23,4 +23,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE lecture_index = #{lecture_index}
 	</update>
 	
+	<update id="update_cnt2" parameterType="int">
+		UPDATE program 
+		SET lecture_cnt = lecture_cnt - 1 
+		WHERE lecture_index = #{lecture_index}
+	</update>
+	
 </mapper>

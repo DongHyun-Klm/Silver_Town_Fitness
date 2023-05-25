@@ -30,5 +30,10 @@ public class LectureServiceImpl implements LectureService{
 	public void update_cnt(int lecture_index) {
 		lectureDao.update_cnt(lecture_index);
 	}
-
+	
+	// 강의 참가인원 1 감소
+	@Override
+	public void update_cnt2(int lecture_index) {
+		lectureDao.update_cnt2(lecture_index);
+	}
 }

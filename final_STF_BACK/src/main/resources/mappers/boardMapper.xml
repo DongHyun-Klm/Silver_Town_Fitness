@@ -7,7 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 사랑방 글 전체 조회 -->
 	<select id="selectList" resultType="Board">
 		SELECT *
-		FROM Board;
+		FROM Board
+		order by board_date desc;
 	</select>
 
 	<!-- 사랑방 글 등록 -->
