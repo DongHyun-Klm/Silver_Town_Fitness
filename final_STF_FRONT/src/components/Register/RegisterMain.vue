@@ -22,27 +22,30 @@
           </v-btn>
         </v-col>
       </v-row>
+    </v-container>
 
-      <v-container fluid class="container-with-border">
-        <v-row>
-          <v-col cols="12">
-            <ScheduleView />
-          </v-col>
-        </v-row>
-      </v-container>
+    <v-container fluid class="container-with-border" v-if="selectedCategory">
+      <v-row>
+        <v-col cols="12">
+          <v-row class="program-details">
+            <!-- 예약한 강의 목록 -->
+            <v-col cols="12">
+              <!-- RegisterTable 컴포넌트에 동적으로 categoryIndex를 전달 -->
+              <RegisterTable
+                :categoryIndex="selectedCategory.id"
+                :key="selectedCategory.id"
+              />
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-container>
 
-      <!-- 선택한 프로그램 내용 -->
-      <v-row v-if="selectedCategory" class="program-details">
-        <!-- 예약한 강의 목록 -->
-        <v-row class="reservation-table">
-          <v-col cols="12">
-            <!-- RegisterTable 컴포넌트에 동적으로 categoryIndex를 전달 -->
-            <RegisterTable
-              :categoryIndex="selectedCategory.id"
-              :key="selectedCategory.id"
-            />
-          </v-col>
-        </v-row>
+    <v-container v-else>
+      <v-row>
+        <v-col cols="12">
+          <ScheduleView />
+        </v-col>
       </v-row>
     </v-container>
   </v-container>
@@ -118,28 +121,14 @@ export default {
   margin-bottom: 20px;
 }
 
-.teacher-card {
-  margin-bottom: 20px;
-}
-
-.teacher-name {
-  margin-bottom: 10px;
-}
-
-.teacher-description {
-  margin-bottom: 10px;
-}
-
-.reservation-table {
+.program-details {
   margin-top: 20px;
 }
 
-.teacher-col {
-  max-width: 100%;
-  flex-basis: 20%;
-}
-
-/* .program-details {
+.container-with-border {
   margin-top: 20px;
-} */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+}
 </style>

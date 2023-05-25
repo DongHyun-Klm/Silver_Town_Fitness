@@ -75,6 +75,8 @@ export default {
   },
   created() {
     this.$checkLogin();
+  },
+  mounted() {
     this.fetchReservations();
   },
   methods: {
@@ -111,7 +113,7 @@ export default {
           alert("강의가 삭제되었습니다.");
           this.fetchReservations();
           this.closeConfirmationDialog();
-          window.location.href = "/Mypage/MypageSchedule";
+          window.location.href = "http://localhost:8080/Mypage/MypageSchedule";
         })
         .catch((error) => {
           console.error(error);

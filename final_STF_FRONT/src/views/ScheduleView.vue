@@ -92,7 +92,6 @@ export default {
         }
         usedColors.add(color);
         const newEvent1 = {
-
           name: `${schedule.lecture_name} - ${schedule.teacher_name}<br>(${schedule.lecture_place})`,
           place: schedule.lecture_place,
           start: start1,
@@ -110,8 +109,6 @@ export default {
           timed: true,
           color: this.colors[color_index],
         };
-
-        
 
         this.events.push(newEvent1);
         this.events.push(newEvent2);
