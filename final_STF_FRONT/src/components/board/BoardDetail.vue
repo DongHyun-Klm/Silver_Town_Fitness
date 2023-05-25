@@ -12,10 +12,27 @@
         <v-btn v-if="AccessUpdate" color="primary" @click="editPost"
           >수정하기</v-btn
         >
-        <v-btn color="error" @click="deletePost">삭제하기</v-btn>
+        <v-btn color="error" @click="showConfirmationDialog">삭제하기</v-btn>
         <v-btn color="success" @click="backPost">뒤로가기</v-btn>
       </v-card-actions>
     </v-card>
+
+    <v-dialog v-model="confirmationDialog" max-width="400px">
+      <v-card>
+        <v-card-title
+          class="headline"
+          style="background-color: #f44336; color: white"
+        >
+          알림
+        </v-card-title>
+        <v-card-text>글을 삭제하시겠습니까?</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="error" text @click="deletePost">확인</v-btn>
+          <v-btn text @click="closeConfirmationDialog">취소</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -27,6 +44,7 @@ export default {
     return {
       post: null,
       AccessUpdate: false,
+      confirmationDialog: false,
     };
   },
   mounted() {
@@ -64,26 +82,25 @@ export default {
     },
     deletePost() {
       const postId = this.$route.params.board_index;
-      axios({
-        // 임시 헤더(j)
-        headers: {
-          "access-token":
-            //라현
-            // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InJhX2lkIiwiYWdlIjoiMjUiLCLri7TslYTrs7TsnpAiOiLtlZzquIDrj4TqsIDriqU_IiwidXNlcl9uYW1lIjoiZG9uZ2h5dW4ifQ.NtCnbyxayVDbbp1g7h0AGS36uLG81CsaQ_V8VCqlgTY",
-            //재이
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImpheV9pZCIsImFnZSI6IjI1Iiwi64u07JWE67O07J6QIjoi7ZWc6riA64-E6rCA64qlPyIsInVzZXJfbmFtZSI6ImRvbmdoeXVuIn0.1jp8iMua6E1EvyUEKeZmc9p7V-Aq6PKZ6vg4Wc5GgYE",
-        },
-        method: "delete",
-        url: `http://localhost:9999/api/board/${postId}`,
-      })
-        .then((response) => {
-          this.$router.push("/");
-          console.log(response.data);
+      axios
+        .delete(`http://localhost:9999/api/board/${postId}`, {
+          headers: { "access-token": localStorage.getItem("access-token") },
+        })
+        .then(() => {
+          alert("삭제되었습니다.");
+          this.$router.push("/Board");
         })
         .catch(() => {
-          alert("본인 글만 삭제할 수 있습니다. 사랑방 페이지로 돌아갑니다~");
-          this.$router.push("/Board");
+          alert("본인 글만 삭제할 수 있습니다.");
+          this.$router.go(0);
         });
+      this.confirmationDialog = false;
+    },
+    showConfirmationDialog() {
+      this.confirmationDialog = true;
+    },
+    closeConfirmationDialog() {
+      this.confirmationDialog = false;
     },
   },
 };

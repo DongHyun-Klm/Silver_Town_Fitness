@@ -12,6 +12,16 @@
         :first-interval="8"
         :last-interval="18"
       >
+        <template #event="{ event }">
+          <div>
+            <span v-html="event.name.replace('\n', '<br>')"></span>
+            <br />
+            <span
+              >{{ event.start | formatTime }} -
+              {{ event.end | formatTime }}</span
+            >
+          </div>
+        </template>
       </v-calendar>
     </v-sheet>
   </v-app>
@@ -21,6 +31,12 @@
 import axios from "axios";
 
 export default {
+  filters: {
+    formatTime(value) {
+      const options = { hour: "numeric", minute: "numeric" };
+      return new Intl.DateTimeFormat("ko-KR", options).format(value);
+    },
+  },
   data: () => ({
     events: [
       {
@@ -76,13 +92,9 @@ export default {
         }
         usedColors.add(color);
         const newEvent1 = {
-          name:
-            schedule.lecture_name +
-            " - " +
-            schedule.teacher_name +
-            "(" +
-            schedule.lecture_place +
-            ")",
+
+          name: `${schedule.lecture_name} - ${schedule.teacher_name}<br>(${schedule.lecture_place})`,
+          place: schedule.lecture_place,
           start: start1,
           end: end1,
           timed: true,
@@ -90,18 +102,16 @@ export default {
         };
 
         const newEvent2 = {
-          name:
-            schedule.lecture_name +
-            " - " +
-            schedule.teacher_name +
-            "(" +
-            schedule.lecture_place +
-            ")",
+          name: `${schedule.lecture_name} - ${schedule.teacher_name}<br>(${schedule.lecture_place})`,
+
+          place: schedule.lecture_place,
           start: start2,
           end: end2,
           timed: true,
           color: this.colors[color_index],
         };
+
+        
 
         this.events.push(newEvent1);
         this.events.push(newEvent2);
