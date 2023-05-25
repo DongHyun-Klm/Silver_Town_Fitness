@@ -54,7 +54,7 @@
 
 <script>
 import axios from "axios";
-import BoardList from "@/components/Board/BoardList.vue";
+import BoardList from "./BoardList.vue";
 
 export default {
   components: {

@@ -45,7 +45,9 @@ public class UserRestController {
 	//파일 저장할 경로
 
 
+
 	final private String filedir =  "C:/Users/EUNSEONG/Dropbox/Seong/Final/BSG_Silver_Town_Fitness/final_STF_FRONT/src/assets/upload/";
+
 
 
 	

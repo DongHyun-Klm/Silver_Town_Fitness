@@ -4,6 +4,7 @@
     <v-container>
       
       <v-row justify="center" class="category-buttons home-container">
+
         <v-col
           cols="12"
           sm="6"
@@ -23,7 +24,6 @@
           </v-btn>
         </v-col>
       </v-row>
-
     </v-container>
 
     <v-container fluid class="container-with-border" v-if="selectedCategory">
@@ -130,6 +130,7 @@ export default {
 .container-with-border {
   margin-top: 20px;
 }
+
 .home-container {
   background-color: #eef3ed;
   padding: 20px; /* 적절한 여백 추가 */
@@ -138,3 +139,4 @@ export default {
   background-position: center; /* 이미지를 가운데 정렬 */
 }
 </style>
+
