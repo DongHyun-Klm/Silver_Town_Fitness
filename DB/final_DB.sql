@@ -386,11 +386,11 @@ SELECT * from Notice;
 -- 회원 정보 테이블
 DELETE FROM User;
 INSERT INTO User(user_index, user_name, user_img, user_birth, user_sex, user_id, user_password, user_nick, user_number, user_email , user_lecture_cnt)
-VALUES ( '0', '김재이', 'jay_id.jpg','19970901','남', 'jay_id', 'ssafy', '재이다', '010-1111-1111','jay@naver.com',0),
- ( '0', '김소연', 'so_id.jpg','19981010', '여','so_id', 'ssafy','소연이다','010-3333-3333','so@gmail.com',0 ),
- ( '0', '김라현',  'ra_id.jpg','19980723','여', 'ra_id', 'ssafy', '라현이다', '010-2222-2222','dong@naver.com',0),
- ( '0', '정동교',  'gyo_id.jpg','19980723','여', 'gyo_id', 'ssafy', '라현이다', '010-2222-2222','dong@naver.com',0),
- ( '0', '김동익',  'ik_id.jpg','19980723','여', 'ik_id', 'ssafy', '라현이다', '010-2222-2222','dong@naver.com',0),
+VALUES ( '0', '김재이', 'jay_id.jpg','19970901','남', 'jayyid', 'ssafy', '재이다', '010-1111-1111','jay@naver.com',0),
+ ( '0', '김소연', 'so_id.jpg','19981010', '여','soyid', 'ssafy','소연이다','010-3333-3333','so@gmail.com',0 ),
+ ( '0', '김라현',  'ra_id.jpg','19980723','여', 'rahid', 'ssafy', '라현이다', '010-2222-2222','dong@naver.com',0),
+ ( '0', '정동교',  'gyo_id.jpg','19980723','여', 'gyoid', 'ssafy', '라현이다', '010-2222-2222','dong@naver.com',0),
+ ( '0', '김동익',  'ik_id.jpg','19980723','여', 'ikkid', 'ssafy', '라현이다', '010-2222-2222','dong@naver.com',0),
  
  ( '0', '김라현',  '라현 사진 url','19980723','여', '가', 'ssafy', '라현이다', '010-2222-2222','dong@naver.com',0),
    ( '0', '김라현',  '라현 사진 url','19980723','여', '나', 'ssafy', '라현이다', '010-2222-2222','dong@naver.com',0),
