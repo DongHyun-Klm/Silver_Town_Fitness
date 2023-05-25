@@ -41,7 +41,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectOne" parameterType="int" resultType="Board">
 		SELECT *
 		FROM board
-		WHERE board_index = #{board_index}
+		WHERE board_index = #{board_index};
+		
 	</select>
 
 	<!-- 조회수 증가 --> 

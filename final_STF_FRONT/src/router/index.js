@@ -154,7 +154,7 @@ const routes = [
         component: NoticeMain,
       },
       {
-        path: ":notice_id",
+        path: ":notice_index",
         name: "NoticeBoard",
         component: NoticeBoard,
       },

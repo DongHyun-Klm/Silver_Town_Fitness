@@ -45,11 +45,10 @@
             <template v-slot:item="{ item, index }">
               <tr>
                 <td>{{ index + 1 }}</td>
-                <td>{{ item.notice_title }}</td>
-                <td>{{ item.notice_content }}</td>
+                <td>{{ limitText(item.notice_title, 20) }}</td>
+                <td>{{ limitText(item.notice_content, 50) }}</td>
                 <td>{{ item.notice_date }}</td>
                 <td>{{ item.notice_manager }}</td>
-                <td>{{ item.notice_cnt }}</td>
                 <td>
                   <v-icon small @click="goToNoticeDetail(item)">
                     mdi-magnify
@@ -83,7 +82,6 @@ export default {
         { text: "등록일", value: "notice_date" },
         { text: "작성자", value: "notice_manager" },
         { text: "조회수", value: "notice_cnt" },
-        { text: "자세히", value: "detail" },
       ],
     };
   },
@@ -92,6 +90,13 @@ export default {
   },
 
   methods: {
+    limitText(text, maxLength) {
+      if (text.length <= maxLength) {
+        return text;
+      } else {
+        return text.slice(0, maxLength) + "...";
+      }
+    },
     fetchNotices() {
       axios
         .get("http://localhost:9999/api/notice")
@@ -122,8 +127,10 @@ export default {
     },
     // "자세히" 버튼 클릭 시 상세 뷰 페이지로 이동
     goToNoticeDetail(notice) {
-      console.log(notice)
-      this.$router.push({ name: "NoticeBoard", params: { notice_id: notice.notice_index } });
+      this.$router.push({
+        name: "NoticeBoard",
+        params: { notice_index: notice.notice_index },
+      });
     },
   },
 };

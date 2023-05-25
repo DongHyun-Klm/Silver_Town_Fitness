@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectOne" parameterType="int" resultType="Notice">
 		SELECT *
 		FROM Notice
-		WHERE notice_index = #{notice_index}
+		WHERE notice_index = #{notice_index};
 	</select>
 	
 	
