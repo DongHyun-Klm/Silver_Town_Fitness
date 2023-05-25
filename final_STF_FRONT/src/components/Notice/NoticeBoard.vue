@@ -1,17 +1,17 @@
 <template>
   <v-app>
     <v-main>
-      <v-container>
+      <v-container class="ps_L" >
         <h1 class="page-title">공지사항 상세 페이지</h1>
         <v-card v-if="notice">
           <v-card-title>{{ notice.notice_title }}</v-card-title>
-          <v-card-text>
+          <v-card-text class="ps_L">
             <p><strong>작성자:</strong> {{ notice.notice_manager }}</p>
             <p><strong>등록일:</strong> {{ notice.notice_date }}</p>
 
           </v-card-text>
           <v-divider></v-divider>
-          <v-card-text>{{ notice.notice_content }}</v-card-text>
+          <v-card-text class="ps_L" >{{ notice.notice_content }}</v-card-text>
         </v-card>
         <v-progress-linear
           v-else
@@ -52,3 +52,8 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+
+</style>

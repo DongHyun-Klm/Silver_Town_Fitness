@@ -5,7 +5,7 @@
       <div class="title-container">
         <v-icon
           class="heart-icon"
-          size="40"
+          size="70"
           v-animation="{
             name: 'heart-animation',
             duration: '2s',
@@ -17,7 +17,7 @@
         <h1 class="title">사랑방</h1>
         <v-icon
           class="heart-icon"
-          size="40"
+          size="70"
           v-animation="{
             name: 'heart-animation',
             duration: '2s',
@@ -28,13 +28,13 @@
         >
       </div>
       <!-- 이미지 -->
-      <div class="banner">
+      <v-card class="banner">
         <img
           src="@/assets/사랑방.jpg"
           alt="사랑방 이미지"
           class="banner-image"
         />
-      </div>
+      </v-card>
       <br />
       <!-- 글 등록 버튼 -->
       <div class="register-container">
