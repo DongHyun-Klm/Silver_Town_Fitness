@@ -50,10 +50,12 @@
                   class="image-frame"
                 ></v-img>
               </div>
-              <v-text class="PS_XXL title">
+              <br />
+              <v-text class="PS_XXL title" style="font-weight: bolder">
                 STF, 어르신들을 위한 특별한 운동 공간입니다. 나이에 구애받지
-                말고, 우리 함께 동작해요!
+                말고, 우리 함께해요!
               </v-text>
+              <br />
               <br />
               STF는 안전과 편안함을 최우선으로 생각합니다. 우리는 첨단 시설과
               장비를 갖춘 운동공간을 제공하며, 트레이너들은 항상 도움이 필요한
@@ -218,11 +220,8 @@ export default {
 }
 
 .home-container {
-  background-color: #eef3ed;
+  background-color: #f2f2f2;
   padding: 20px; /* 적절한 여백 추가 */
-  /* background-image: url('@/assets/barImg.jpeg'); */
-  background-size: cover; /* 이미지를 화면에 꽉 차게 설정 */
-  background-position: center; /* 이미지를 가운데 정렬 */
 }
 
 .card-group {
@@ -290,7 +289,7 @@ export default {
 }
 
 .text {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: bold;
   color: #000000;
 }
