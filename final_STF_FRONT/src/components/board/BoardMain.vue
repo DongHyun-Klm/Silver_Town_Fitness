@@ -29,11 +29,13 @@
       </div>
       <!-- 이미지 -->
       <v-card class="banner">
-        <img
-          src="@/assets/사랑방.jpg"
-          alt="사랑방 이미지"
-          class="banner-image"
-        />
+        <div class="frame">
+          <img
+            src="@/assets/사랑방.jpg"
+            alt="사랑방 이미지"
+            class="banner-image"
+          />
+        </div>
       </v-card>
       <br />
       <!-- 글 등록 버튼 -->
@@ -142,5 +144,23 @@ export default {
   font-weight: bold;
   color: #333;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.frame {
+  border: 2px solid #ccc;
+  padding: 10px;
+}
+
+.banner-image {
+  max-width: 500px;
+  max-height: 500px;
+  object-fit: cover;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="home-container">
     <v-main>
       <v-container>
         <v-row>
@@ -199,5 +199,10 @@ p {
 .error-button {
   background-color: #f44336;
   color: white;
+}
+
+.home-container {
+  background-color: #f2f2f2;
+  padding: 20px; /* 적절한 여백 추가 */
 }
 </style>

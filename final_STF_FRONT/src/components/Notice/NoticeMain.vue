@@ -135,3 +135,10 @@ export default {
   },
 };
 </script>
+
+<style>
+.home-container {
+  background-color: #f2f2f2;
+  padding: 20px; /* 적절한 여백 추가 */
+}
+</style>

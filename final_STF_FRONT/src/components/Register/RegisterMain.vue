@@ -2,8 +2,9 @@
   <v-container class="container home-container" fluid>
     <!-- 프로그램 분류 버튼 -->
     <v-container>
-      
+
       <v-row justify="center" class="category-buttons">
+
 
         <v-col
           cols="12"
@@ -45,7 +46,7 @@
 
     <v-container v-else>
       <v-row>
-        <v-col cols="12">
+        <v-col cols="12" class="schedule-view">
           <ScheduleView />
         </v-col>
       </v-row>
@@ -112,10 +113,14 @@ export default {
 </script>
 
 <style scoped>
+.schedule-view {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 .container {
-  margin-top: 20px;
-  /* background-color: rgba(255, 255, 255, 0.7); */
-  background-image: url('@/assets/barImg.jpeg');
+  margin-top: 30px;
+  background-color: rgba(255, 255, 255, 0.7);
   padding: 20px;
   border-radius: 5px;
 }
@@ -131,13 +136,4 @@ export default {
 .container-with-border {
   margin-top: 20px;
 }
-
-.home-container {
-  background-color: #eef3ed;
-  padding: 20px; /* 적절한 여백 추가 */
-  /* background-image: url('@/assets/barImg.jpeg'); */
-  background-size: cover; /* 이미지를 화면에 꽉 차게 설정 */
-  background-position: center; /* 이미지를 가운데 정렬 */
-}
 </style>
-
