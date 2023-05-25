@@ -14,9 +14,9 @@
         >
           <template v-slot:item="{ item }">
             <tr>
-              <td>{{ item.exercise_index }}</td>
-              <td>{{ item.teacher_index }}</td>
-              <td>{{ item.lecture_month }}</td>
+              <td>{{ formatExercise(item.exercise_index) }}</td>
+              <td>{{ formatTeacher(item.teacher_index) }}</td>
+              <td>{{ item.lecture_name }}</td>
               <td>{{ item.lecture_time1 }}</td>
               <td>{{ item.lecture_place }}</td>
               <td>{{ item.lecture_cnt }}</td>
@@ -57,9 +57,12 @@ export default {
   data() {
     return {
       tableHeaders: [
-        { text: "운동 종목", value: "exercise_index" },
+        {
+          text: "운동 종목",
+          value: "exercise_index",
+        },
         { text: "강사명", value: "teacher_index" },
-        { text: "교육 주차", value: "lecture_month" },
+        { text: "강의 이름", value: "lecture_month" },
         { text: "교육 일시", value: "lecture_time1" },
         { text: "교육 장소", value: "lecture_place" },
         { text: "참석 인원", value: "lecture_cnt" },
@@ -79,6 +82,48 @@ export default {
     this.getUserLectureData();
   },
   methods: {
+    formatExercise(value) {
+      switch (value) {
+        case 1:
+          return "수영";
+        case 2:
+          return "요가";
+        case 3:
+          return "게이트볼";
+        case 4:
+          return "댄스 스포츠";
+        case 5:
+          return "스쿼시";
+        default:
+          return "";
+      }
+    },
+    formatTeacher(value) {
+      switch (value) {
+        case 1:
+          return "웨이브익";
+        case 2:
+          return "해파리현";
+        case 3:
+          return "플라잉식";
+        case 4:
+          return "커브현";
+        case 5:
+          return "스윙종";
+        case 6:
+          return "공중제경";
+        case 7:
+          return "그루브교";
+        case 8:
+          return "댄싱용";
+        case 9:
+          return "요가호";
+        case 10:
+          return "유연영";
+        default:
+          return "";
+      }
+    },
     fetchLectureData() {
       const categoryIndex = this.categoryIndex;
       const apiUrl = `http://localhost:9999/api/lecture/list/${categoryIndex}`;

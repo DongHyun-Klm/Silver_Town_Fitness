@@ -72,6 +72,8 @@ public class BoardRestController {
 			file.transferTo(new File(fullpath));
 			board.setBoard_img(oimg);
 		}
+		System.out.println("--------------------------");
+		System.out.println(board);
 		// token에서 유저 id 가져오기
 		String user_id = (String) jwtUtil.parseToken(token).get("id");
 		board.setUser_id(user_id);
@@ -148,9 +150,7 @@ public class BoardRestController {
 	@GetMapping("/notice/{notice_index}")
 	public ResponseEntity<Notice> notice_detail(@PathVariable int notice_index){
 		Notice result = noticeService.selectOne(notice_index);
-//		System.out.println(result);
 		result.setNotice_cnt(result.getNotice_cnt()+1);
-//		System.out.println(result);
 		return new ResponseEntity<Notice>(result, HttpStatus.OK);
 	}
 	

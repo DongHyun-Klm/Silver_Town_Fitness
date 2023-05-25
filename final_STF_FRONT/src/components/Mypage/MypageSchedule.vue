@@ -3,34 +3,41 @@
     <v-container class="custom-container">
       <h2>나의 수강 관리 페이지</h2>
       <schedule-view />
-      <v-container style="margin: 20px;">
-      <h3>수강중인 강의 목록</h3>
-      <table >
-        <thead>
-          <tr>
-            <th>강의명</th>
-            <th>강사명</th>
-            <th>강의 장소</th>
-            <th>수강취소</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="reservation in reservations" :key="reservation.id">
-            <td style="text-align: center">{{ reservation.lecture_name }}</td>
-            <td style="text-align: center">{{ reservation.teacher_name }}</td>
-            <td style="text-align: center">{{ reservation.lecture_place }}</td>
-            <td style="text-align: center">
-              <v-btn
-                color="error"
-                @click="showConfirmationDialog(reservation.reservation_index)"
-                small
-              >
-                취소
-              </v-btn>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <v-container style="margin: 20px">
+        <h3>수강중인 강의 목록</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>강의명</th>
+              <th>강사명</th>
+              <th>강의 장소</th>
+              <th>수강취소</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="reservation in reservations" :key="reservation.id">
+              <td style="text-align: center">{{ reservation.lecture_name }}</td>
+              <td style="text-align: center">{{ reservation.teacher_name }}</td>
+              <td style="text-align: center">
+                {{ reservation.lecture_place }}
+              </td>
+              <td style="text-align: center">
+                <v-btn
+                  color="error"
+                  @click="
+                    showConfirmationDialog(
+                      reservation.reservation_index,
+                      reservation.lecture_index
+                    )
+                  "
+                  small
+                >
+                  취소
+                </v-btn>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </v-container>
     </v-container>
 
@@ -63,9 +70,11 @@ export default {
       reservations: [],
       confirmationDialog: false,
       selectedReservationId: null,
+      lecture_index: null,
     };
   },
   created() {
+    this.$checkLogin();
     this.fetchReservations();
   },
   methods: {
@@ -85,26 +94,24 @@ export default {
           console.error(error);
         });
     },
-    showConfirmationDialog(reservationId) {
+    showConfirmationDialog(reservationId, lindex) {
       this.selectedReservationId = reservationId;
+      this.lecture_index = lindex;
       this.confirmationDialog = true;
     },
     cancelReservation() {
-      const token = localStorage.getItem("access-token");
       axios
         .delete("http://localhost:9999/api/reservation", {
-          headers: {
-            "access-token": token,
-          },
           params: {
             reservation_index: this.selectedReservationId,
+            lecture_index: this.lecture_index,
           },
         })
         .then(() => {
           alert("강의가 삭제되었습니다.");
           this.fetchReservations();
           this.closeConfirmationDialog();
-          window.location.href = "/Mypage/MypageSchedule"
+          window.location.href = "/Mypage/MypageSchedule";
         })
         .catch((error) => {
           console.error(error);
@@ -119,7 +126,6 @@ export default {
 </script>
 
 <style scoped>
-
 .custom-container {
   width: 2000px;
   height: 1000px;

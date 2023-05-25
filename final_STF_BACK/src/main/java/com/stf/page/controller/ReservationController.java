@@ -78,7 +78,9 @@ public class ReservationController {
 
 	// 수강신청 삭제
 	@DeleteMapping("/reservation")
-	public ResponseEntity<Void> deleteReservation(int reservation_index) {
+	public ResponseEntity<Void> deleteReservation(int reservation_index, int lecture_index) {
+		System.out.println(lecture_index);
+		Lservice.update_cnt2(lecture_index);
 		Rservice.deleteReservation(reservation_index);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

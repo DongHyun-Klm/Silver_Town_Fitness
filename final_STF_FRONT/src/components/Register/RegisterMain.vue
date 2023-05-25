@@ -78,6 +78,7 @@ export default {
     };
   },
   created() {
+    this.$checkLogin();
     this.fetchLectureData();
   },
   methods: {

@@ -1,20 +1,35 @@
 <template>
   <v-container class="container">
     <v-card>
-      <v-card-title class="board-title">{{ post.board_title }}</v-card-title>
-      <v-card-subtitle>작성자: {{ post.user_id }}</v-card-subtitle>
-      <v-card-subtitle>작성일: {{ post.board_date }}</v-card-subtitle>
-      <v-card-subtitle>조회수: {{ post.board_cnt }}</v-card-subtitle>
-      <v-card-text>
-        <div v-html="post.board_content"></div>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn v-if="AccessUpdate" color="primary" @click="editPost"
-          >수정하기</v-btn
-        >
-        <v-btn color="error" @click="showConfirmationDialog">삭제하기</v-btn>
-        <v-btn color="success" @click="backPost">뒤로가기</v-btn>
-      </v-card-actions>
+      <div class="card-content">
+        <div class="info-container">
+          <div>
+            <v-card-title class="board-title">{{
+              post.board_title
+            }}</v-card-title>
+            <v-card-subtitle>작성자: {{ post.user_id }}</v-card-subtitle>
+            <v-card-subtitle>작성일: {{ post.board_date }}</v-card-subtitle>
+            <v-card-subtitle>조회수: {{ post.board_cnt }}</v-card-subtitle>
+          </div>
+          <v-img
+            :src="getImagePath(img)"
+            :width="500"
+            :height="500"
+            contain
+            class="image-container"
+          ></v-img>
+        </div>
+        <v-card-text>
+          <div v-html="post.board_content"></div>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn v-if="AccessUpdate" color="primary" @click="editPost"
+            >수정하기</v-btn
+          >
+          <v-btn color="error" @click="showConfirmationDialog">삭제하기</v-btn>
+          <v-btn color="success" @click="backPost">뒤로가기</v-btn>
+        </v-card-actions>
+      </div>
     </v-card>
 
     <v-dialog v-model="confirmationDialog" max-width="400px">
@@ -45,6 +60,7 @@ export default {
       post: null,
       AccessUpdate: false,
       confirmationDialog: false,
+      img: "",
     };
   },
   mounted() {
@@ -64,6 +80,7 @@ export default {
         .get(`http://localhost:9999/api/board/${postId}`)
         .then((response) => {
           this.post = response.data;
+          this.img = response.data.board_img;
         })
         .catch((error) => {
           console.error(error);
@@ -102,6 +119,9 @@ export default {
     closeConfirmationDialog() {
       this.confirmationDialog = false;
     },
+    getImagePath(image) {
+      return require(`@/assets/upload/${image}`);
+    },
   },
 };
 </script>
@@ -126,5 +146,20 @@ export default {
 
 .v-card-actions {
   margin-top: 20px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.image-container {
+  width: 50%;
 }
 </style>
