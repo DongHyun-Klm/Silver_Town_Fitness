@@ -83,7 +83,6 @@ export default {
             "(" +
             schedule.lecture_place +
             ")",
-          place: schedule.lecture_place,
           start: start1,
           end: end1,
           timed: true,

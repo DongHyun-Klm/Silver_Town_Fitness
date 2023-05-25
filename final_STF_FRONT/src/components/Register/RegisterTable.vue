@@ -22,16 +22,18 @@
               <td>{{ item.lecture_cnt }}</td>
               <td>{{ item.lecture_max_cnt }}</td>
               <td>
+                <v-btn v-if="isRegistered(item)" color="primary" small disabled>
+                  신청한 강의
+                </v-btn>
                 <v-btn
-                  v-if="isRegistrationPossible(item)"
+                  v-else-if="isRegistrationPossible(item)"
                   color="green"
                   small
                   @click="registerLecture(item.lecture_index)"
                 >
                   수강신청 가능
                 </v-btn>
-
-                <v-btn v-else color="red" small> 수강신청 불가 </v-btn>
+                <v-chip v-else color="red" small disabled>신청인원 마감</v-chip>
               </td>
             </tr>
           </template>
@@ -65,6 +67,7 @@ export default {
         { text: "신청 가능 여부", value: "lecture_possible" }, // 새로운 컬럼 추가
       ],
       lectureData: [],
+      userLectureData: [],
       search: "",
       pagination: {
         rowsPerPage: 10,
@@ -73,6 +76,7 @@ export default {
   },
   created() {
     this.fetchLectureData();
+    this.getUserLectureData();
   },
   methods: {
     fetchLectureData() {
@@ -86,6 +90,16 @@ export default {
         })
         .catch((error) => {
           console.error(error);
+        });
+    },
+    getUserLectureData() {
+      const token = localStorage.getItem("access-token");
+      axios
+        .get("http://localhost:9999/api/reservation", {
+          headers: { "access-token": token },
+        })
+        .then(({ data }) => {
+          this.userLectureData = data;
         });
     },
     registerLecture(index) {
@@ -109,6 +123,11 @@ export default {
     isRegistrationPossible(item) {
       const ratio = item.lecture_cnt / item.lecture_max_cnt;
       return ratio < 1; // 1 이상인 경우 수강신청
+    },
+    isRegistered(item) {
+      return this.userLectureData.some(
+        (lecture) => lecture.lecture_index === item.lecture_index
+      );
     },
   },
 };

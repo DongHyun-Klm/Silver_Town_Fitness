@@ -46,9 +46,14 @@
             v-model="id"
             name="id"
             class="form-control form-control-id"
-            placeholder="아이디 입력"
+            placeholder="아이디 입력(영어 5글자이상)"
             required
+            @input="dupliChk"
           />
+          <div v-if="showIdStatus">
+            <div v-if="!isIdValid">사용 불가능한 아이디입니다.</div>
+            <div v-else>사용 가능한 아이디입니다.</div>
+          </div>
           <input
             type="password"
             v-model="password"
@@ -116,7 +121,15 @@
           </div>
           <div v-if="showUploadSuccess">사진이 업로드되었습니다!</div>
           <div class="mg-1">
-            <button type="submit" class="btn">회원가입</button>
+            <v-btn
+              :color="!isIdValid ? 'grey darken-2' : 'primary'"
+              dark
+              class="btn"
+              :disabled="!isIdValid"
+              @click="register"
+            >
+              <template>회원가입</template>
+            </v-btn>
           </div>
         </form>
       </div>
@@ -154,6 +167,7 @@ export default {
       email: "",
       image: null,
       showUploadSuccess: false,
+      isIdValid: false,
     };
   },
   methods: {
@@ -209,6 +223,22 @@ export default {
       const file = event.target.files[0];
       this.image = file;
       this.showUploadSuccess = true;
+    },
+    // 아이디 유효성검사
+    dupliChk() {
+      this.showIdStatus = true; // 아이디 상태 표시 영역을 보이도록 설정
+
+      const regex = /^[A-Za-z0-9]+$/;
+      const isValidId = regex.test(this.id) && this.id.length >= 5;
+
+      if (isValidId) {
+        // 중복 체크 요청
+        http.post("/user/signup/chk", { user_id: this.id }).then(({ data }) => {
+          this.isIdValid = !data;
+        });
+      } else {
+        this.isIdValid = false;
+      }
     },
   },
 };

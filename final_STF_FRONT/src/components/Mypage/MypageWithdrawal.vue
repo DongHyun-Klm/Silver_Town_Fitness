@@ -36,6 +36,8 @@ export default {
         })
         .then(() => {
           alert("그동안 이용해주셔서 감사합니다");
+          localStorage.removeItem("access-token");
+          localStorage.removeItem("id");
           this.$router.push("/");
         })
         .catch((error) => {

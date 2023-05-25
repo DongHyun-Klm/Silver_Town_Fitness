@@ -44,7 +44,7 @@ public class UserRestController {
 
 	//파일 저장할 경로
 
-	final private String filedir =  "C:/Users/EUNSEONG/Dropbox/Seong/Final/BSG_Silver_Town_Fitness/final_STF_FRONT/src/assets/upload/";
+	final private String filedir =  "C:/Users/SSAFY/Dropbox/STF/BSG_Silver_Town_Fitness/final_STF_FRONT/src/assets/upload/";
 	
 	//로그인
 	@PostMapping("/user/login")
@@ -94,11 +94,12 @@ public class UserRestController {
 	
 	//아이디 중복검사
 	@PostMapping("/user/signup/chk")
-	public ResponseEntity<?> dupChk(String user_name){
+	public ResponseEntity<Boolean> dupChk(@RequestBody User user){
+		System.out.println(user.getUser_id());
 		// 아이디가 이미 있다면
-		if(userService.dupliChk(user_name)) 
-			return new ResponseEntity<String>("아이디가 이미 존재합니다.", HttpStatus.CONFLICT);
-		return new ResponseEntity<>(HttpStatus.OK);
+		if(userService.dupliChk(user.getUser_id())) 
+			return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+		return new ResponseEntity<Boolean>(false, HttpStatus.OK);
 	}
 	
 	//회원 정보수정
