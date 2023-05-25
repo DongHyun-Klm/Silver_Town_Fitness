@@ -3,7 +3,7 @@
     <!-- 프로그램 분류 버튼 -->
     <v-container>
       
-      <v-row justify="center" class="category-buttons home-container">
+      <v-row justify="center" class="category-buttons">
 
         <v-col
           cols="12"
@@ -114,7 +114,8 @@ export default {
 <style scoped>
 .container {
   margin-top: 20px;
-  background-color: rgba(255, 255, 255, 0.7);
+  /* background-color: rgba(255, 255, 255, 0.7); */
+  background-image: url('@/assets/barImg.jpeg');
   padding: 20px;
   border-radius: 5px;
 }
