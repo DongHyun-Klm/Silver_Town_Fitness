@@ -2,12 +2,13 @@
   <v-container class="container" fluid>
     <!-- 프로그램 분류 버튼 -->
     <v-container>
+      
       <v-row justify="center" class="category-buttons">
         <v-col
           cols="12"
           sm="6"
           md="4"
-          lg="3"
+          lg="4"
           v-for="category in categories"
           :key="category.id"
         >
@@ -22,6 +23,7 @@
           </v-btn>
         </v-col>
       </v-row>
+
     </v-container>
 
     <v-container fluid class="container-with-border" v-if="selectedCategory">
@@ -127,8 +129,5 @@ export default {
 
 .container-with-border {
   margin-top: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 20px;
 }
 </style>

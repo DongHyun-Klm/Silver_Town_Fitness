@@ -27,7 +27,7 @@
             ></v-text-field>
           </v-col>
           <!-- 검색 버튼 -->
-          <v-col cols="12" sm="2" md="1">
+          <v-col cols="10" sm="2" md="1">
             <v-btn icon @click="search">
               <v-icon>mdi-magnify</v-icon>
             </v-btn>
@@ -81,7 +81,7 @@ export default {
         { text: "내용", value: "notice_content" },
         { text: "등록일", value: "notice_date" },
         { text: "작성자", value: "notice_manager" },
-        { text: "조회수", value: "notice_cnt" },
+        { text: "자세히" },
       ],
     };
   },
