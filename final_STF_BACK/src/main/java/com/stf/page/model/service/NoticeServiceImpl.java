@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stf.page.model.dao.NoticeDao;
+import com.stf.page.model.dto.Board;
 import com.stf.page.model.dto.Notice;
 
 

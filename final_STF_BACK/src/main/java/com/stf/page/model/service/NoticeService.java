@@ -13,5 +13,4 @@ public interface NoticeService{
 	Notice selectOne(int notice_index);
 	
 	
-	
 }

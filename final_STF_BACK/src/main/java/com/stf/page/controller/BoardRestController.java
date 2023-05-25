@@ -145,7 +145,9 @@ public class BoardRestController {
 	@GetMapping("/notice/{notice_index}")
 	public ResponseEntity<Notice> notice_detail(@PathVariable int notice_index){
 		Notice result = noticeService.selectOne(notice_index);
-
+//		System.out.println(result);
+		result.setNotice_cnt(result.getNotice_cnt()+1);
+//		System.out.println(result);
 		return new ResponseEntity<Notice>(result, HttpStatus.OK);
 	}
 	
