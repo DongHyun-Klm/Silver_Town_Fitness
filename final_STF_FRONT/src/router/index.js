@@ -37,6 +37,8 @@ import RegisterMain from "../components/Register/RegisterMain.vue";
 
 // Test
 import ScheduleView from "../views/ScheduleView.vue";
+import testT from "../views/testT.vue";
+
 const routes = [
   // Home
   {
@@ -49,6 +51,11 @@ const routes = [
     path: "/Schedule",
     name: "Schedule",
     component: ScheduleView,
+  },
+  {
+    path: "/testT",
+    name: "testT",
+    component: testT,
   },
   {
     path: "/Board",

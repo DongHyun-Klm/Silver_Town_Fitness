@@ -104,7 +104,7 @@ export default {
           headers: { "access-token": localStorage.getItem("access-token") },
         })
         .then(() => {
-          alert("삭제되었습니다.");
+          // alert("삭제되었습니다.");
           this.$router.push("/Board");
         })
         .catch(() => {
