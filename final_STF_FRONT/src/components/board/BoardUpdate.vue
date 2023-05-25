@@ -30,6 +30,16 @@
             >수정 완료</v-btn
           >
         </v-form>
+        <v-dialog v-model="dialog" max-width="400px">
+          <v-card>
+            <v-card-title class="headline" style="background-color: #2196f3; color: white;">알림</v-card-title>
+            <v-card-text>게시글이 수정되었습니다.</v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="primary" text @click="closeDialog">확인</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-col>
     </v-row>
   </v-container>
@@ -49,6 +59,7 @@ export default {
         user_id: "",
         board_content: "",
       },
+      dialog: false,
     };
   },
   mounted() {
@@ -71,15 +82,18 @@ export default {
       axios
         .put(`http://localhost:9999/api/board`, this.form)
         .then(() => {
-          alert("게시글이 수정되었습니다.");
-
-          this.$router.go(-1);
+          this.dialog = true; // 다이얼로그 열기
 
           // 추가적인 작업 수행
         })
         .catch((error) => {
           console.error(error);
         });
+    },
+    closeDialog() {
+      this.dialog = false; // 다이얼로그 닫기
+
+      this.$router.go(-1); // 이전 페이지로 이동
     },
   },
 };
