@@ -13,17 +13,26 @@
   </tr>
 </table>
 
-- #### 프로젝트명 : STF(Silver Town Fitness) Web Page 만들기
+- #### 프로젝트명
+>  STF(Silver Town Fitness) Web Page
 
-- #### 진행 기간: 2023. 05. 17 ~ 2023. 05. 25
+- #### 진행 기간
+> 2023.05.17 ~ 2023. 05. 25
 
-- #### 팀명: STF
-
-- #### 목표: Fitness 수강 웹 페이지를 만들어보자.
+- #### 기획 배경 및 목표
+ > 고령화가 빠르게 진행됨에 따라, 실버캐슬과 같은 노인종합복지시설에도 영향을 미칠것. <br>
+ > 이에 따라, 실버타운 노인들을 위한 운동 수강신청 서비스와 커뮤니티 웹 사이트를 제작.
 
 - #### 기술
+> ##### User(회원 관리) / Reservation(수강 신청) / Lecture(운동 조회) / Board(게시판) / Instructior(강사 리뷰 및 조회)
 
-    - ##### User(회원 관리) / Reservation(수강 신청) / Lecture(운동 조회) / Board(게시판) / Instructior(강사 리뷰 및 조회)
+
+- ## 개발 기록
+> ![개발기록](https://github.com/SeongLI/BSG_Silver_Town_Fitness/assets/110223414/deaff47d-51fd-4bf3-8069-2f2cbf06a040)
+
+- ## ERD
+> ![ERD](https://github.com/SeongLI/BSG_Silver_Town_Fitness/assets/110223414/55122726-993b-45ba-9134-9a41518b6922)
+
 
 ## :wrench: 기술스택
 
@@ -44,8 +53,22 @@
 ![Git](https://img.shields.io/badge/Git-232F3E.svg?&style=for-the-badge&logo=Git&logoColor=white)
 
 
-![1](https://github.com/SeongLI/STF/assets/110223414/bc759685-517d-41f6-bab1-fa1a51bccaba)
-![2](https://github.com/SeongLI/STF/assets/110223414/60976d74-2374-4405-a3f4-82ae9b741775)
-![3](https://github.com/SeongLI/STF/assets/110223414/cbff3792-9582-4cfe-a9cf-73ea044de090)
-![4](https://github.com/SeongLI/STF/assets/110223414/f033bc06-a43e-4666-8c88-84df38abbc0d)
-![5](https://github.com/SeongLI/STF/assets/110223414/e81cc969-540b-43f8-9b55-ade355068bb8)
+## 시연 동영상
+- ### 회원가입->로그인 
+> https://github.com/SeongLI/BSG_Silver_Town_Fitness/assets/110223414/6dad77c0-587f-4066-b777-15e9e6a8c457
+
+- ### 마이페이지 -> 개인정보수정 -> 강사 리뷰 확인, 등록
+> https://github.com/SeongLI/BSG_Silver_Town_Fitness/assets/110223414/dc5c0e9d-9aba-4b1f-89cc-221c9f8aeb9d
+
+- ###  수강신청 -> 시간표 확인 -> 수강취소
+> https://github.com/SeongLI/BSG_Silver_Town_Fitness/assets/110223414/27a3ef1c-0002-497d-8123-334e77ebe736
+
+- ### 공지사항 검색, 상세 -> 게시판 상세, 수정
+> https://github.com/SeongLI/BSG_Silver_Town_Fitness/assets/110223414/fa2b3cb3-688a-4dab-895a-65d04b453857
+
+- ### 게시판 등록, 삭제 -> 로그아웃
+> https://github.com/SeongLI/BSG_Silver_Town_Fitness/assets/110223414/85a51044-d635-4180-9378-2a363c452d96
+
+
+
+
