@@ -8,8 +8,8 @@
 ### :raising_hand: 팀원소개
 <table>
   <tr>
+    <td align="center"><a href="https://github.com/dongk1m/"><img src="https://avatars.githubusercontent.com/u/120110806?v=4" width="100px;" height="120px;" alt=""/><br /><sub><b>김동현<br>Back-end <br> Front-end</b></sub></a><br /></td>  
       <td align="center"><a href="https://github.com/SeongLI"><img src="https://avatars.githubusercontent.com/u/110223414?v=4" width="100px;" height="120px;" alt=""/><br /><sub><b>이은성<br>Back-end <br> Front-end<br/></b></sub></a></td>
-      <td align="center"><a href="https://github.com/dongk1m/"><img src="https://avatars.githubusercontent.com/u/120110806?v=4" width="100px;" height="120px;" alt=""/><br /><sub><b>김동현<br>Back-end <br> Front-end</b></sub></a><br /></td>      
   </tr>
 </table>
 
